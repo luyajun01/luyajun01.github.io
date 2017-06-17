@@ -1,0 +1,9 @@
+#+OPTIONS: TOC:nil
+#+OPTIONS: NUM:nil
+#+OPTIONS: AUTHOR:nil 
+#+OPTIONS: TIMESTAMP:nil
+#+HTML_HEAD: <link  href="https://rawgithub.com/luyajun01/code/master/org-css.css" rel="stylesheet" type="text/css">
+#+HTML: <h1 align="center">个人博客</h1>
+
+* 2017年6月
+- [[file:1.org][通过org2blog发布博客]]
