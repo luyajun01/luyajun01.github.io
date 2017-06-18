@@ -101,7 +101,7 @@ abstract class IntQueue
 
 #+BEGIN_SRC -n
  cd C:\\Users\\Administrator\\Dropbox\\org
- git add .
+ git add -A ;本地文件有删除用-A，只有增加的文件用 .
  git commit -m "add code"
  git remote set-url origin git@github.com:luyajun01/luyajun01.github.io.git 
  git push origin master
