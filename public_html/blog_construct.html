@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-06-18 ���� 17:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>通过ox-publish创建博客</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../css/org-css.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="index.html"> HOME </a>
+</div><div id="preamble" class="status">
+<div id=
+</div>
+<div id="content">
+<h1 class="title">通过ox-publish创建博客</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org3369885">1. 配置Emacs</a>
+<ul>
+<li><a href="#org137c97a">1.1. 基本配置</a></li>
+<li><a href="#orgc14e5cc">1.2. 添加disqus评论</a></li>
+<li><a href="#orgb37555a">1.3. code高亮</a></li>
+</ul>
+</li>
+<li><a href="#org3354525">2. 上传Github</a></li>
+<li><a href="#org78da439">3. 参考资料</a></li>
+</ul>
+</div>
+</div>
+<blockquote>
+<p>
+
+</p>
+
+<p>
+一入emacs，坑深似海！
+</p>
+</blockquote>
+
+<p>
+昨天，无意之间看到了<a href="https://www.guidao.github.io">guidao博客的网站</a>，第一眼就喜欢上了，这就是我想要的网站呐，漂亮至极。我一直都觉得，org生成的html效果是最好的。废话不多说，下面说明建站过程记录，同时也会放在我个人wiki上。
+</p>
+
+<div id="outline-container-org3369885" class="outline-2">
+<h2 id="org3369885"><span class="section-number-2">1</span> 配置Emacs</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-org137c97a" class="outline-3">
+<h3 id="org137c97a"><span class="section-number-3">1.1</span> 基本配置</h3>
+<div class="outline-text-3" id="text-1-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="linenr"> 1: </span>abstract class IntQueue 
+<span class="linenr"> 2: </span>(add-to-list 'load-path <span style="color: #E6DB74;">"~/.emacs.d/elpa/org-20170606"</span>) <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">&#26368;&#26032;&#29256;&#26412;&#30340;org-mode&#30340;&#36335;&#24452;</span>
+<span class="linenr"> 3: </span>(<span style="color: #F92672;">require</span> '<span style="color: #AE81FF; font-weight: bold;">ox-publish</span>)
+<span class="linenr"> 4: </span>(<span style="color: #F92672;">require</span> '<span style="color: #AE81FF; font-weight: bold;">ox-html</span>)
+<span class="linenr"> 5: </span>(<span style="color: #F92672;">setq</span> org-publish-project-alist
+<span class="linenr"> 6: </span>'((<span style="color: #E6DB74;">"blog-notes"</span>
+<span class="linenr"> 7: </span> <span style="color: #F92672;">:base-directory</span> <span style="color: #E6DB74;">"C:/Users/Administrator/Dropbox/org/notes/"</span> <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">org&#25991;&#20214;&#30340;&#36335;&#24452;</span>
+<span class="linenr"> 8: </span> <span style="color: #F92672;">:base-extension</span> <span style="color: #E6DB74;">"org"</span>
+<span class="linenr"> 9: </span> <span style="color: #F92672;">:publishing-directory</span> <span style="color: #E6DB74;">"C:/Users/Administrator/Dropbox/org/public_html/"</span><span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">&#29983;&#25104;&#30340;html&#25991;&#20214;&#36335;&#24452;</span>
+<span class="linenr">10: </span> <span style="color: #F92672;">:recursive</span> t
+<span class="linenr">11: </span> <span style="color: #F92672;">:publishing-function</span> org-html-publish-to-html <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">&#29983;&#25104;&#20989;&#25968;</span>
+<span class="linenr">12: </span> <span style="color: #F92672;">:html-link-home</span> <span style="color: #E6DB74;">"index.html"</span> <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">Home&#25991;&#20214;&#30340;&#36335;&#24452;</span>
+<span class="linenr">13: </span> <span style="color: #F92672;">:html-link-org-files-as-html</span>  org-html-link-org-files-as-html
+<span class="linenr">14: </span> <span style="color: #F92672;">:headline-levels</span> 5             <span style="color: #75715E;">; </span><span style="color: #75715E; font-style: italic;">Just the default for this project.</span>
+<span class="linenr">15: </span> <span style="color: #F92672;">:with-author</span> nil <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">&#21435;&#25481;author</span>
+<span class="linenr">16: </span> <span style="color: #F92672;">:with-email</span> nil  <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">&#21435;&#25481;email</span>
+<span class="linenr">17: </span> <span style="color: #F92672;">:with-creator</span> nil  <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">&#21435;&#25481;creator</span>
+<span class="linenr">18: </span> <span style="color: #F92672;">:with-timestamp</span> nil  <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">&#21435;&#25481;&#26102;&#38388;&#32447;</span>
+<span class="linenr">19: </span> <span style="color: #F92672;">:html-postamble</span> nil
+<span class="linenr">20: </span> <span style="color: #F92672;">:auto-preamble</span> t
+<span class="linenr">21: </span> <span style="color: #F92672;">:section-numbers</span> nil
+<span class="linenr">22: </span> <span style="color: #F92672;">:html-head</span> <span style="color: #E6DB74;">"&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"../css/org-css.css\" /&gt;"</span> <span style="color: #75715E;">;</span><span style="color: #75715E; font-style: italic;">&#24341;&#20837;css&#25991;&#20214;</span>
+<span class="linenr">23: </span> <span style="color: #F92672;">:auto-sitemap</span> t                <span style="color: #75715E;">; </span><span style="color: #75715E; font-style: italic;">Generate sitemap.org automagically...</span>
+<span class="linenr">24: </span> <span style="color: #F92672;">:sitemap-filename</span> <span style="color: #E6DB74;">"sitemap.org"</span>  <span style="color: #75715E;">; </span><span style="color: #75715E; font-style: italic;">... call it sitemap.org (it's the default)...</span>
+<span class="linenr">25: </span> <span style="color: #F92672;">:sitemap-title</span> <span style="color: #E6DB74;">"Sitemap"</span>         <span style="color: #75715E;">; </span><span style="color: #75715E; font-style: italic;">... with title 'Sitemap'.</span>
+<span class="linenr">26: </span> <span style="color: #F92672;">:sitemap-sort-files</span> anti-chronologically
+<span class="linenr">27: </span> <span style="color: #F92672;">:sitemap-file-entry-format</span> <span style="color: #E6DB74;">"%d %t"</span>
+<span class="linenr">28: </span> )
+<span class="linenr">29: </span>(<span style="color: #E6DB74;">"blog-static"</span>
+<span class="linenr">30: </span> <span style="color: #F92672;">:base-directory</span> <span style="color: #E6DB74;">"C:/Users/Administrator/Dropbox/org/notes"</span>
+<span class="linenr">31: </span> <span style="color: #F92672;">:base-extension</span> <span style="color: #E6DB74;">"css</span><span style="color: #AE81FF;">\\</span><span style="color: #E6DB74;">|</span><span style="color: #E6DB74;">js</span><span style="color: #AE81FF;">\\</span><span style="color: #E6DB74;">|</span><span style="color: #E6DB74;">png</span><span style="color: #AE81FF;">\\</span><span style="color: #E6DB74;">|</span><span style="color: #E6DB74;">jpg</span><span style="color: #AE81FF;">\\</span><span style="color: #E6DB74;">|</span><span style="color: #E6DB74;">gif</span><span style="color: #AE81FF;">\\</span><span style="color: #E6DB74;">|</span><span style="color: #E6DB74;">pdf</span><span style="color: #AE81FF;">\\</span><span style="color: #E6DB74;">|</span><span style="color: #E6DB74;">mp3</span><span style="color: #AE81FF;">\\</span><span style="color: #E6DB74;">|</span><span style="color: #E6DB74;">ogg</span><span style="color: #AE81FF;">\\</span><span style="color: #E6DB74;">|</span><span style="color: #E6DB74;">swf"</span>
+<span class="linenr">32: </span> <span style="color: #F92672;">:publishing-directory</span> <span style="color: #E6DB74;">"C:/Users/Administrator/Dropbox/org/public_html/"</span>
+<span class="linenr">33: </span> <span style="color: #F92672;">:recursive</span> t
+<span class="linenr">34: </span> <span style="color: #F92672;">:publishing-function</span> org-publish-attachment
+<span class="linenr">35: </span> )
+<span class="linenr">36: </span> (<span style="color: #E6DB74;">"blog"</span> <span style="color: #F92672;">:components</span> (<span style="color: #E6DB74;">"blog-notes"</span> <span style="color: #E6DB74;">"blog-static"</span>))
+<span class="linenr">37: </span> ))
+<span class="linenr">38: </span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc14e5cc" class="outline-3">
+<h3 id="orgc14e5cc"><span class="section-number-3">1.2</span> 添加disqus评论</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+首先在<a href="https://tonylu.disqus.com/admin/install/platforms/universalcode/">disqus网站</a>申请网站评论站点，得到以下代码放到上面的配置文件中。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-css"><span class="linenr"> 1: </span>abstract class IntQueue 
+<span class="linenr"> 2: </span>&lt;div id=<span style="color: #E6DB74;">"disqus_thread"</span>&gt;&lt;/div&gt;
+<span class="linenr"> 3: </span>&lt;script&gt;(add-to-list <span style="color: #E6DB74;">'load-path "~/.emacs.d/elpa/htmlize-20161211.1019")</span>
+<span class="linenr"> 4: </span><span style="color: #E6DB74;">(require '</span>htmlize)
+<span class="linenr"> 5: </span>(setq org-html-htmlize-output-type <span style="color: #E6DB74;">'css)</span>
+<span class="linenr"> 6: </span><span style="color: #E6DB74;">(setq org-html-htmlize-output-type '</span>inline-css)
+<span class="linenr"> 7: </span>var disqus_config = function () {
+<span class="linenr"> 8: </span>this.page.url = PAGE_URL;  // Replace PAGE_URL with your page<span style="color: #E6DB74;">'s canonical URL variable</span>
+<span class="linenr"> 9: </span><span style="color: #E6DB74;">this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page'</span>s unique identifier variable
+<span class="linenr">10: </span>};
+<span class="linenr">11: </span>(function() { // DON<span style="color: #E6DB74;">'T EDIT BELOW THIS LINE</span>
+<span class="linenr">12: </span><span style="color: #E6DB74;">var d = document, s = d.createElement('</span>script<span style="color: #E6DB74;">');</span>
+<span class="linenr">13: </span><span style="color: #E6DB74;">s.src = '</span>https://tonylu.disqus.com/embed.js<span style="color: #E6DB74;">';</span>
+<span class="linenr">14: </span><span style="color: #E6DB74;">s.setAttribute('</span>data-timestamp<span style="color: #E6DB74;">', +new Date());</span>
+<span class="linenr">15: </span><span style="color: #E6DB74;">(d.head || d.body).appendChild(s);</span>
+<span class="linenr">16: </span><span style="color: #E6DB74;">})();</span>
+<span class="linenr">17: </span><span style="color: #E6DB74;">&lt;/script&gt;</span>
+<span class="linenr">18: </span><span style="color: #E6DB74;">&lt;noscript&gt;Please enable JavaScript to view the &lt;a href="https://disqus.com/?ref_noscript"&gt;comments powered by Disqus.</span>
+<span class="linenr">19: </span><span style="color: #E6DB74;">&lt;/a&gt;&lt;/noscript&gt;                             </span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb37555a" class="outline-3">
+<h3 id="orgb37555a"><span class="section-number-3">1.3</span> code高亮</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+解决这个问题花了好长时间，emacs学习曲线确实陡峭。在网上，找到了一个<a href="http://www.zmonster.me/2013/12/02/org8.x-export-source-code.html">参考资料</a>。具体做法是这样。首先，加载htmlize.el，然后
+在上面配置文件中，添加一行代码。
+</p>
+<div class="org-src-container">
+<pre class="src src-emacs-lisp"><span class="linenr"> 1: </span>abstract class IntQueue 
+<span class="linenr"> 2: </span>(add-to-list 'load-path <span style="color: #E6DB74;">"~/.emacs.d/elpa/htmlize-20161211.1019"</span>)
+<span class="linenr"> 3: </span>(<span style="color: #F92672;">require</span> '<span style="color: #AE81FF; font-weight: bold;">htmlize</span>)
+<span class="linenr"> 4: </span>(<span style="color: #F92672;">setq</span> org-html-htmlize-output-type 'css)
+<span class="linenr"> 5: </span>(<span style="color: #F92672;">setq</span> org-html-htmlize-output-type 'inline-css)
+<span class="linenr"> 6: </span>(<span style="color: #F92672;">setq</span> org-publish-project-alist
+<span class="linenr"> 7: </span>    '(
+<span class="linenr"> 8: </span>      (<span style="color: #E6DB74;">"project-name"</span>
+<span class="linenr"> 9: </span>       ......
+<span class="linenr">10: </span>   <span style="color: #F92672;">:htmlized-source</span> t 
+<span class="linenr">11: </span>       ......
+<span class="linenr">12: </span>       )
+<span class="linenr">13: </span>       ......))
+</pre>
+</div>
+
+<p>
+完整版的配置详见<a href="http://tonylu.pe.hu/wiki.html">我的wiki</a>。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3354525" class="outline-2">
+<h2 id="org3354525"><span class="section-number-2">2</span> 上传Github</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+上传github中，遇到的最大问题就是要生成一个RSA密钥，具体步骤参照<a href="http://blog.csdn.net/benweizhu/article/details/8492968">这个链接</a>。利用下面的程序上传文件，就能生成网站了。
+</p>
+
+<div class="org-src-container">
+<pre class="src src--n">cd C:\\Users\\Administrator\\Dropbox\\org
+git add .
+git commit -m "add code"
+git remote set-url origin git@github.com:luyajun01/luyajun01.github.io.git 
+git push origin master
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org78da439" class="outline-2">
+<h2 id="org78da439"><span class="section-number-2">3</span> 参考资料</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li><a href="https://guidao.github.io/emacs_blog.html">https://guidao.github.io/emacs_blog.html</a></li>
+<li><a href="http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html">http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html</a></li>
+<li><a href="http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html">http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html</a></li>
+<li><a href="https://yuyang0.github.io/articles/org-mode-dropbox-blog.html">https://yuyang0.github.io/articles/org-mode-dropbox-blog.html</a></li>
+<li><a href="http://orgmode.org/manual/Publishing-options.html">http://orgmode.org/manual/Publishing-options.html</a></li>
+<li><a href="http://blog.csdn.net/benweizhu/article/details/8492968">http://blog.csdn.net/benweizhu/article/details/8492968</a></li>
+<li><a href="http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html">http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html</a></li>
+<li><a href="http://www.zmonster.me/2013/12/02/org8.x-export-source-code.html">http://www.zmonster.me/2013/12/02/org8.x-export-source-code.html</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div id="disqus_thread"></div><script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = https://luyajun01.github.io;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://tonylu.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</body>
+</html>

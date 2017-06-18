@@ -1,4 +1,4 @@
 #+TITLE: Sitemap
 
-   + [[file:index.org][2017-06-17 index]]
-   + [[file:1.org][2017-06-17 通过org2blog发布博客]]
+   + [[file:blog_construct.org][2017-06-18 通过ox-publish创建博客]]
+   + [[file:index.org][2017-06-18 index]]
