@@ -1,4 +1,0 @@
-#+TITLE: Sitemap
-
-   + [[file:index.org][2017-06-17 index]]
-   + [[file:1.org][2017-06-17 通过org2blog发布博客]]
