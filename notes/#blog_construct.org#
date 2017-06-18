@@ -1,0 +1,118 @@
+ #+TITLE: 通过ox-publish创建博客
+#+OPTIONS: H:2 num:t 
+#+begin_quote
+
+一入emacs，坑深似海！
+
+#+end_quote
+
+昨天，无意之间看到了[[https://www.guidao.github.io][guidao博客的网站]]，第一眼就喜欢上了，这就是我想要的网站呐，漂亮至极。我一直都觉得，org生成的html效果是最好的。废话不多说，下面说明建站过程记录，同时也会放在我个人wiki上。
+
+** 配置Emacs
+*** 基本配置
+#+BEGIN_SRC emacs-lisp -n ;-n是指代码的行要列出来
+abstract class IntQueue 
+(add-to-list 'load-path "~/.emacs.d/elpa/org-20170606") ;最新版本的org-mode的路径
+(require 'ox-publish)
+(require 'ox-html)
+(setq org-publish-project-alist
+'(("blog-notes"
+ :base-directory "C:/Users/Administrator/Dropbox/org/notes/" ;org文件的路径
+ :base-extension "org"
+ :publishing-directory "C:/Users/Administrator/Dropbox/org/public_html/";生成的html文件路径
+ :recursive t
+ :publishing-function org-html-publish-to-html ;生成函数
+ :html-link-home "index.html" ;Home文件的路径
+ :html-link-org-files-as-html  org-html-link-org-files-as-html
+ :headline-levels 5             ; Just the default for this project.
+ :with-author nil ;去掉author
+ :with-email nil  ;去掉email
+ :with-creator nil  ;去掉creator
+ :with-timestamp nil  ;去掉时间线
+ :html-postamble nil
+ :auto-preamble t
+ :section-numbers nil
+ :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/org-css.css\" />" ;引入css文件
+ :auto-sitemap t                ; Generate sitemap.org automagically...
+ :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
+ :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
+ :sitemap-sort-files anti-chronologically
+ :sitemap-file-entry-format "%d %t"
+ )
+("blog-static"
+ :base-directory "C:/Users/Administrator/Dropbox/org/notes"
+ :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+ :publishing-directory "C:/Users/Administrator/Dropbox/org/public_html/"
+ :recursive t
+ :publishing-function org-publish-attachment
+ )
+ ("blog" :components ("blog-notes" "blog-static"))
+ ))
+
+#+END_SRC
+*** 添加disqus评论
+
+首先在[[https://tonylu.disqus.com/admin/install/platforms/universalcode/][disqus网站]]申请网站评论站点，得到以下代码放到上面的配置文件中。
+
+#+BEGIN_SRC css -n
+abstract class IntQueue 
+<div id="disqus_thread"></div>
+<script>(add-to-list 'load-path "~/.emacs.d/elpa/htmlize-20161211.1019")
+(require 'htmlize)
+(setq org-html-htmlize-output-type 'css)
+(setq org-html-htmlize-output-type 'inline-css)
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://tonylu.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.
+</a></noscript>                             
+#+END_SRC
+*** code高亮
+解决这个问题花了好长时间，emacs学习曲线确实陡峭。在网上，找到了一个[[http://www.zmonster.me/2013/12/02/org8.x-export-source-code.html][参考资料]]。具体做法是这样。首先，加载htmlize.el，然后
+在上面配置文件中，添加一行代码。
+#+BEGIN_SRC emacs-lisp -n
+abstract class IntQueue 
+(add-to-list 'load-path "~/.emacs.d/elpa/htmlize-20161211.1019")
+(require 'htmlize)
+(setq org-html-htmlize-output-type 'css)
+(setq org-html-htmlize-output-type 'inline-css)
+(setq org-publish-project-alist
+    '(
+      ("project-name"
+       ......
+   :htmlized-source t 
+       ......
+       )
+       ......))
+#+END_SRC
+
+完整版的配置详见[[http://tonylu.pe.hu/wiki.html][我的wiki]]。
+** 上传Github
+
+上传github中，遇到的最大问题就是要生成一个RSA密钥，具体步骤参照[[http://blog.csdn.net/benweizhu/article/details/8492968][这个链接]]。利用下面的程序上传文件，就能生成网站了。
+
+#+BEGIN_SRC -n
+ cd C:\\Users\\Administrator\\Dropbox\\org
+ git add -A ;本地文件有删除用-A，只有增加的文件用 .
+ git commit -m "add code"
+ git remote set-url origin git@github.com:luyajun01/luyajun01.github.io.git 
+ git push origin master
+#+END_SRC
+
+** 参考资料
++ [[https://guidao.github.io/emacs_blog.html]]
++ [[http://dayigu.github.io/WhyUseOrgModeToWriteBlog.html]]
++ [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html]]
++ [[https://yuyang0.github.io/articles/org-mode-dropbox-blog.html]]
++ [[http://orgmode.org/manual/Publishing-options.html]]
++ [[http://blog.csdn.net/benweizhu/article/details/8492968]]
++ [[http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html]]
++ [[http://www.zmonster.me/2013/12/02/org8.x-export-source-code.html]]
