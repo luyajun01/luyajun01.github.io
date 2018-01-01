@@ -1,38 +1,38 @@
-#+TITLE: 通过ox-publish创建博客
+#+TITLE: 通过 ox-publish 创建博客
 #+OPTIONS: H:2 num:t 
 #+begin_quote
 
-一入emacs，坑深似海！
+一入 emacs，坑深似海！
 
 #+end_quote
 
-昨天，无意之间看到了[[https://www.guidao.github.io][guidao博客的网站]]，第一眼就喜欢上了，这就是我想要的网站呐，漂亮至极。我一直都觉得，org生成的html效果是最好的。废话不多说，下面说明建站过程记录，同时也会放在我个人wiki上。
+昨天，无意之间看到了[[https://www.guidao.github.io][guidao 博客的网站]]，第一眼就喜欢上了，这就是我想要的网站呐，漂亮至极。我一直都觉得，org 生成的 html 效果是最好的。废话不多说，下面说明建站过程记录，同时也会放在我个人[[http://tonylu.pe.hu/wiki.html][wiki]]上。
 
-** 配置Emacs
+** 配置 Emacs
 *** 基本配置
-#+BEGIN_SRC emacs-lisp -n ;-n是指代码的行要列出来
+#+BEGIN_SRC emacs-lisp -n ;-n 是指代码的行要列出来
 abstract class IntQueue 
-(add-to-list 'load-path "~/.emacs.d/elpa/org-20170606") ;最新版本的org-mode的路径
+(add-to-list 'load-path "~/.emacs.d/elpa/org-20170606") ;最新版本的 org-mode 的路径
 (require 'ox-publish)
 (require 'ox-html)
 (setq org-publish-project-alist
 '(("blog-notes"
- :base-directory "C:/Users/Administrator/Dropbox/org/notes/" ;org文件的路径
+ :base-directory "C:/Users/Administrator/Dropbox/org/notes/" ;org 文件的路径
  :base-extension "org"
- :publishing-directory "C:/Users/Administrator/Dropbox/org/public_html/";生成的html文件路径
+ :publishing-directory "C:/Users/Administrator/Dropbox/org/public_html/";生成的 html 文件路径
  :recursive t
  :publishing-function org-html-publish-to-html ;生成函数
- :html-link-home "index.html" ;Home文件的路径
+ :html-link-home "index.html" ;Home 文件的路径
  :html-link-org-files-as-html  org-html-link-org-files-as-html
  :headline-levels 5             ; Just the default for this project.
- :with-author nil ;去掉author
- :with-email nil  ;去掉email
- :with-creator nil  ;去掉creator
+ :with-author nil ;去掉 author
+ :with-email nil  ;去掉 email
+ :with-creator nil  ;去掉 creator
  :with-timestamp nil  ;去掉时间线
  :html-postamble nil
  :auto-preamble t
  :section-numbers nil
- :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/org-css.css\" />" ;引入css文件
+ :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/org-css.css\" />" ;引入 css 文件
  :auto-sitemap t                ; Generate sitemap.org automagically...
  :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
  :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
@@ -50,9 +50,9 @@ abstract class IntQueue
  ))
 
 #+END_SRC
-*** 添加disqus评论
+*** 添加 disqus 评论
 
-首先在[[https://tonylu.disqus.com/admin/install/platforms/universalcode/][disqus网站]]申请网站评论站点，得到以下代码放到上面的配置文件中。
+首先在[[https://tonylu.disqus.com/admin/install/platforms/universalcode/][disqus 网站]]申请网站评论站点，得到以下代码放到上面的配置文件中。
 
 #+BEGIN_SRC css -n
 abstract class IntQueue 
@@ -75,8 +75,8 @@ s.setAttribute('data-timestamp', +new Date());
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.
 </a></noscript>                             
 #+END_SRC
-*** code高亮
-解决这个问题花了好长时间，emacs学习曲线确实陡峭。在网上，找到了一个[[http://www.zmonster.me/2013/12/02/org8.x-export-source-code.html][参考资料]]。具体做法是这样。首先，加载htmlize.el，然后
+*** code 高亮
+解决这个问题花了好长时间，emacs 学习曲线确实陡峭。在网上，找到了一个[[http://www.zmonster.me/2013/12/02/org8.x-export-source-code.html][参考资料]]。具体做法是这样。首先，加载 htmlize.el，然后
 在上面配置文件中，添加一行代码。
 #+BEGIN_SRC emacs-lisp -n
 abstract class IntQueue 
@@ -94,10 +94,10 @@ abstract class IntQueue
        ......))
 #+END_SRC
 
-完整版的配置详见[[http://tonylu.pe.hu/wiki.html][我的wiki]]。
-** 上传Github
+完整版的配置详见[[http://tonylu.pe.hu/wiki.html][我的 wiki]]。
+** 上传 Github
 
-上传github中，遇到的最大问题就是要生成一个RSA密钥，具体步骤参照[[http://blog.csdn.net/benweizhu/article/details/8492968][这个链接]]。利用下面的程序上传文件，就能生成网站了。
+上传 github 中，遇到的最大问题就是要生成一个 RSA 密钥，具体步骤参照[[http://blog.csdn.net/benweizhu/article/details/8492968][这个链接]]。利用下面的程序上传文件，就能生成网站了。
 
 #+BEGIN_SRC -n
  cd C:\\Users\\Administrator\\Dropbox\\org

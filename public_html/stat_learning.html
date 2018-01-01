@@ -3,9 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2018-01-01 周一 21:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title></title>
+<title>大数据时代统计学发展的若干问题</title>
 <meta name="generator" content="Org mode" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -224,6 +225,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="org-div-home-and-up">
@@ -234,16 +257,72 @@ for the JavaScript code in this tag.
 <div id=
 </div>
 <div id="content">
-<h1 align="center">个人博客</h1>
+<h1 class="title">大数据时代统计学发展的若干问题</h1>
+<p>
+从数据特征来看，Grobelink.M(2012)对大数据提出了著名的“3V”定义，即 <b>多样性（variety）、规模性（volume）、高速性（velocity）</b> 。在此基础上，国际数据公司认为大数据还具有 <b>价值密度低</b> 的特点。
+</p>
 
-<div id="outline-container-org3429d6c" class="outline-2">
-<h2 id="org3429d6c">2017年6月</h2>
-<div class="outline-text-2" id="text-org3429d6c">
+<p>
+回顾统计学史可以发现，在不同的社会背景下，统计学的发展都是以实际需求为驱动，伴随着需求和数据的改变逐步向前发展。
+</p>
+
+<p>
+尽管对相关关系的分析颇具价值，但是相关分析只是停留在数据表面。1934 年，Wright 把路径分析引入统计学，用有向图表示因果假设开始了因果推断，路径分析逐渐发展成结构方程模型。近几十年，很多学者致力于因果关系的研究， <b>因果网（causal net works）和虚拟事实模型（counter factual）或潜在反应（potential-outcomes）模型</b> 是最重要的用来刻画因果关系的两种模型。
+</p>
+
 <ul class="org-ul">
-<li><a href="blog_construct.html">通过ox-publish创建博客</a></li>
+<li>大数据时代仍然需要抽样？</li>
 </ul>
+
+<p>
+1、 <b>需要借助抽样方法分析大数据的核心内容。</b> 在一些大数据领域，可依靠高性能计算机使用分布式系统处理数据，然而在很多大数据环境下，计算机无法满足处理需求。例如在高速网络中，面对瞬息之间涌入的海量数据流，我们无法将信息完全存储下来。此时一种合理的策略就是基于抽样建立起能够进行事后分析的汇总信息来保存数据核心内容。针对大数据流环境，耿直(2014)提出需要探索如何抽取足以满足统计目的和精度的样本，需要研究新的适应性、序贯性和动态的抽样方法。
+</p>
+
+<p>
+2、 <b>需要借助抽样方法分析具有大量的误差的大数据。</b>   还有一层意思是因为大数据存在混杂性，数据误差普遍存在于大型数据库和网络中，在捕捉主要趋势信息时，如果进行全数据处理，大量的误差会影响分析结果的有效性。所以需要抽样，当抽样数据与大数据结果起冲突严重时，新的数据设计与采集值得被考虑，此时抽样对大数据系统起到预警作用。
+</p>
+
+<p>
+在统计回归模型中，为保证模型估计的 <b>一致性</b><sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>要求解释变量需满足外生性<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>。而在大数据情况下，数据来源的各异、形态的多元化会加剧解释变量数据误差的产生，由此有可能会出现内生性问题，影响模型的结果。
+</p>
+
+<p>
+内生性就是模型中的一个或者多个解释变量与随机扰动项相关。导致的原因主要有 2 个，遗漏了变量，且遗漏变量与引入模型的其他变量相关；解释变量和被解释变量相互作用，互相影响，互为因果。
+</p>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+:估计的评价标准有三个。无偏性、有效性、一致性。无偏性：\(E(\bar{\theta})=\theta\),其中 \(\bar{\theta}\) 未知参数 \(\theta\) 的估计量。有效性（方差最小性）： \(\theta\) 的两个无偏估计量 \(\bar{\theta}_{1}\) 比 \(\bar{\theta}_{2}\) 有效，如果 \(D(\bar{\theta}_{1})< D(\bar{\theta}_{2})\) . 一致性（相合性）：称估计量 \(\bar{\theta}_{n}=\theta(X_{1},X_{2},\cdots,X_{n})\) 为未知参数 \(\theta\) 的一致估计，如果   
+\(\lim\limits_{n\rightarrow +\infty} P\left\{|\bar{\theta_{n}-\theta|>\epsilon}\right\}=0\) .
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+: <b>内生变量</b> 的取值是（一定程度上）由模型决定的。内生变量将违背解释变量与误差项不相关的经典假设，因而内生性问题是计量模型的大敌，可能造成系数估计值的非一致性和偏误； <b>外生变量</b> 的取值是（完全）由模型以外的因素决定的。外生解释变量与误差项完全无关，不论是当期，还是滞后期。
+</p></div></div>
+
+
 </div>
-</div>
+</div></div>
+<div id="postamble" class="status">
+<div id="disqus_thread"></div><script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = https://luyajun01.github.io;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://tonylu.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 </body>
 </html>
