@@ -6,7 +6,11 @@
 #+OPTIONS: html-postamble:nil
 #+HTML: <h1 align="center">个人博客</h1>
 
-* 2017年6月
-- [[file:blog_construct.org][通过ox-publish创建博客]]
+* 2017 年 6 月
+- [[file:blog_construct.org][通过 ox-publish 创建博客]]
+
+* 2018 年 1 月
+
+- [[file:stat_learning.org][大数据时代统计学发展的若干问题]]
 
 

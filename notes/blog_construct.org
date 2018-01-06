@@ -96,6 +96,11 @@ abstract class IntQueue
 
 完整版的配置详见[[http://tonylu.pe.hu/wiki.html][我的 wiki]]。
 ** 上传 Github
+在把文件上传到 github 之前，需要生成 index 文件和文档 html。
+
+具体来说，就需要根据 index.org 文件运行 M-X org-publish-project 命令，生成 index.html 文件，对应的学习文档.org 采用同样的办法生成 html 文件。
+
+然后把新生成的 index 和学习文档网页文件放在根目录下，上传至 github 即可成功。
 
 上传 github 中，遇到的最大问题就是要生成一个 RSA 密钥，具体步骤参照[[http://blog.csdn.net/benweizhu/article/details/8492968][这个链接]]。利用下面的程序上传文件，就能生成网站了。
 

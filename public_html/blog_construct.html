@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-01-01 周一 21:02 -->
+<!-- 2018-01-06 周六 21:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>通过 ox-publish 创建博客</title>
@@ -378,6 +378,18 @@ for the JavaScript code in this tag.
 <div id="outline-container-org5cdd00e" class="outline-2">
 <h2 id="org5cdd00e"><span class="section-number-2">2</span> 上传 Github</h2>
 <div class="outline-text-2" id="text-2">
+<p>
+在把文件上传到 github 之前，需要生成 index 文件和文档 html。
+</p>
+
+<p>
+具体来说，就需要根据 index.org 文件运行 M-X org-publish-project 命令，生成 index.html 文件，对应的学习文档.org 采用同样的办法生成 html 文件。
+</p>
+
+<p>
+然后把新生成的 index 和学习文档网页文件放在根目录下，上传至 github 即可成功。
+</p>
+
 <p>
 上传 github 中，遇到的最大问题就是要生成一个 RSA 密钥，具体步骤参照<a href="http://blog.csdn.net/benweizhu/article/details/8492968">这个链接</a>。利用下面的程序上传文件，就能生成网站了。
 </p>
