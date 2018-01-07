@@ -1,5 +1,6 @@
 #+TITLE: Sitemap
 
+   + [[file:2017_plan.org][2018-01-07 2017 -2018 年度总结、计划]]
+   + [[file:index.org][2018-01-07 index]]
    + [[file:blog_construct.org][2018-01-06 通过 ox-publish 创建博客]]
-   + [[file:index.org][2018-01-06 index]]
    + [[file:stat_learning.org][2018-01-01 大数据时代统计学发展的若干问题]]
