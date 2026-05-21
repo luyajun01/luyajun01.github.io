@@ -88,10 +88,12 @@
     code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../css/org-css.css" />
+  <link rel="stylesheet" href="../css/wiki.css" />
 </head>
 <body>
+<div class="wiki-nav"><a href="../index.html">首页</a><a href="index.html">Wiki 目录</a></div>
 <header id="title-block-header">
-<h1 class="title">Python Wiki</h1>
+<h1 id="python-wiki-1" class="title">Python Wiki</h1>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -101,7 +103,7 @@
 <li><a href="#模块导入" id="toc-模块导入">模块导入</a></li>
 <li><a href="#输入输出" id="toc-输入输出">输入输出</a></li>
 <li><a href="#基本数据类型操作"
-id="toc-基本数据类型操作">基本数据类型操作</a></li>
+id="toc-基本数据类型操作">基础数据类型操作</a></li>
 <li><a href="#错误和异常" id="toc-错误和异常">错误和异常</a>
 <ul>
 <li><a href="#数据类型" id="toc-数据类型">数据类型</a></li>
@@ -109,16 +111,16 @@ id="toc-基本数据类型操作">基本数据类型操作</a></li>
 </ul></li>
 <li><a href="#基础知识" id="toc-基础知识">基础知识</a>
 <ul>
-<li><a href="#python-版本" id="toc-python-版本">python 版本</a></li>
+<li><a href="#python-版本" id="toc-python-版本">Python 版本</a></li>
 <li><a href="#虚拟环境" id="toc-虚拟环境">虚拟环境</a></li>
 <li><a href="#查看安装的包" id="toc-查看安装的包">查看安装的包</a></li>
 <li><a href="#安装包" id="toc-安装包">安装包</a></li>
-<li><a href="#ubuntu" id="toc-ubuntu">ubuntu</a></li>
+<li><a href="#ubuntu" id="toc-ubuntu">Ubuntu</a></li>
 <li><a href="#工作目录" id="toc-工作目录">工作目录</a></li>
 <li><a href="#os.path.exists"
 id="toc-os.path.exists">os.path.exists</a></li>
-<li><a href="#code" id="toc-code"><u><u>code</u></u></a></li>
-<li><a href="#section" id="toc-section">\</a></li>
+<li><a href="#code" id="toc-code">__code__</a></li>
+<li><a href="#line-continuation" id="toc-line-continuation">续行符</a></li>
 <li><a href="#数据交换" id="toc-数据交换">数据交换</a></li>
 <li><a href="#open" id="toc-open">open</a></li>
 <li><a href="#assert" id="toc-assert">assert</a></li>
@@ -133,7 +135,7 @@ evaluation</a></li>
 <li><a href="#广播机制" id="toc-广播机制">广播机制</a></li>
 <li><a href="#from..imports"
 id="toc-from..imports">from..imports</a></li>
-<li><a href="#name" id="toc-name"><u><u>name</u></u></a></li>
+<li><a href="#name" id="toc-name">__name__</a></li>
 </ul></li>
 <li><a href="#缺失值" id="toc-缺失值">缺失值</a>
 <ul>
@@ -141,13 +143,13 @@ id="toc-from..imports">from..imports</a></li>
 <li><a href="#fillna" id="toc-fillna">fillna</a></li>
 <li><a href="#缺失值填充" id="toc-缺失值填充">缺失值填充</a></li>
 </ul></li>
-<li><a href="#boolean" id="toc-boolean">boolean</a>
+<li><a href="#boolean" id="toc-boolean">布尔值</a>
 <ul>
 <li><a href="#section-1" id="toc-section-1">%</a></li>
 <li><a href="#section-2" id="toc-section-2">^</a></li>
 <li><a href="#while" id="toc-while">while</a></li>
 </ul></li>
-<li><a href="#字符" id="toc-字符">字符</a>
+<li><a href="#字符" id="toc-字符">字符串</a>
 <ul>
 <li><a href="#re.match" id="toc-re.match">re.match</a></li>
 <li><a href="#匹配任何单个字符"
@@ -166,24 +168,18 @@ id="toc-用-shell-通配符匹配字符串">用 shell 通配符匹配字符串</
 <li><a href="#字符串搜索和替换"
 id="toc-字符串搜索和替换">字符串搜索和替换</a></li>
 <li><a href="#splitting-string-on-any-of-multiple-delimiter"
-id="toc-splitting-string-on-any-of-multiple-delimiter">splitting string
-on any of multiple delimiter</a></li>
+id="toc-splitting-string-on-any-of-multiple-delimiter">按多个分隔符切分字符串</a></li>
 <li><a href="#字符首尾匹配" id="toc-字符首尾匹配">字符首尾匹配</a></li>
 <li><a href="#matching-strings-using-shell-wildcard-patterns"
-id="toc-matching-strings-using-shell-wildcard-patterns">matching strings
-using shell wildcard patterns</a></li>
+id="toc-matching-strings-using-shell-wildcard-patterns">使用 Shell 通配符匹配字符串</a></li>
 <li><a href="#matching-and-searching-for-text-patterns"
-id="toc-matching-and-searching-for-text-patterns">matching and searching
-for text patterns</a></li>
+id="toc-matching-and-searching-for-text-patterns">文本模式匹配与搜索</a></li>
 <li><a href="#searching-and-replacing-text"
-id="toc-searching-and-replacing-text">searching and replacing
-text</a></li>
+id="toc-searching-and-replacing-text">文本搜索与替换</a></li>
 <li><a href="#searching-and-replacing-case---insensitive-text"
-id="toc-searching-and-replacing-case---insensitive-text">searching and
-replacing case - insensitive text</a></li>
+id="toc-searching-and-replacing-case---insensitive-text">忽略大小写的文本搜索与替换</a></li>
 <li><a href="#specifying-a-regular-expression-for-the-shortest-match"
-id="toc-specifying-a-regular-expression-for-the-shortest-match">specifying
-a regular expression for the shortest match</a></li>
+id="toc-specifying-a-regular-expression-for-the-shortest-match">最短匹配的正则表达式</a></li>
 <li><a href="#字符统计" id="toc-字符统计">字符统计</a></li>
 <li><a href="#字符串大小写" id="toc-字符串大小写">字符串大小写</a></li>
 <li><a href="#去除空格-1" id="toc-去除空格-1">去除空格</a></li>
@@ -194,18 +190,16 @@ a regular expression for the shortest match</a></li>
 id="toc-字符中插入变量">字符中插入变量</a></li>
 <li><a href="#f-strings" id="toc-f-strings">f-strings</a></li>
 <li><a href="#performing-accurate-decimal-calculations"
-id="toc-performing-accurate-decimal-calculations">performing accurate
-decimal calculations</a></li>
+id="toc-performing-accurate-decimal-calculations">精确的小数计算</a></li>
 <li><a href="#formatting-numbers-for-output"
-id="toc-formatting-numbers-for-output">formatting numbers for
-output</a></li>
+id="toc-formatting-numbers-for-output">数字输出格式化</a></li>
 <li><a href="#原始字符串操作符"
 id="toc-原始字符串操作符">原始字符串操作符</a></li>
 </ul></li>
 <li><a href="#元组" id="toc-元组">元组</a>
 <ul>
 <li><a href="#unionintersectiondifference"
-id="toc-unionintersectiondifference">union/intersection/difference</a></li>
+id="toc-unionintersectiondifference">并集 / 交集 / 差集</a></li>
 </ul></li>
 <li><a href="#字典" id="toc-字典">字典</a>
 <ul>
@@ -215,52 +209,45 @@ id="toc-从字典中提取子集">从字典中提取子集</a></li>
 <li><a href="#defaultdict" id="toc-defaultdict">defaultdict</a></li>
 <li><a href="#setdefault" id="toc-setdefault">setdefault</a></li>
 <li><a href="#keeping-the-last-n-items"
-id="toc-keeping-the-last-n-items">keeping the last N items</a></li>
+id="toc-keeping-the-last-n-items">保留最后 N 个元素</a></li>
 <li><a href="#finding-the-largest-or-smallest-n-items"
-id="toc-finding-the-largest-or-smallest-n-items">finding the largest or
-smallest n items</a></li>
+id="toc-finding-the-largest-or-smallest-n-items">查找最大或最小的 N 个元素</a></li>
 <li><a href="#append" id="toc-append">append</a></li>
 <li><a href="#计算最大最小及排序值"
-id="toc-计算最大最小及排序值">计算最大,最小及排序值</a></li>
+id="toc-计算最大最小及排序值">计算最大、最小及排序值</a></li>
 <li><a href="#寻找共同的key"
-id="toc-寻找共同的key">寻找共同的key</a></li>
+id="toc-寻找共同的key">寻找共同的 key</a></li>
 <li><a href="#删除序列相同元素并保持顺序"
 id="toc-删除序列相同元素并保持顺序">删除序列相同元素并保持顺序</a></li>
 <li><a href="#序列中出现次数最多的元素"
 id="toc-序列中出现次数最多的元素">序列中出现次数最多的元素</a></li>
 <li><a href="#sorting-a-list-of-dictionaries-by-a-common-key"
-id="toc-sorting-a-list-of-dictionaries-by-a-common-key">sorting a list
-of dictionaries by a common key</a></li>
+id="toc-sorting-a-list-of-dictionaries-by-a-common-key">按共同键排序字典列表</a></li>
 <li><a href="#sorting-objects-without-native-comparison-support"
-id="toc-sorting-objects-without-native-comparison-support">sorting
-objects without native comparison support</a></li>
+id="toc-sorting-objects-without-native-comparison-support">排序不支持原生比较的对象</a></li>
 <li><a href="#grouping-records-together-based-on-a-field"
-id="toc-grouping-records-together-based-on-a-field">grouping records
-together based on a field</a></li>
+id="toc-grouping-records-together-based-on-a-field">按字段分组记录</a></li>
 <li><a href="#filtering-sequence-elements"
-id="toc-filtering-sequence-elements">filtering sequence
-elements</a></li>
+id="toc-filtering-sequence-elements">过滤序列元素</a></li>
 <li><a href="#映射名称到序列元素"
 id="toc-映射名称到序列元素">映射名称到序列元素</a></li>
 <li><a href="#转换并同时计算数据"
 id="toc-转换并同时计算数据">转换并同时计算数据</a></li>
 <li><a href="#合并多个字典或映射"
 id="toc-合并多个字典或映射">合并多个字典或映射</a></li>
-<li><a href="#case-when" id="toc-case-when">case when</a></li>
+<li><a href="#case-when" id="toc-case-when">CASE WHEN</a></li>
 </ul></li>
-<li><a href="#list" id="toc-list">list</a>
+<li><a href="#list" id="toc-list">列表</a>
 <ul>
 <li><a href="#appendextend" id="toc-appendextend">append/extend</a></li>
 <li><a href="#enumerate" id="toc-enumerate">enumerate</a></li>
 <li><a href="#len" id="toc-len">len</a></li>
 <li><a href="#笛卡尔积" id="toc-笛卡尔积">笛卡尔积</a></li>
 <li><a href="#slice" id="toc-slice">slice</a></li>
-<li><a href="#iterating-on-items-in-separate-containersr"
-id="toc-iterating-on-items-in-separate-containersr">iterating on items
-in separate containersr</a></li>
+<li><a href="#iterating-on-items-in-separate-containers"
+id="toc-iterating-on-items-in-separate-containers">并行遍历多个容器</a></li>
 <li><a href="#iterating-in-sorted-order-over-merged-sorted-iterable"
-id="toc-iterating-in-sorted-order-over-merged-sorted-iterable">iterating
-in sorted order over merged sorted iterable</a></li>
+id="toc-iterating-in-sorted-order-over-merged-sorted-iterable">按排序顺序合并遍历</a></li>
 <li><a href="#推导式" id="toc-推导式">推导式</a></li>
 <li><a href="#字典-1" id="toc-字典-1">字典</a></li>
 <li><a href="#集合" id="toc-集合">集合</a></li>
@@ -278,15 +265,15 @@ in sorted order over merged sorted iterable</a></li>
 <li><a href="#return" id="toc-return">return</a></li>
 <li><a href="#命名空间和作用域"
 id="toc-命名空间和作用域">命名空间和作用域</a></li>
-<li><a href="#section-3" id="toc-section-3"><strong>/*</strong></a></li>
+<li><a href="#args-kwargs" id="toc-args-kwargs">*args 和 **kwargs</a></li>
 <li><a href="#isinstance" id="toc-isinstance">isinstance</a></li>
 <li><a href="#super" id="toc-super">super</a></li>
 <li><a href="#魔法函数" id="toc-魔法函数">魔法函数</a></li>
-<li><a href="#slots" id="toc-slots"><u><u>slots</u></u></a></li>
+<li><a href="#slots" id="toc-slots">__slots__</a></li>
 <li><a href="#int" id="toc-int">int</a></li>
 <li><a href="#set" id="toc-set">set</a></li>
 <li><a href="#help" id="toc-help">help</a></li>
-<li><a href="#list-1" id="toc-list-1">list</a></li>
+<li><a href="#list-1" id="toc-list-1">列表</a></li>
 <li><a href="#print" id="toc-print">print</a></li>
 <li><a href="#tolist" id="toc-tolist">tolist</a></li>
 <li><a href="#title" id="toc-title">title</a></li>
@@ -359,7 +346,7 @@ id="toc-最小值和最大值">最小值和最大值</a></li>
 <li><a href="#线性模型" id="toc-线性模型">线性模型</a></li>
 <li><a href="#lasso" id="toc-lasso">lasso</a></li>
 </ul></li>
-<li><a href="#packages" id="toc-packages">Packages</a>
+<li><a href="#packages" id="toc-packages">常用包</a>
 <ul>
 <li><a href="#numpy" id="toc-numpy">numpy</a></li>
 <li><a href="#pandas" id="toc-pandas">pandas</a></li>
@@ -367,7 +354,7 @@ id="toc-最小值和最大值">最小值和最大值</a></li>
 <li><a href="#sklearn" id="toc-sklearn">sklearn</a></li>
 </ul></li>
 <li><a href="#面向对象技术简介"
-id="toc-面向对象技术简介">面向对象技术简介</a>
+id="toc-面向对象技术简介">面向对象</a>
 <ul>
 <li><a href="#继承" id="toc-继承">继承</a></li>
 </ul></li>
@@ -375,12 +362,11 @@ id="toc-面向对象技术简介">面向对象技术简介</a>
 <ul>
 <li><a href="#线性表" id="toc-线性表">线性表</a></li>
 <li><a href="#链表" id="toc-链表">链表</a></li>
-<li><a href="#hash表" id="toc-hash表">hash表</a></li>
+<li><a href="#哈希表" id="toc-哈希表">哈希表</a></li>
 </ul></li>
 </ul></li>
 </ul>
 </nav>
-<h1 id="python-wiki-1">Python Wiki</h1>
 <h2 id="编程规范">编程规范</h2>
 <p>代码缩进：用实际例子说明 Python 中缩进的重要性，以及如何正确使用 4
 个空格进行缩进。</p>
@@ -402,10 +388,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 不好的代码示例：</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 不推荐的代码示例：</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span>  calculateSum ( a,B ):</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#计算a和B的和</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 计算 a 和 B 的和</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a<span class="op">+</span>B</span></code></pre></div>
 <h2 id="模块导入">模块导入</h2>
 <p>导入整个模块：使用 import
@@ -444,7 +430,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a hr
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 f-string 格式化输出问候语</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;您好，</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">！&quot;</span>)</span></code></pre></div>
-<h2 id="基本数据类型操作">基本数据类型操作</h2>
+<h2 id="基本数据类型操作">基础数据类型操作</h2>
 <p>数值类型：演示整数、浮点数的基本运算，以及类型转换。</p>
 <p>字符串类型：演示字符串拼接、格式化、查找、替换等操作。</p>
 <p>布尔类型：演示布尔运算 (and, or, not) 和比较运算符 (==, !=, &gt;,
@@ -506,7 +492,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a hr
 <p>前面的_<sub>and</sub>_<sub>是可用的方法</sub>，后面的
 bit<sub>length</sub> 是可用属性。字符、元组、列表、字典.</p>
 <h2 id="基础知识">基础知识</h2>
-<h3 id="python-版本">python 版本</h3>
+<h3 id="python-版本">Python 版本</h3>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sys.version_info</span>
@@ -524,8 +510,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a hr
 <h3 id="安装包">安装包</h3>
 <div class="sourceCode" id="cb10" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pip install <span class="op">-</span>i https:<span class="op">//</span>pypi.tuna.tsinghua.edu.cn<span class="op">/</span>simple seaborn</span></code></pre></div>
-<h3 id="ubuntu">ubuntu</h3>
-<p>在ubuntu 中, <a
+<h3 id="ubuntu">Ubuntu</h3>
+<p>在 Ubuntu 中, <a
 href="https://zhuanlan.zhihu.com/p/81321705">https://zhuanlan.zhihu.com/p/81321705</a>。</p>
 <div class="sourceCode" id="cb11"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">;;</span>使用<span class="op">--</span>envs选项(<span class="op">-</span>e)查看所有已创建的虚拟环境,在列出的虚拟环境中,使用星号(<span class="op">*</span>)标识的是当前激活的虚拟环境.</span>
@@ -536,15 +522,15 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a h
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#引入模块，获得工作目录</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">import</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>os.getcwd() <span class="co">#获得当前工作目录</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; &#39;/path/to/local-file&#39;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; &#39;/path/to/example&#39;</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>os.chdir(<span class="st">&#39;/path/to/work&#39;</span>) <span class="co">#改变工作目录</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>os.mkdir(<span class="st">&#39;work&#39;</span>) <span class="co">#建立新目录</span></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>os.rmdir(<span class="st">&#39;work&#39;</span>) <span class="co">#删除目录</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>os.rename(<span class="st">&#39;fff.txt&#39;</span>,<span class="st">&#39;fool.txt&#39;</span>) <span class="co">#重命名</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>os.remove(<span class="st">&#39;h.txt&#39;</span>) <span class="co">#删除文件</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>os.listdir(<span class="st">&quot;D:</span><span class="ch">\&quot;</span><span class="st">)#获得当前工作目录下的所有文件</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>os.listdir(<span class="st">&quot;.&quot;</span>)#获得当前工作目录下的所有文件</span></span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="er">print</span>(<span class="bu">list</span>(<span class="bu">filter</span>(os.path.isfile, os.listdir()))) <span class="co">#列出当前文件夹下所有文件</span></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">filter</span>(os.path.isdir, os.listdir()))) <span class="co">#列出当前文件夹下所有文件夹</span></span></code></pre></div>
 <p>也能获得system命令</p>
@@ -600,7 +586,7 @@ os.R<sub>OK</sub>): print(f"文件 {file<sub>path</sub>} 存在且可读")
 else: print(f"文件 {file<sub>path</sub>} 不存在或不可读") ```</p>
 <p>这些方法都不使用try语句,而是直接检查文件或目录的状态。它们是线程安全的,并且通常比使用try-except块更快。</p>
 <p>注意:在多线程环境中,在检查文件存在性和实际使用文件之间可能存在竞态条件。如果这是一个问题,你可能需要使用适当的锁定机制或考虑使用try-except块来处理文件操作。</p>
-<h3 id="code"><u><u>code</u></u></h3>
+<h3 id="code">__code__</h3>
 <p>这个函数可以用来查看变量参数等信息.</p>
 <div class="sourceCode" id="cb16"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test(x, y <span class="op">=</span> <span class="dv">10</span>):</span>
@@ -618,7 +604,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a h
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; (10,)</span></span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>test(<span class="dv">1</span>)</span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 101 10</span></span></code></pre></div>
-<h3 id="section">\</h3>
+<h3 id="line-continuation">续行符</h3>
 <p>如果代码太长写成一行不便于阅读 可以使用.</p>
 <div class="sourceCode" id="cb17"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>year <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&#39;请输入年份: &#39;</span>))</span>
@@ -643,7 +629,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a h
 <h3 id="assert">assert</h3>
 <p>利用assert来发现问题.可以 check 等式是否成立. 加上-O
 参数可以禁用断言,如 python -O
-asserttest.py.对于类似数组越界0之类的错误,不建议使用断言来进行处理.</p>
+对于数组越界这类运行时错误，不建议使用断言处理。</p>
 <div class="sourceCode" id="cb20"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span>(a<span class="op">&gt;</span><span class="dv">1</span>)</span>
@@ -731,7 +717,7 @@ int.十进制转二进制</p>
 <div class="sourceCode" id="cb29" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">bin</span>(<span class="dv">100</span>))</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 0b1100100</span></span></code></pre></div>
-<h3 id="lazy-evaluation">lazy evaluation</h3>
+<h3 id="lazy-evaluation">惰性求值</h3>
 <p>惰性计算。指的是仅仅在真正需要执行的时候才计算表达式的值。惰性计算是指在需要的时候才计算，而不是立即计算。这样可以节省计算资源，提高程序的运行效率。惰性计算的一个典型应用是生成器。生成器是一种特殊的迭代器，它可以在需要的时候才生成数据，而不是一次性生成所有数据。</p>
 <p>(1) 避免不必要的计算，带来性能上的提升。对于python
 中的条件表达式。</p>
@@ -852,13 +838,13 @@ sys import argv
 <div class="sourceCode" id="cb35" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> sqrt</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;Square root of 16 is&quot;</span>, sqrt (<span class="dv">16</span>))</span></code></pre></div>
-<h3 id="name"><u><u>name</u></u></h3>
+<h3 id="name">__name__</h3>
 <p>在 Python 中，`_<sub>name</sub>__`
 是一个内置的特殊变量，它的值取决于模块是如何被运行的。</p>
 <ul>
 <li>如果模块是被直接运行的（比如你在命令行输入 `python
 my<sub>script</sub>.py`），那么 `_<sub>name</sub>__` 的值就是
-`"<u><u>main</u></u>"`。</li>
+`"__main__"`。</li>
 <li>如果模块是被导入的（比如在另一个 Python 文件中你写了 `import
 my<sub>script</sub>`），那么 `_<sub>name</sub>__`
 的值就是模块的名字（在这个例子中就是 `my<sub>script</sub>`）。</li>
@@ -881,7 +867,7 @@ directly."。</li>
 Python 代码时非常有用。</p>
 <h2 id="缺失值">缺失值</h2>
 <h3 id="isnull">isnull</h3>
-<p>python 中 np.nan 与 None 是等价关系？</p>
+<p>Python 中 np.nan 与 None 是等价关系？</p>
 <div class="sourceCode" id="cb37"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -901,7 +887,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a h
 <span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 0    1.0</span></span>
 <span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co">#    2    2.0</span></span>
 <span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co">#    dtype: float64</span></span></code></pre></div>
-<p>在 series 里使用的 isnull() 和 notnull() 同样适用于 dataframe.</p>
+<p>Series 中的 isnull() 和 notnull() 同样适用于 DataFrame。</p>
 <h3 id="fillna">fillna</h3>
 <p>df.fillna(),将缺失值填充为给定值.</p>
 <div class="sourceCode" id="cb38"><pre
@@ -924,7 +910,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a h
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>housing.drop(<span class="st">&#39;total_bedrooms&#39;</span>, axis<span class="op">=</span><span class="dv">1</span>)  <span class="co">#删除一个特征</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>median <span class="op">=</span> housing[<span class="st">&#39;total_bedrooms&#39;</span>].median()</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>housing[<span class="st">&#39;total_bedrooms&#39;</span>].fillna(median)</span></code></pre></div>
-<h2 id="boolean">boolean</h2>
+<h2 id="boolean">布尔值</h2>
 <div class="sourceCode" id="cb40" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="st">&quot;Hi&quot;</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="st">&quot;Hi&quot;</span></span>
@@ -964,8 +950,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a h
 class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="op">%</span> <span class="dv">3</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1</span></span></code></pre></div>
 <h3 id="section-2">^</h3>
-<p>python 中的逻辑运算符，异或xor。</p>
-<p>一种逻辑运算符是并不排它用 or 表示；另外一种就是异或，在python 中用 ^
+<p>Python 中的逻辑运算符，异或xor。</p>
+<p>一种逻辑运算符是并不排它用 or 表示；另外一种就是异或，在Python 中用 ^
 表示。</p>
 <table>
 <tbody>
@@ -1032,8 +1018,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a h
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>current_num</span>
 <span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 6</span></span></code></pre></div>
-<h2 id="字符">字符</h2>
-<p>在 python 中 re
+<h2 id="字符">字符串</h2>
+<p>在 Python 中 re
 模块可以完成对文本的正则化处理。匹配对象的两种方法：group() 和
 groups().</p>
 <h3 id="re.match">re.match</h3>
@@ -1161,8 +1147,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a h
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>encoder <span class="op">=</span> LabelBinarizer()</span>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>housing_cat_1hot <span class="op">=</span> encoder.fit_transform(housing_cat)</span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>housing_cat_1hot</span></code></pre></div>
-<h3 id="splitting-string-on-any-of-multiple-delimiter">splitting string
-on any of multiple delimiter</h3>
+<h3 id="splitting-string-on-any-of-multiple-delimiter">按多个分隔符切分字符串</h3>
 <p>you need to split a string into fields, but the delimiters aren't
 consistent throughout the strings.</p>
 <p>r,表示需要原始字符串，不转义特殊字符。</p>
@@ -1199,8 +1184,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a h
 class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span><span class="st">&#39;http://www.python.org&#39;</span></span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>re.match(<span class="st">&#39;http:|https:|ftp:&#39;</span>, url)</span></code></pre></div>
-<h3 id="matching-strings-using-shell-wildcard-patterns">matching strings
-using shell wildcard patterns</h3>
+<h3 id="matching-strings-using-shell-wildcard-patterns">使用 Shell 通配符匹配字符串</h3>
 <div class="sourceCode" id="cb63" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fnmatch <span class="im">import</span> fnmatch,fnmatchcase</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>fnmatch(<span class="st">&#39;foo.txt&#39;</span>, <span class="st">&#39;*.txt&#39;</span>)</span>
@@ -1217,8 +1201,7 @@ uppercase conventions that you supply.</p>
 <div class="sourceCode" id="cb64" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>fnmatchcase(<span class="st">&#39;foo.txt&#39;</span>, <span class="st">&#39;*.TXT&#39;</span>)</span>
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; False</span></span></code></pre></div>
-<h3 id="matching-and-searching-for-text-patterns">matching and searching
-for text patterns</h3>
+<h3 id="matching-and-searching-for-text-patterns">文本模式匹配与搜索</h3>
 <div class="sourceCode" id="cb65" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">&#39;yeah, but no, but yeah, but no, but yeah&#39;</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>text <span class="op">==</span> <span class="st">&#39;yeah&#39;</span></span>
@@ -1262,7 +1245,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a h
 <span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb66-18"><a href="#cb66-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> datepat.finditer(text):</span>
 <span id="cb66-19"><a href="#cb66-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(m.groups())</span></code></pre></div>
-<h3 id="searching-and-replacing-text">searching and replacing text</h3>
+<h3 id="searching-and-replacing-text">文本搜索与替换</h3>
 <div class="sourceCode" id="cb67" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">&#39;Yeah, but no, but Yeah&#39;</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>text.replace(<span class="st">&#39;yeah&#39;</span>, <span class="st">&#39;yep&#39;</span>)</span>
@@ -1279,8 +1262,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a h
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>datepat <span class="op">=</span>re.<span class="bu">compile</span>(<span class="vs">r&#39;</span><span class="kw">(</span><span class="dv">\d</span><span class="op">+</span><span class="kw">)</span><span class="vs">/</span><span class="kw">(</span><span class="dv">\d</span><span class="op">+</span><span class="kw">)</span><span class="vs">/</span><span class="kw">(</span><span class="dv">\d</span><span class="op">+</span><span class="kw">)</span><span class="vs">&#39;</span>)</span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>newtext, n<span class="op">=</span> datepat.sub(<span class="vs">r&#39;</span><span class="ch">\3</span><span class="vs">-</span><span class="ch">\1</span><span class="vs">-</span><span class="ch">\2</span><span class="vs">&#39;</span>, text)</span>
 <span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>newtext</span></code></pre></div>
-<h3 id="searching-and-replacing-case---insensitive-text">searching and
-replacing case - insensitive text</h3>
+<h3 id="searching-and-replacing-case---insensitive-text">忽略大小写的文本搜索与替换</h3>
 <div class="sourceCode" id="cb69" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>text<span class="op">=</span><span class="st">&#39;Upper Python, lower python, mixed python&#39;</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>re.findall(<span class="st">&#39;python&#39;</span>, text, flags<span class="op">=</span>re.IGNORECASE)</span>
@@ -1401,8 +1383,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a h
 <span id="cb78-16"><a href="#cb78-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb78-17"><a href="#cb78-17" aria-hidden="true" tabindex="-1"></a>users <span class="op">=</span> [User(<span class="ss">f&quot;user</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">&quot;</span>, i) <span class="cf">for</span> i <span class="kw">in</span> (<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">2</span>)]</span>
 <span id="cb78-18"><a href="#cb78-18" aria-hidden="true" tabindex="-1"></a>users</span></code></pre></div>
-<h3 id="performing-accurate-decimal-calculations">performing accurate
-decimal calculations</h3>
+<h3 id="performing-accurate-decimal-calculations">精确的小数计算</h3>
 <div class="sourceCode" id="cb79" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">4.2</span></span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="fl">2.1</span></span>
@@ -1438,7 +1419,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a h
 <span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a>math.fsum(nums)</span>
 <span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 1.0</span></span></code></pre></div>
 <p>在判断两个字符串是否相等的时候,混用is 和==
-是很多初学者经常犯的错误,造成大结果是程序在不同情况下表现不一.</p>
+是很多初学者经常犯这个错误，导致程序在不同情况下表现不一致.</p>
 <div class="sourceCode" id="cb83"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="st">&#39;Hi&#39;</span></span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="st">&#39;Hi&#39;</span></span>
@@ -1454,8 +1435,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a h
 <span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; True</span></span></code></pre></div>
 <p>不一致的原因在于 is 是表示的是对象标示符(object identity),而 ==
 表示的意思是相等(equal), 显然两者不是一个东西.</p>
-<h3 id="formatting-numbers-for-output">formatting numbers for
-output</h3>
+<h3 id="formatting-numbers-for-output">数字输出格式化</h3>
 <p>to format a single number for output, use the built-in format()
 function.</p>
 <div class="sourceCode" id="cb84"><pre
@@ -1478,7 +1458,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a h
 <span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; hello</span></span></code></pre></div>
 <h2 id="元组">元组</h2>
 <p>元组是一个固定长度，不可改变的 python
-序列对象。创建元组的最简单方式，用用逗号分隔一列值：tuple 和 list
+序列对象。创建元组的最简单方式，用逗号分隔一列值：tuple 和 list
 非常类似（一个用圆括号，一个用方括号），主要区别在于 tuple
 不能增减或更改其元素，而 dict
 则是有索引的多元组（用花括号表示），有其方便的地方。tuple 和 list
@@ -1493,7 +1473,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a h
 class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>nested_tup <span class="op">=</span> (<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>),(<span class="dv">7</span>,<span class="dv">8</span>)</span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>nested_tup</span>
 <span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ((4, 5, 6), (7, 8))</span></span></code></pre></div>
-<p>用 tuple 可以将任意序列或迭代器转换成元组:</p>
+<p>可以使用 tuple 将任意序列或迭代器转换成元组：</p>
 <div class="sourceCode" id="cb88"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="bu">tuple</span>([<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">2</span>])</span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (4, 0, 2)</span></span>
@@ -1557,10 +1537,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a h
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>t[<span class="dv">2</span>] <span class="op">=</span> <span class="va">False</span></span>
 <span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Traceback (most recent call last):</span></span>
 <span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/local-file&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/example&quot;, line 1, in &lt;module&gt;</span></span>
 <span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="co">#        # -*- org-confirm-babel-evaluate: nil; -*-</span></span>
 <span id="cb97-7"><a href="#cb97-7" aria-hidden="true" tabindex="-1"></a><span class="co">#    TypeError: &#39;tuple&#39; object does not support item assignment</span></span></code></pre></div>
-<p>当tuple 只有一个元素时，必须加逗号, 来消除歧义</p>
+<p>当 tuple 只有一个元素时，必须加逗号来消除歧义</p>
 <div class="sourceCode" id="cb98"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="bu">tuple</span> <span class="op">=</span> (<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>,<span class="st">&#39;e&#39;</span>)</span>
 <span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="bu">tuple</span>[<span class="dv">1</span>:<span class="dv">3</span>]</span>
@@ -1572,7 +1552,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a h
 <span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> (<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,[<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>])</span>
 <span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; (&#39;a&#39;, &#39;b&#39;, [&#39;A&#39;, &#39;B&#39;])</span></span>
-<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a>t[<span class="dv">2</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="st">&#39;X&#39;</span> <span class="co">#tuple 里的list 型可以更改对象</span></span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a>t[<span class="dv">2</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="st">&#39;X&#39;</span> <span class="co">#tuple 里的 list 对象本身仍可修改</span></span>
 <span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; &#39;X&#39;</span></span>
 <span id="cb98-13"><a href="#cb98-13" aria-hidden="true" tabindex="-1"></a>t[<span class="dv">0</span>] <span class="op">=</span>  <span class="st">&#39;C&#39;</span></span>
 <span id="cb98-14"><a href="#cb98-14" aria-hidden="true" tabindex="-1"></a>t</span>
@@ -1623,7 +1603,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb105-1"><a 
 <span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 1 2 5</span></span>
 <span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rest)</span>
 <span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [3, 4]</span></span></code></pre></div>
-<p>解压缩对象不仅仅局限于tuple，list, 还包括有string.files, iterators,
+<p>解压缩对象不仅局限于 tuple 和 list，也适用于字符串、文件对象和迭代器，
 generators.</p>
 <p>可以通过_ 来扔掉某些你不想要的变量。</p>
 <div class="sourceCode" id="cb106"><pre
@@ -1643,9 +1623,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a 
 <span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>name, <span class="op">*</span>_,(<span class="op">*</span>_,year) <span class="op">=</span> record</span>
 <span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>year</span>
 <span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 3</span></span></code></pre></div>
-<h3 id="unionintersectiondifference">union/intersection/difference</h3>
-<p>基本模块的集合运算不能直接用于 list，但可以用于通过函数 set()转换的
-list,这些计算包括集合的差（difference），并（union），交（intersection）。</p>
+<h3 id="unionintersectiondifference">并集 / 交集 / 差集</h3>
+<p>集合运算不能直接用于 list，但可以先用 set() 转换；常见运算包括差集、并集和交集。</p>
 <div class="sourceCode" id="cb109"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>([<span class="st">&#39;I&#39;</span>, <span class="st">&#39;you&#39;</span>, <span class="st">&#39;he&#39;</span>, <span class="st">&#39;I&#39;</span>])</span>
 <span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; {&#39;you&#39;, &#39;he&#39;, &#39;I&#39;}</span></span></code></pre></div>
@@ -1735,7 +1714,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a 
 class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {}</span>
 <span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>d.setdefault(<span class="st">&#39;a&#39;</span>, []).append(<span class="dv">1</span>)</span>
 <span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>d.setdefault(<span class="st">&#39;a&#39;</span>, []).append(<span class="dv">2</span>)</span></code></pre></div>
-<h3 id="keeping-the-last-n-items">keeping the last N items</h3>
+<h3 id="keeping-the-last-n-items">保留最后 N 个元素</h3>
 <p>确保向量保留固定位数数字。</p>
 <div class="sourceCode" id="cb116" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
@@ -1752,8 +1731,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a 
 <span id="cb116-12"><a href="#cb116-12" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 3</span></span>
 <span id="cb116-13"><a href="#cb116-13" aria-hidden="true" tabindex="-1"></a>q.popleft() <span class="co">#从左边开始剔除</span></span>
 <span id="cb116-14"><a href="#cb116-14" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 4</span></span></code></pre></div>
-<h3 id="finding-the-largest-or-smallest-n-items">finding the largest or
-smallest n items</h3>
+<h3 id="finding-the-largest-or-smallest-n-items">查找最大或最小的 N 个元素</h3>
 <p>找出最大或者最小的值.</p>
 <div class="sourceCode" id="cb117" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> heapq</span>
@@ -1782,7 +1760,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a 
 <span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>d[<span class="st">&#39;a&#39;</span>].append(<span class="dv">1</span>)</span>
 <span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>d</span>
 <span id="cb119-8"><a href="#cb119-8" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; {&#39;a&#39;: [1, 2, 3, 1], &#39;b&#39;: [4, 5]}</span></span></code></pre></div>
-<h3 id="计算最大最小及排序值">计算最大,最小及排序值</h3>
+<h3 id="计算最大最小及排序值">计算最大、最小及排序值</h3>
 <p>如何统计字典型数据的最大，最小及排序值。</p>
 <div class="sourceCode" id="cb120" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>prices <span class="op">=</span> {<span class="st">&#39;ACme&#39;</span>: <span class="fl">45.23</span>,<span class="st">&#39;A&#39;</span>:<span class="fl">231.120</span>,<span class="st">&quot;sdfg&quot;</span>:<span class="dv">234</span>}</span>
@@ -1803,7 +1781,7 @@ max(price)
 max(price.values())
 sorted(price)
 </code></pre>
-<h3 id="寻找共同的key">寻找共同的key</h3>
+<h3 id="寻找共同的key">寻找共同的 key</h3>
 <p>找到2个字典数据共有的keys, same values.</p>
 <div class="sourceCode" id="cb122" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> {<span class="st">&#39;x&#39;</span>:<span class="dv">1</span>, <span class="st">&#39;y&#39;</span>:<span class="dv">1</span>, <span class="st">&#39;z&#39;</span>:<span class="dv">3</span>}</span>
@@ -1879,8 +1857,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a 
 <span id="cb128-7"><a href="#cb128-7" aria-hidden="true" tabindex="-1"></a><span class="co">#subtract counts</span></span>
 <span id="cb128-8"><a href="#cb128-8" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> a <span class="op">-</span> b</span>
 <span id="cb128-9"><a href="#cb128-9" aria-hidden="true" tabindex="-1"></a>d</span></code></pre></div>
-<h3 id="sorting-a-list-of-dictionaries-by-a-common-key">sorting a list
-of dictionaries by a common key</h3>
+<h3 id="sorting-a-list-of-dictionaries-by-a-common-key">按共同键排序字典列表</h3>
 <div class="sourceCode" id="cb129" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [</span>
 <span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&#39;fname&#39;</span>: <span class="st">&#39;Brian&#39;</span>, <span class="st">&#39;lname&#39;</span>: <span class="st">&#39;Jones&#39;</span>, <span class="st">&#39;uid&#39;</span>: <span class="dv">1003</span>},</span>
@@ -1907,15 +1884,13 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a 
 <div class="sourceCode" id="cb131" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="bu">min</span>(rows,key<span class="op">=</span>itemgetter(<span class="st">&#39;uid&#39;</span>))</span>
 <span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="bu">max</span>(rows,key<span class="op">=</span>itemgetter(<span class="st">&#39;uid&#39;</span>))</span></code></pre></div>
-<h3 id="sorting-objects-without-native-comparison-support">sorting
-objects without native comparison support</h3>
+<h3 id="sorting-objects-without-native-comparison-support">排序不支持原生比较的对象</h3>
 <div class="sourceCode" id="cb132" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> date, items <span class="kw">in</span> groupby(rows, key <span class="op">=</span>itemgetter(<span class="st">&#39;date&#39;</span>)):</span>
 <span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(date)</span>
 <span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> items:</span>
 <span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;    &quot;</span>, i)</span></code></pre></div>
-<h3 id="grouping-records-together-based-on-a-field">grouping records
-together based on a field</h3>
+<h3 id="grouping-records-together-based-on-a-field">按字段分组记录</h3>
 <div class="sourceCode" id="cb133" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [</span>
 <span id="cb133-2"><a href="#cb133-2" aria-hidden="true" tabindex="-1"></a>    {<span class="st">&#39;address&#39;</span>: <span class="st">&#39;5412 N CLARK&#39;</span>, <span class="st">&#39;date&#39;</span>: <span class="st">&#39;07/01/2012&#39;</span>},</span>
@@ -1949,7 +1924,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb133-1"><a 
 <span id="cb133-30"><a href="#cb133-30" aria-hidden="true" tabindex="-1"></a>        <span class="co"># 07/04/2012</span></span>
 <span id="cb133-31"><a href="#cb133-31" aria-hidden="true" tabindex="-1"></a>        <span class="co">#      {&#39;address&#39;: &#39;5148 N CLARK&#39;, &#39;date&#39;: &#39;07/04/2012&#39;}</span></span>
 <span id="cb133-32"><a href="#cb133-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">#      {&#39;address&#39;: &#39;1039 W GRANVILLE&#39;, &#39;date&#39;: &#39;07/04/2012&#39;}</span></span></code></pre></div>
-<h3 id="filtering-sequence-elements">filtering sequence elements</h3>
+<h3 id="filtering-sequence-elements">过滤序列元素</h3>
 <p>The easiest way to filter sequence data is often to use a list
 comprehension.</p>
 <div class="sourceCode" id="cb134" data-results="output"><pre
@@ -2039,7 +2014,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb139-1"><a 
 <span id="cb139-22"><a href="#cb139-22" aria-hidden="true" tabindex="-1"></a>s.share <span class="op">=</span> <span class="dv">75</span></span>
 <span id="cb139-23"><a href="#cb139-23" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Traceback (most recent call last):</span></span>
 <span id="cb139-24"><a href="#cb139-24" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb139-25"><a href="#cb139-25" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/local-file&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb139-25"><a href="#cb139-25" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/example&quot;, line 1, in &lt;module&gt;</span></span>
 <span id="cb139-26"><a href="#cb139-26" aria-hidden="true" tabindex="-1"></a><span class="co">#        # -*- org-confirm-babel-evaluate: nil; -*-</span></span>
 <span id="cb139-27"><a href="#cb139-27" aria-hidden="true" tabindex="-1"></a><span class="co">#    AttributeError: can&#39;t set attribute</span></span>
 <span id="cb139-28"><a href="#cb139-28" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> s._replace(share<span class="op">=</span><span class="dv">75</span>)</span>
@@ -2105,7 +2080,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb141-1"><a 
 <span id="cb141-23"><a href="#cb141-23" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; {&#39;z&#39;: 100, &#39;w&#39;: 400}</span></span>
 <span id="cb141-24"><a href="#cb141-24" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> c[<span class="st">&#39;y&#39;</span>]</span>
 <span id="cb141-25"><a href="#cb141-25" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Traceback (most recent call last):</span></span>
-<span id="cb141-26"><a href="#cb141-26" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/local-file&quot;, line 970, in __delitem__</span></span>
+<span id="cb141-26"><a href="#cb141-26" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/example&quot;, line 970, in __delitem__</span></span>
 <span id="cb141-27"><a href="#cb141-27" aria-hidden="true" tabindex="-1"></a><span class="co">#        del self.maps[0][key]</span></span>
 <span id="cb141-28"><a href="#cb141-28" aria-hidden="true" tabindex="-1"></a><span class="co">#    KeyError: &#39;y&#39;</span></span>
 <span id="cb141-29"><a href="#cb141-29" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
@@ -2113,7 +2088,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb141-1"><a 
 <span id="cb141-31"><a href="#cb141-31" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb141-32"><a href="#cb141-32" aria-hidden="true" tabindex="-1"></a><span class="co">#    Traceback (most recent call last):</span></span>
 <span id="cb141-33"><a href="#cb141-33" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb141-34"><a href="#cb141-34" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/local-file&quot;, line 972, in __delitem__</span></span>
+<span id="cb141-34"><a href="#cb141-34" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/example&quot;, line 972, in __delitem__</span></span>
 <span id="cb141-35"><a href="#cb141-35" aria-hidden="true" tabindex="-1"></a><span class="co">#        raise KeyError(&#39;Key not found in the first mapping: {!r}&#39;.format(key))</span></span>
 <span id="cb141-36"><a href="#cb141-36" aria-hidden="true" tabindex="-1"></a><span class="co">#    KeyError: &quot;Key not found in the first mapping: &#39;y&#39;&quot;</span></span>
 <span id="cb141-37"><a href="#cb141-37" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span>ChainMap()</span>
@@ -2150,8 +2125,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb142-1"><a 
 <span id="cb142-15"><a href="#cb142-15" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">&#39;x&#39;</span>]</span>
 <span id="cb142-16"><a href="#cb142-16" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 42</span></span></code></pre></div>
 <p>从上面的例子可以看出，dict 会对取值作去重处理。</p>
-<h3 id="case-when">case when</h3>
-<p>python 中是没有case when 函数的.主要是用dict 来实现这个功能.</p>
+<h3 id="case-when">CASE WHEN</h3>
+<p>Python 中没有 CASE WHEN 函数，通常可以用 dict 实现类似逻辑。</p>
 <div class="sourceCode" id="cb143" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
 <span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
@@ -2159,7 +2134,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb143-1"><a 
 <span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;b&#39;</span>: <span class="dv">2</span></span>
 <span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a>    }.get(x, <span class="dv">9</span>)    <span class="co"># 9 is default if x is not found</span></span></code></pre></div>
 <p>默认值是 9 。</p>
-<h2 id="list">list</h2>
+<h2 id="list">列表</h2>
 <p>与元组对比，列表的长度可变，内容可以被修改。属于 mutable.</p>
 <div class="sourceCode" id="cb144"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>tup <span class="op">=</span> (<span class="st">&#39;foo&#39;</span>, <span class="st">&#39;bar&#39;</span>)</span>
@@ -2215,20 +2190,20 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb149-1"><a 
 <span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">2</span>]<span class="op">*</span><span class="dv">2</span></span>
 <span id="cb149-4"><a href="#cb149-4" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [1, 2, 1, 2]</span></span></code></pre></div>
 <h3 id="len">len</h3>
-<p>计算 list 型数据的维度大小。</p>
+<p>计算列表的长度。</p>
 <div class="sourceCode" id="cb150"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
 <span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 3</span></span></code></pre></div>
 <h3 id="笛卡尔积">笛卡尔积</h3>
-<p>python 真的很喜欢用 for 循环。</p>
+<p>Python 很适合用 for 循环和推导式表达组合逻辑。</p>
 <div class="sourceCode" id="cb151"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">&#39;black&#39;</span>, <span class="st">&#39;white&#39;</span>]</span>
 <span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> [<span class="st">&#39;S&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="st">&#39;L&#39;</span>]</span>
 <span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>tshirts <span class="op">=</span> [(color, size) <span class="cf">for</span> color <span class="kw">in</span> colors <span class="cf">for</span> size <span class="kw">in</span> sizes]</span>
 <span id="cb151-4"><a href="#cb151-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [(&#39;black&#39;, &#39;S&#39;), (&#39;black&#39;, &#39;M&#39;), (&#39;black&#39;, &#39;L&#39;), (&#39;white&#39;, &#39;S&#39;), (&#39;white&#39;, &#39;M&#39;), (&#39;white&#39;, &#39;L&#39;)]</span></span></code></pre></div>
 <h3 id="slice">slice</h3>
-<p>在 python
-里，像列表（list）（tuple）（str）这类序列类型都支持切片操作。</p>
+<p>在 Python
+里，列表（list）、元组（tuple）和字符串（str）这类序列类型都支持切片操作。</p>
 <div class="sourceCode" id="cb152"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>]</span>
 <span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>l[::<span class="dv">2</span>]</span>
@@ -2286,8 +2261,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a 
 <span id="cb155-17"><a href="#cb155-17" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 1    a</span></span>
 <span id="cb155-18"><a href="#cb155-18" aria-hidden="true" tabindex="-1"></a><span class="co">#    3    b</span></span>
 <span id="cb155-19"><a href="#cb155-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    dtype: object</span></span></code></pre></div>
-<h3 id="iterating-on-items-in-separate-containersr">iterating on items
-in separate containersr</h3>
+<h3 id="iterating-on-items-in-separate-containers">并行遍历多个容器</h3>
 <p>多个数据类型数据放在一起迭代需要用一些特别的手段。</p>
 <div class="sourceCode" id="cb156" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> chain</span>
@@ -2305,8 +2279,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a 
 <span id="cb156-13"><a href="#cb156-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb156-14"><a href="#cb156-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> a <span class="op">+</span> b:</span>
 <span id="cb156-15"><a href="#cb156-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code></pre></div>
-<h3 id="iterating-in-sorted-order-over-merged-sorted-iterable">iterating
-in sorted order over merged sorted iterable</h3>
+<h3 id="iterating-in-sorted-order-over-merged-sorted-iterable">按排序顺序合并遍历</h3>
 <p>将2个列表元素依照一定顺序排列。</p>
 <div class="sourceCode" id="cb157" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> heapq</span>
@@ -2460,7 +2433,7 @@ callable() 函数。</p>
 <li>函数（包括内置函数和自定义函数）</li>
 <li>类（调用类会创建一个新的实例）</li>
 <li>类的方法</li>
-<li>一些特殊的对象（比如实现了 <u><u>call</u></u> 方法的对象）</li>
+<li>一些特殊的对象（比如实现了 __call__ 方法的对象）</li>
 </ul></li>
 <li><p>callable() 函数： 这是 Python
 提供的一个内置函数，用来检查一个对象是否是可调用的。如果对象可调用，返回
@@ -2528,7 +2501,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a 
 <span id="cb173-27"><a href="#cb173-27" aria-hidden="true" tabindex="-1"></a>func()</span>
 <span id="cb173-28"><a href="#cb173-28" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Traceback (most recent call last):</span></span>
 <span id="cb173-29"><a href="#cb173-29" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb173-30"><a href="#cb173-30" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/local-file&quot;, line 2, in func</span></span>
+<span id="cb173-30"><a href="#cb173-30" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/example&quot;, line 2, in func</span></span>
 <span id="cb173-31"><a href="#cb173-31" aria-hidden="true" tabindex="-1"></a><span class="co">#        #+PROPERTY: header-args :eval never-export</span></span>
 <span id="cb173-32"><a href="#cb173-32" aria-hidden="true" tabindex="-1"></a><span class="co">#    UnboundLocalError: local variable &#39;x&#39; referenced before assignment</span></span></code></pre></div>
 <p>下面 times = 1,就是默认的参数值。</p>
@@ -2558,7 +2531,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb175-1"><a 
 <p>如果想给一个在程序顶层的变量赋值（也就是说不存在于任何作用域中，无论是函数还是类），那么你必须告诉
 python 这一变量并非局部，而是全局（global）。因为在不使用 global
 语句的情况下，不可能为一个定义于函数之外的变量赋值。</p>
-<h3 id="section-3"><strong>/*</strong></h3>
+<h3 id="args-kwargs">*args 和 **kwargs</h3>
 <p>为了能让一个函数接受任意数量的位置参数，可以使用一个*参数。例如</p>
 <div class="sourceCode" id="cb176"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> avg(first, <span class="op">*</span>rest):</span>
@@ -2578,9 +2551,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a 
 <span id="cb177-7"><a href="#cb177-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> y</span>
 <span id="cb177-8"><a href="#cb177-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb177-9"><a href="#cb177-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(maximun(<span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
-<p>从上面两个例子可以看出 * 对应的是任意数量的位置参数,而 **
-对应的是任意数量的关键字参数.还有一种情况是只接受关键字参数的函数.将强制关键字参数放到某个
-* 参数或者单个 * 后面就能达到这种效果。</p>
+<p>从上面两个例子可以看出，* 对应任意数量的位置参数，**
+对应任意数量的关键字参数。还有一种情况是函数只接受关键字参数：把强制关键字参数放到某个
+* 参数或者单个 * 后面，就能达到这种效果。</p>
 <div class="sourceCode" id="cb178"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recv(maxsize, <span class="op">*</span>, block):</span>
 <span id="cb178-2"><a href="#cb178-2" aria-hidden="true" tabindex="-1"></a>   <span class="co">&#39;Receives a message&#39;</span></span>
@@ -2620,7 +2593,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a 
 <li>给函数参数增加元信息</li>
 </ul>
 <p>好了一个函数，然后想为这个函数的参数增加一些额外的信息，这样的话其他使用者就能清楚的知道这个函数应该怎么使用。函数注解只存储在函数的
-<u><u>annotations</u></u> 属性中。</p>
+__annotations__ 属性中。</p>
 <div class="sourceCode" id="cb181"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add(x:<span class="bu">int</span>, y:<span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
 <span id="cb181-2"><a href="#cb181-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">+</span> y</span>
@@ -2780,8 +2753,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb189-1"><a 
 <span id="cb189-18"><a href="#cb189-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>([m(<span class="dv">100</span>) <span class="cf">for</span> m <span class="kw">in</span> multiply()])</span></code></pre></div>
 <ol>
 <li><p>异常处理</p>
-<p>到目前为止，在 python
-程序中遇到错误，或“异常”，意味着整个程序崩溃。我们不希望这发生在真实世界中，相反希望程序能检测到错误，处理它们，然后继续运行。</p>
+<p>在 Python
+程序中遇到错误或“异常”时，程序可能会中断。更好的做法是检测并处理错误，让程序在可控范围内继续运行。</p>
 <div class="sourceCode" id="cb190"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb190-1"><a href="#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> spam(divideBy):</span>
 <span id="cb190-2"><a href="#cb190-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">42</span><span class="op">/</span> divideBy</span>
@@ -3062,13 +3035,13 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb205-1"><a 
 <span id="cb205-17"><a href="#cb205-17" aria-hidden="true" tabindex="-1"></a>sb <span class="op">=</span> SongBird()</span>
 <span id="cb205-18"><a href="#cb205-18" aria-hidden="true" tabindex="-1"></a>sb.sing()</span>
 <span id="cb205-19"><a href="#cb205-19" aria-hidden="true" tabindex="-1"></a>sb.eat()</span></code></pre></div>
-<p>注意到 <u><u>init</u></u> 方法的第一个参数永远是 self,
-表示创建的实例本身，因此， 在 <u><u>init</u></u>
+<p>注意到 __init__ 方法的第一个参数永远是 self,
+表示创建的实例本身，因此， 在 __init__
 方法内部，就可以把各种属性绑定到 self, 因为 self 就指向创
 建的实例本身。</p>
-<p>有了 <u><u>init</u></u>
+<p>有了 __init__
 方法，在创建实例的时候，就不能传入空的参数了，必须传入与
-<u><u>init</u></u> 方法匹配的参数，但 self 不需要传，python
+__init__ 方法匹配的参数，但 self 不需要传，python
 解释器自己会把实例变 量传进去。</p>
 <div class="sourceCode" id="cb206" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb206-1"><a href="#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Student(<span class="bu">object</span>):</span>
@@ -3078,13 +3051,13 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb206-1"><a 
 <h3 id="魔法函数">魔法函数</h3>
 <p>所谓的魔法函数是python
 的一种高级语法，允许你在类中自定义函数（函数名格式一般为
-<u><u>xx</u></u> ），并绑定到类的特殊方法中，比如在类A 中自定义
+__xx__ ），并绑定到类的特殊方法中，比如在类A 中自定义
 _<sub>str</sub>_<sub>()</sub>函数，则再调用str(A())
 时，会自动调用_<sub>str</sub>_<sub>()</sub>函数，并返回相应的结果。在我们平时的使用中，可能经常使用
 _<sub>init</sub>_<sub>()</sub>函数（构造函数）和
 _<sub>del</sub>_<sub>()</sub>函数（）</p>
-<h3 id="slots"><u><u>slots</u></u></h3>
-<p>限制实例的属性就需要 <u><u>slot</u></u></p>
+<h3 id="slots">__slots__</h3>
+<p>限制实例的属性就需要 __slots__</p>
 <p>必须只想要2个属性,'name','age',不需要其他属性,那么就可以使用_<sub>slots</sub>__
 了.</p>
 <div class="sourceCode" id="cb207" data-results="output"><pre
@@ -3097,7 +3070,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb207-1"><a 
 <span id="cb207-7"><a href="#cb207-7" aria-hidden="true" tabindex="-1"></a>s.score <span class="op">=</span> <span class="dv">99</span></span>
 <span id="cb207-8"><a href="#cb207-8" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Traceback (most recent call last):</span></span>
 <span id="cb207-9"><a href="#cb207-9" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb207-10"><a href="#cb207-10" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/local-file&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb207-10"><a href="#cb207-10" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/example&quot;, line 1, in &lt;module&gt;</span></span>
 <span id="cb207-11"><a href="#cb207-11" aria-hidden="true" tabindex="-1"></a><span class="co">#        # -*- org-confirm-babel-evaluate: nil; -*-</span></span>
 <span id="cb207-12"><a href="#cb207-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    AttributeError: &#39;Student&#39; object has no attribute &#39;score&#39;</span></span></code></pre></div>
 <h3 id="int">int</h3>
@@ -3120,8 +3093,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a 
 class="sourceCode python"><code class="sourceCode python"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>() <span class="co">#可以获取帮助文档</span></span>
 <span id="cb211-2"><a href="#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="co">#比如:</span></span>
 <span id="cb211-3"><a href="#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(re.match)</span></code></pre></div>
-<h3 id="list-1">list</h3>
-<p>python 中的 list 转变为 array.</p>
+<h3 id="list-1">列表</h3>
+<p>Python 中的 list 转换为 array。.</p>
 <div class="sourceCode" id="cb212"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="#cb212-1" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
 <span id="cb212-2"><a href="#cb212-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(items)</span>
@@ -3129,7 +3102,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a 
 <span id="cb212-4"><a href="#cb212-4" aria-hidden="true" tabindex="-1"></a>l <span class="op">=</span> np.array(items)</span>
 <span id="cb212-5"><a href="#cb212-5" aria-hidden="true" tabindex="-1"></a>l</span>
 <span id="cb212-6"><a href="#cb212-6" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(l)</span></code></pre></div>
-<p>值得注意的是list 和 np.array 对数值计算的差异.</p>
+<p>需要注意 list 和 np.array 在数值计算中的差异.</p>
 <div class="sourceCode" id="cb213"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb213-1"><a href="#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="co">##list</span></span>
 <span id="cb213-2"><a href="#cb213-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
@@ -3174,7 +3147,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb214-1"><a 
 <span id="cb214-3"><a href="#cb214-3" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;</span></span>
 <span id="cb214-4"><a href="#cb214-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    TypeErrorTraceback (most recent call last)</span></span>
 <span id="cb214-5"><a href="#cb214-5" aria-hidden="true" tabindex="-1"></a><span class="co">#    &lt;ipython-input-14-f112f822bcf5&gt; in &lt;module&gt;</span></span>
-<span id="cb214-6"><a href="#cb214-6" aria-hidden="true" tabindex="-1"></a><span class="co">#    ----&gt; 1 import codecs, os;__pyfile = codecs.open(&#39;&#39;&#39;/tmp/example-file&#39;&#39;&#39;, encoding=&#39;&#39;&#39;utf-8&#39;&#39;&#39;);__code = __pyfile.read().encode(&#39;&#39;&#39;utf-8&#39;&#39;&#39;);__pyfile.close();os.remove(&#39;&#39;&#39;/tmp/example-file&#39;&#39;&#39;);exec(compile(__code, &#39;&#39;&#39;/path/to/local-file&#39;&#39;&#39;, &#39;exec&#39;));</span></span>
+<span id="cb214-6"><a href="#cb214-6" aria-hidden="true" tabindex="-1"></a><span class="co">#    ----&gt; 1 import codecs, os;__pyfile = codecs.open(&#39;&#39;&#39;/tmp/example&#39;&#39;&#39;, encoding=&#39;&#39;&#39;utf-8&#39;&#39;&#39;);__code = __pyfile.read().encode(&#39;&#39;&#39;utf-8&#39;&#39;&#39;);__pyfile.close();os.remove(&#39;&#39;&#39;/tmp/example&#39;&#39;&#39;);exec(compile(__code, &#39;&#39;&#39;/path/to/example&#39;&#39;&#39;, &#39;exec&#39;));</span></span>
 <span id="cb214-7"><a href="#cb214-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb214-8"><a href="#cb214-8" aria-hidden="true" tabindex="-1"></a><span class="co">#    ~/Documents/坚果云/我的坚果云/github/wiki/python_wiki.org in &lt;module&gt;</span></span>
 <span id="cb214-9"><a href="#cb214-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    ----&gt; 1 # -*- org-confirm-babel-evaluate: nil; -*-</span></span>
@@ -3258,12 +3231,12 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a 
 <span id="cb221-7"><a href="#cb221-7" aria-hidden="true" tabindex="-1"></a>[[row[i] <span class="cf">for</span> row <span class="kw">in</span> matrix] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)]</span></code></pre></div></li>
 </ol>
 <h3 id="print">print</h3>
-<p>在 python 中，print 的功能要比 R 要丰富的多。类似于是 glue。</p>
+<p>在 Python 中，print 的功能要比 R 要丰富的多。类似于是 glue。</p>
 <div class="sourceCode" id="cb222"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a>new_points <span class="op">=</span> alien_0[<span class="st">&#39;color&#39;</span>]</span>
 <span id="cb222-2"><a href="#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;you just earned &quot;</span> <span class="op">+</span> <span class="bu">str</span>(new_points) <span class="op">+</span> <span class="st">&quot; points!&quot;</span>)</span></code></pre></div>
 <h3 id="tolist">tolist</h3>
-<p>array 转变成 list.</p>
+<p>array 转换为 list.</p>
 <div class="sourceCode" id="cb223"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb223-1"><a href="#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> array <span class="im">as</span> arr</span>
 <span id="cb223-2"><a href="#cb223-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> arr.array(<span class="st">&quot;i&quot;</span>, [<span class="dv">10</span>, <span class="op">-</span><span class="dv">20</span>, <span class="dv">30</span>])</span>
@@ -3590,7 +3563,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb246-1"><a 
 <span id="cb246-10"><a href="#cb246-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a.pop(<span class="dv">0</span>)</span>
 <span id="cb246-11"><a href="#cb246-11" aria-hidden="true" tabindex="-1"></a>b</span>
 <span id="cb246-12"><a href="#cb246-12" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; &#39;sa&#39;</span></span>
-<span id="cb246-13"><a href="#cb246-13" aria-hidden="true" tabindex="-1"></a>a <span class="co">##为啥是删除的第一个元素?</span></span>
+<span id="cb246-13"><a href="#cb246-13" aria-hidden="true" tabindex="-1"></a>a <span class="co">##为为什么删除的是第一个匹配元素？</span></span>
 <span id="cb246-14"><a href="#cb246-14" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [&#39;df&#39;, &#39;sd&#39;]</span></span>
 <span id="cb246-15"><a href="#cb246-15" aria-hidden="true" tabindex="-1"></a>a.remove(<span class="st">&quot;df&quot;</span>)</span>
 <span id="cb246-16"><a href="#cb246-16" aria-hidden="true" tabindex="-1"></a>a</span>
@@ -3810,8 +3783,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb263-1"><a 
 <p>形参名*toppings 中的星号让 python 创建一个名为 toppings
 的空元组，并将收到的所有值都封装到这个元组中。这点跟 R 不一样。</p></li>
 <li><p>可更改（mutable）与不可更改（immutable）对象</p>
-<p>在 python 中，strings,tuples 和 numbers 是不可更改的对象，而
-list,dict 等则是可以修改的对象。</p>
+<p>在 Python 中，strings、tuples 和 numbers 是不可更改的对象，而
+list、dict 等则是可以修改的对象。</p>
 <p>不可变类型：变量赋值 a = 5 后再赋值 a = 10，这里实际是新生成一个 int
 值对象 10，再让 a 指向它，而 5 被丢弃，不是改变 a 的值，相当于新生成了
 a.</p>
@@ -4032,7 +4005,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb286-1"><a 
 <span id="cb286-2"><a href="#cb286-2" aria-hidden="true" tabindex="-1"></a>np.ones((<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
 <span id="cb286-3"><a href="#cb286-3" aria-hidden="true" tabindex="-1"></a>np.zeros((<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
 <span id="cb286-4"><a href="#cb286-4" aria-hidden="true" tabindex="-1"></a>np.empty((<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>) )</span></code></pre></div>
-<p>python 中,++1 就是1,而–1,则为1,负负得正, 在python 中,++1
+<p>Python 中,++1 就是1,而–1,则为1,负负得正, 在Python 中,++1
 不是自增操作.</p>
 <h2 id="统计相关">统计相关</h2>
 <h3 id="最小值和最大值">最小值和最大值</h3>
@@ -4049,7 +4022,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb287-1"><a 
 <span id="cb287-10"><a href="#cb287-10" aria-hidden="true" tabindex="-1"></a>minMaxScaler <span class="op">=</span> MinMaxScaler().fit(X_train)</span>
 <span id="cb287-11"><a href="#cb287-11" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Traceback (most recent call last):</span></span>
 <span id="cb287-12"><a href="#cb287-12" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span></span>
-<span id="cb287-13"><a href="#cb287-13" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/local-file&quot;, line 1, in &lt;module&gt;</span></span>
+<span id="cb287-13"><a href="#cb287-13" aria-hidden="true" tabindex="-1"></a><span class="co">#      File &quot;/path/to/example&quot;, line 1, in &lt;module&gt;</span></span>
 <span id="cb287-14"><a href="#cb287-14" aria-hidden="true" tabindex="-1"></a><span class="co">#        # -*- org-confirm-babel-evaluate: nil; -*-</span></span>
 <span id="cb287-15"><a href="#cb287-15" aria-hidden="true" tabindex="-1"></a><span class="co">#    NameError: name &#39;X_train&#39; is not defined</span></span>
 <span id="cb287-16"><a href="#cb287-16" aria-hidden="true" tabindex="-1"></a>minMaxScaler.transform(X_train)</span>
@@ -4114,7 +4087,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb291-1"><a 
 <span id="cb291-14"><a href="#cb291-14" aria-hidden="true" tabindex="-1"></a><span class="co">#        [0., 0., 0., 0., 1., 2.],</span></span>
 <span id="cb291-15"><a href="#cb291-15" aria-hidden="true" tabindex="-1"></a><span class="co">#        [0., 0., 0., 0., 3., 4.]])</span></span></code></pre></div>
 <h3 id="舍入运算">舍入运算</h3>
-<p>在 R 里面是 round(x,6).在python 中，也可以直接使用 round.</p>
+<p>在 R 里面是 round(x,6).在Python 中，也可以直接使用 round.</p>
 <div class="sourceCode" id="cb292"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb292-1"><a href="#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb292-2"><a href="#cb292-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([<span class="fl">1.234</span>, <span class="fl">2.387</span>, <span class="fl">3.673</span>])</span>
@@ -4318,7 +4291,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb303-1"><a 
 <span id="cb303-6"><a href="#cb303-6" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>])</span>
 <span id="cb303-7"><a href="#cb303-7" aria-hidden="true" tabindex="-1"></a>clf.coef_</span>
 <span id="cb303-8"><a href="#cb303-8" aria-hidden="true" tabindex="-1"></a>clf.intercept_</span></code></pre></div>
-<h2 id="packages">Packages</h2>
+<h2 id="packages">常用包</h2>
 <h3 id="numpy">numpy</h3>
 <ol>
 <li><p>shape</p>
@@ -4539,7 +4512,7 @@ destination)`，其中 `source` 是要移动的轴的当前位置，而 `destina
 -1)`，我们的意思是：“将 0 轴（行）移动到最后一个位置”。</p>
 <p>这就是为什么我们说 "你告诉 NumPy 你想把 0 轴（行）移动到最后"
 的原因。希望这能帮助你理解。</p>
-<p>没错，np.moveaxis 是针对数组的维度（轴）进行操作的。 在 numpy
+<p>np.moveaxis 用于调整数组的维度（轴）。 在 numpy
 中，多维数组的每个维度都可以被看作一个轴。np.moveaxis
 函数允许您指定要移动的轴以及它要移动到的目标位置，从而改变数组的维度顺序。
 例如，对于一个三维数组，您可以使用 np.moveaxis
@@ -4588,7 +4561,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb318-1"><a 
 <span id="cb318-16"><a href="#cb318-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 这将把3x1的数组变成1x3的数组</span></span>
 <span id="cb318-17"><a href="#cb318-17" aria-hidden="true" tabindex="-1"></a>np.swapaxes(x, <span class="dv">0</span>, <span class="dv">1</span>).shape</span></code></pre></div></li>
 <li><p>ndarray.T</p>
-<p>The tranposed array.转置</p>
+<p>The transposed array.转置</p>
 <div class="sourceCode" id="cb319" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb319-1"><a href="#cb319-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
 <span id="cb319-2"><a href="#cb319-2" aria-hidden="true" tabindex="-1"></a>x</span>
@@ -4599,7 +4572,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb319-1"><a 
 <span id="cb319-7"><a href="#cb319-7" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt;</span></span>
 <span id="cb319-8"><a href="#cb319-8" aria-hidden="true" tabindex="-1"></a><span class="co"># array([[1, 3],</span></span>
 <span id="cb319-9"><a href="#cb319-9" aria-hidden="true" tabindex="-1"></a><span class="co">#        [2, 4]])</span></span></code></pre></div></li>
-<li><p>tranpose</p>
+<li><p>transpose</p>
 <p>Reverse or permute the axes of an array; returns the modified
 array.</p>
 <div class="sourceCode" id="cb320" data-results="output"><pre
@@ -4834,7 +4807,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb338-1"><a 
 <span id="cb338-2"><a href="#cb338-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
 <span id="cb338-3"><a href="#cb338-3" aria-hidden="true" tabindex="-1"></a>np.vstack((a, b))</span>
 <span id="cb338-4"><a href="#cb338-4" aria-hidden="true" tabindex="-1"></a>np.hstack((a,b))</span></code></pre></div>
-<p>用R习惯了，一直没明白为啥 python 的语言里面np.vstack((a,
+<p>习惯 R 语法后，一直没明白为什么 python 的语言里面np.vstack((a,
 b))，而不是np.vstack(a, b)</p>
 <div class="note">
 <div class="title">
@@ -5008,13 +4981,13 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb352-1"><a 
 class="sourceCode python"><code class="sourceCode python"><span id="cb353-1"><a href="#cb353-1" aria-hidden="true" tabindex="-1"></a>df2.columns</span>
 <span id="cb353-2"><a href="#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; Index([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;], dtype=&#39;object&#39;)</span></span></code></pre></div></li>
 <li><p>to<sub>numpy</sub></p>
-<p>输出底层数据的numpy 对象.注意,DataFrame
-的列由多种数据类型组成时,该操作耗费系统资源较大,这也是pandas 和 numpy
-的本质区别:numpy 数组只有一种 数据类型,dataframe
-每列的数据类型各不相同.</p>
-<p>调用DataFrame.to<sub>numpy</sub>()时,Pandas 查找支持DataFrame
-里所有数据类型的NumPy数据类型.还有一种数据类型是object,可以把dataframe
-列里的值强制转换为python 对象.</p>
+<p>输出底层数据的 NumPy 对象。注意，DataFrame
+的列可能由多种数据类型组成，这类转换可能比较耗费资源；这也是 pandas 和 NumPy
+的本质区别之一：NumPy 数组通常只有一种数据类型，而 DataFrame
+的每列可以有不同的数据类型。</p>
+<p>调用 DataFrame.to<sub>numpy</sub>() 时，pandas 会查找能够兼容 DataFrame
+中所有数据类型的 NumPy 数据类型。也可以使用 object 类型，把 DataFrame
+列里的值强制转换为 Python 对象。</p>
 <div class="sourceCode" id="cb354" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb354-1"><a href="#cb354-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">&#39;A&#39;</span>:<span class="dv">1</span>,</span>
 <span id="cb354-2"><a href="#cb354-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;B&#39;</span>:pd.Timestamp(<span class="st">&#39;20130102&#39;</span>),</span>
@@ -5029,8 +5002,8 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb354-1"><a 
 <span id="cb354-11"><a href="#cb354-11" aria-hidden="true" tabindex="-1"></a><span class="co">#        [1, Timestamp(&#39;2013-01-02 00:00:00&#39;), 1.0, 3, &#39;test&#39;, &#39;foo&#39;],</span></span>
 <span id="cb354-12"><a href="#cb354-12" aria-hidden="true" tabindex="-1"></a><span class="co">#        [1, Timestamp(&#39;2013-01-02 00:00:00&#39;), 1.0, 3, &#39;train&#39;, &#39;foo&#39;]],</span></span>
 <span id="cb354-13"><a href="#cb354-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       dtype=object)</span></span></code></pre></div>
-<p>df2 这个dataframe 包含了多种类型,dataframe.to<sub>numpy</sub>()
-操作就会耗费较多资源.</p></li>
+<p>df2 这个 DataFrame 包含多种类型，因此 DataFrame.to<sub>numpy</sub>()
+操作会耗费较多资源。</p></li>
 <li><p>describe</p>
 <p>describe 可以快速查看数据的统计摘要.</p>
 <div class="sourceCode" id="cb355" data-results="output"><pre
@@ -5434,7 +5407,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb383-1"><a 
 <span id="cb383-22"><a href="#cb383-22" aria-hidden="true" tabindex="-1"></a><span class="co">#versicolor        5.94</span></span>
 <span id="cb383-23"><a href="#cb383-23" aria-hidden="true" tabindex="-1"></a><span class="co">#virginica         6.59</span></span></code></pre></div></li>
 <li><p>mode</p>
-<p>可以统计series 或dataframe 的众数，即出现频率最高的值。</p>
+<p>可以统计 Series 或 DataFrame 的众数，即出现频率最高的值。</p>
 <div class="sourceCode" id="cb384" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb384-1"><a href="#cb384-1" aria-hidden="true" tabindex="-1"></a>s5 <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">7</span>])</span>
 <span id="cb384-2"><a href="#cb384-2" aria-hidden="true" tabindex="-1"></a>s5.mode()</span>
@@ -5522,7 +5495,7 @@ series：", series.tolist())</p>
 <div class="sourceCode" id="cb390" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb390-1"><a href="#cb390-1" aria-hidden="true" tabindex="-1"></a>count <span class="op">=</span> iris.species.value_counts()</span>
 <span id="cb390-2"><a href="#cb390-2" aria-hidden="true" tabindex="-1"></a>count.nlargest(<span class="dv">2</span>)</span></code></pre></div>
-<p>dataframe 也支持 nlargest 与 nsmallest 方法。</p>
+<p>DataFrame 也支持 nlargest 与 nsmallest 方法。</p>
 <div class="sourceCode" id="cb391" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb391-1"><a href="#cb391-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">&#39;a&#39;</span>: [<span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">8</span>, <span class="dv">11</span>, <span class="op">-</span><span class="dv">1</span>],</span>
 <span id="cb391-2"><a href="#cb391-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">&#39;b&#39;</span>: <span class="bu">list</span>(<span class="st">&#39;abdceff&#39;</span>),</span>
@@ -5541,7 +5514,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb392-1"><a 
 <span id="cb392-7"><a href="#cb392-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用 pd.concat 进行合并</span></span>
 <span id="cb392-8"><a href="#cb392-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pd.concat([pd.Series(x), pd.Series(y)], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb392-9"><a href="#cb392-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div>
-<p>用concat() 函数可以把原dataframe 与新dataframe 组合在一起。</p>
+<p>用 concat() 函数可以把原 DataFrame 与新 DataFrame 组合在一起。</p>
 <div class="sourceCode" id="cb393" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb393-1"><a href="#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建第一个 DataFrame</span></span>
 <span id="cb393-2"><a href="#cb393-2" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({</span>
@@ -5983,7 +5956,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb414-1"><a 
 <span id="cb414-2"><a href="#cb414-2" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> MinMaxScaler(feature_range<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb414-3"><a href="#cb414-3" aria-hidden="true" tabindex="-1"></a>train_data_normalized <span class="op">=</span> scaler.fit_transform(train_data.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div></li>
 </ol>
-<h2 id="面向对象技术简介">面向对象技术简介</h2>
+<h2 id="面向对象技术简介">面向对象</h2>
 <p><strong>类(Class):</strong>
 用来描述具有相同的属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。</p>
 <p><strong>方法：</strong> 类中定义的函数。</p>
@@ -6008,14 +5981,14 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb415-1"><a 
 <span id="cb415-5"><a href="#cb415-5" aria-hidden="true" tabindex="-1"></a>    .</span>
 <span id="cb415-6"><a href="#cb415-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>statement<span class="op">-</span>N<span class="op">&gt;</span></span>
 <span id="cb415-7"><a href="#cb415-7" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
-<p>实例化类其他编程语言中一般用关键字 new，但是在 python
-中并没有这个关键字，类的实例化类似函数调用方式。</p>
+<p>其他编程语言中常用关键字 <code>new</code> 实例化类，但 Python
+中没有这个关键字；Python 的类实例化形式更接近函数调用。</p>
 <p>类实例化后，可以使用其属性，实际上，创建一个类之后，可以通过类名访问其属性。</p>
 <p>类对象：</p>
-<p>类对象支持两种操作：属性引用和实例化。属性引用使用和 python
-中所有的属性引用一样的标准语法：obj.name.类对象创建后，类命名空间中所有的命名都是有效属性名。所有如果类定义是这样类的方法与普通函数只有一个特别的区别，它们必须有一个额外的第一个参数名称，按照惯例它的名称为
-self。</p>
-<p>在 python 中，可以使用点 .
+<p>类对象支持两种操作：属性引用和实例化。属性引用使用 <code>obj.name</code>
+语法；类对象创建后，类命名空间中的名称都会成为有效属性名。类方法与普通函数的主要区别是：类方法必须额外声明第一个参数，按惯例命名为
+<code>self</code>。</p>
+<p>在 Python 中，可以使用点 .
 来访问对象的属性，也可以使用以下函数的方式来访问属性：</p>
 <ul>
 <li><p>getattr(obj, name) 访问对象的属性</p></li>
@@ -6038,10 +6011,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb416-1"><a 
 <span id="cb416-14"><a href="#cb416-14" aria-hidden="true" tabindex="-1"></a><span class="bu">getattr</span>(myinst, <span class="st">&#39;bar&#39;</span>)</span></code></pre></div>
 <ul>
 <li><p>setattr(obj, name, value)
-设置一个属性，如果属性不存在，会创建一个新属性,存在的话，会覆盖掉原来的属性值。</p></li>
+设置一个属性；如果属性不存在，会创建新属性；如果已经存在，会覆盖原属性值。</p></li>
 <li><p>delattr(obj, name) 删除属性</p></li>
 </ul>
-<p>python 内置类属性：</p>
+<p>Python 内置类属性：</p>
 <p>_<sub>dict</sub>__：类的属性（包含一个字典，由类的数据属性组成）</p>
 <p>_<sub>doc</sub>__：类的文档字符串</p>
 <p>_<sub>name</sub>__：类名</p>
@@ -6061,10 +6034,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb417-1"><a 
 <span id="cb417-11"><a href="#cb417-11" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; MyClass 类的属性 i 为： 12345</span></span>
 <span id="cb417-12"><a href="#cb417-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;MyClass 类的方法 f 输出为：&#39;</span>, x.f())</span>
 <span id="cb417-13"><a href="#cb417-13" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; MyClass 类的方法 f 输出为： hello world</span></span></code></pre></div>
-<p>python 对象销毁（垃圾回收）：python
-使用了引用计数这一简单技术来跟踪和回收垃圾。在 python
-内部记录着所有使用中的对象各自有多少引用。一个完整的 python
-类例子是：</p>
+<p>Python 对象销毁（垃圾回收）：Python
+使用引用计数跟踪并回收对象。Python 会记录每个使用中的对象有多少引用。下面是一个完整的
+Python 类示例：</p>
 <div class="sourceCode" id="cb418"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb418-1"><a href="#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Employee:</span>
 <span id="cb418-2"><a href="#cb418-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&#39;所有员工的基类&#39;</span></span>
@@ -6150,8 +6122,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb421-1"><a 
 <span id="cb421-18"><a href="#cb421-18" aria-hidden="true" tabindex="-1"></a>p.speak()</span>
 <span id="cb421-19"><a href="#cb421-19" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; runoob 说: 我 10 岁。</span></span></code></pre></div>
 <h3 id="继承">继承</h3>
-<p>python
-同样支持类的继承，如果一种语言不支持继承，类就没有什么意义。派生类的定义如下：</p>
+<p>Python 同样支持类的继承。派生类的定义如下：</p>
 <div class="sourceCode" id="cb422"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb422-1"><a href="#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DerivedClassName(BaseClassName1):</span>
 <span id="cb422-2"><a href="#cb422-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>statement<span class="op">-</span><span class="dv">1</span><span class="op">&gt;</span></span>
@@ -6200,19 +6171,15 @@ class="math inline"><em>n</em></span> 个数据元素的有限序列。</p>
 链表的节点的结构如下： data next
 data为自定义的数据，next为下一个节点的地址。
 链表的结构为，head保存首位节点的地址：</p>
-<h3 id="hash表">hash表</h3>
-<p>数组能够通过下标O(1)
-访问，但是删除一个中间元素却要移动其他元素，时间O(n).</p>
-<p>能不能给每个元素一种逻辑下标，然后直接找到它呢，hash
-表就是这种实现？它通过一个hash
-函数来计算一个元素应该放在数组哪个位置，当然对于一个特定的元素，哈希函数每次计算的下标必须要一样才可以，而且范围不能超过给定的数组长度。</p>
-<p>假设有一个数组T, 包含 <span
-class="math inline"><em>M</em> = 13</span> 个元素，可以定义个简单的hash
-函数。</p>
+<h3 id="哈希表">哈希表</h3>
+<p>数组可以通过下标以 O(1)
+时间访问元素，但删除中间元素时需要移动其他元素，时间复杂度为 O(n)。</p>
+<p>哈希表的思路是给每个元素计算一个逻辑下标，从而快速定位元素。它通过哈希函数计算元素应放在数组中的位置；对于同一个元素，哈希函数每次计算出的下标必须一致，并且不能超过数组长度范围。</p>
+<p>假设有一个数组 T，包含 <span
+class="math inline"><em>M</em> = 13</span> 个元素，可以定义一个简单的哈希函数。</p>
 <div class="sourceCode" id="cb424" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb424-1"><a href="#cb424-1" aria-hidden="true" tabindex="-1"></a>h(key) <span class="op">=</span> key <span class="op">%</span> M</span></code></pre></div>
-<p>假设需要插入765, 431, 96, 142, 579, 226, 903, 388
-元素，可以先计算下它们应用哈希函数的结果。</p>
+<p>假设需要插入 765、431、96、142、579、226、903、388，可以先计算它们应用哈希函数后的结果。</p>
 <div class="sourceCode" id="cb425" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb425-1"><a href="#cb425-1" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">13</span></span>
 <span id="cb425-2"><a href="#cb425-2" aria-hidden="true" tabindex="-1"></a>h(<span class="dv">765</span>) <span class="op">=</span> <span class="dv">765</span> <span class="op">%</span> M <span class="op">=</span> <span class="dv">11</span></span>
