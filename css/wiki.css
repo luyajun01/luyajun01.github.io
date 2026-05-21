@@ -23,6 +23,21 @@ table {
     overflow-x: auto;
 }
 
+#content sub,
+#content sup {
+    vertical-align: baseline;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+#content sub::before {
+    content: "_";
+}
+
+#content sup::before {
+    content: "^";
+}
+
 @media (max-width: 1220px) {
     #content,
     #tag-cloud-wrapper,

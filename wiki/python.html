@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -469,7 +469,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a hr
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># SyntaxError：语法错误</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Hello, world!  # 缺少右括号</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="er"># NameError：未定义的变量</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># NameError：未定义的变量</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(undefined_variable)</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -483,15 +483,15 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a hr
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ZeroDivisionError</span>:</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;除数不能为零！&quot;</span>)</span></code></pre></div>
 <p>通过在基础知识部分添加这些内容，可以让您的知识库更加完整，为初学者提供更全面的学习指导。</p>
-<p>1.代码一定要简洁!重复的代码可以用函数型代码来实现! 包括R也是.</p>
+<p>代码一定要简洁！重复的逻辑可以用函数封装来实现，R 也是一样。</p>
 <h3 id="数据类型">数据类型</h3>
 <h3 id="基本数据类型">基本数据类型</h3>
 <p>整数、浮点数、布尔. 可以通过 dir() 查看对象的可用的属性，help
 可以看到方法。</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">dir</span>(<span class="bu">int</span>)</span></code></pre></div>
-<p>前面的_<sub>and</sub>_<sub>是可用的方法</sub>，后面的
-bit<sub>length</sub> 是可用属性。字符、元组、列表、字典.</p>
+<p>前面的 <code>__and__</code> 是可用方法，后面的 <code>bit_length</code>
+是可用属性。字符、元组、列表、字典也可以用类似方式查看。</p>
 <h2 id="基础知识">基础知识</h2>
 <h3 id="python-版本">Python 版本</h3>
 <div class="sourceCode" id="cb7"><pre
@@ -520,20 +520,22 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a h
 <p>用之前打开m-x venv-workon.</p>
 <h3 id="工作目录">工作目录</h3>
 <p>类似于 R 的 getwd(),setwd().</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#引入模块，获得工作目录</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>os.getcwd() <span class="co">#获得当前工作目录</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; &#39;/path/to/example&#39;</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>os.chdir(<span class="st">&#39;/path/to/work&#39;</span>) <span class="co">#改变工作目录</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>os.mkdir(<span class="st">&#39;work&#39;</span>) <span class="co">#建立新目录</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>os.rmdir(<span class="st">&#39;work&#39;</span>) <span class="co">#删除目录</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>os.rename(<span class="st">&#39;fff.txt&#39;</span>,<span class="st">&#39;fool.txt&#39;</span>) <span class="co">#重命名</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>os.remove(<span class="st">&#39;h.txt&#39;</span>) <span class="co">#删除文件</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>os.listdir(<span class="st">&quot;.&quot;</span>)#获得当前工作目录下的所有文件</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="er">print</span>(<span class="bu">list</span>(<span class="bu">filter</span>(os.path.isfile, os.listdir()))) <span class="co">#列出当前文件夹下所有文件</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">filter</span>(os.path.isdir, os.listdir()))) <span class="co">#列出当前文件夹下所有文件夹</span></span></code></pre></div>
+<pre><code class="language-python"># 引入模块，获得工作目录
+import os
+from pathlib import Path
+
+os.getcwd()  # 获得当前工作目录
+# =&gt; '/path/to/example'
+
+os.chdir('/path/to/work')  # 改变工作目录
+os.mkdir('work')           # 建立新目录
+os.rmdir('work')           # 删除目录
+os.rename('fff.txt', 'fool.txt')  # 重命名
+os.remove('h.txt')         # 删除文件
+os.listdir(".")            # 获得当前工作目录下的所有文件
+
+print(list(filter(os.path.isfile, os.listdir())))  # 列出当前文件夹下所有文件
+print(list(filter(os.path.isdir, os.listdir())))   # 列出当前文件夹下所有文件夹</code></pre>
 <p>也能获得system命令</p>
 <div class="sourceCode" id="cb13" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -552,41 +554,53 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a h
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sys.getfilesystemencoding()</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; &#39;utf-8&#39;</span></span></code></pre></div>
 <h3 id="os.path.exists">os.path.exists</h3>
-<p>在Python中检查文件是否存在而不使用try语句,最常用和推荐的方法是使用`os.path.exists()`函数。这是一个简单、直接且高效的方法。以下是具体的实现和一些相关的函数:</p>
+<p>在 Python 中检查文件是否存在时，最常用的方法是
+<code>os.path.exists()</code>。这是一个简单、直接且高效的方法。以下是具体实现和相关函数：</p>
 <ol>
-<li>使用 `os.path.exists()`:</li>
+<li>使用 <code>os.path.exists()</code>：</li>
 </ol>
-<p>```python import os</p>
-<p>file<sub>path</sub> = "/path/to/your/file.txt" if
-os.path.exists(file<sub>path</sub>): print(f"文件 {file<sub>path</sub>}
-存在") else: print(f"文件 {file<sub>path</sub>} 不存在") ```</p>
+<pre><code class="language-python">import os
+
+file_path = "/path/to/your/file.txt"
+if os.path.exists(file_path):
+    print(f"文件 {file_path} 存在")
+else:
+    print(f"文件 {file_path} 不存在")</code></pre>
 <ol>
 <li>如果你特别想检查它是否是一个文件(而不是目录),可以使用
-`os.path.isfile()`:</li>
+<code>os.path.isfile()</code>：</li>
 </ol>
-<p>```python import os</p>
-<p>file<sub>path</sub> = "/path/to/your/file.txt" if
-os.path.isfile(file<sub>path</sub>): print(f"{file<sub>path</sub>}
-是一个文件") else: print(f"{file<sub>path</sub>} 不是一个文件或不存在")
-```</p>
+<pre><code class="language-python">import os
+
+file_path = "/path/to/your/file.txt"
+if os.path.isfile(file_path):
+    print(f"{file_path} 是一个文件")
+else:
+    print(f"{file_path} 不是一个文件或不存在")</code></pre>
 <ol>
-<li>如果你想检查它是否是一个目录,可以使用 `os.path.isdir()`:</li>
+<li>如果你想检查它是否是一个目录，可以使用 <code>os.path.isdir()</code>：</li>
 </ol>
-<p>```python import os</p>
-<p>dir<sub>path</sub> = "/path/to/your/directory" if
-os.path.isdir(dir<sub>path</sub>): print(f"{dir<sub>path</sub>}
-是一个目录") else: print(f"{dir<sub>path</sub>} 不是一个目录或不存在")
-```</p>
+<pre><code class="language-python">import os
+
+dir_path = "/path/to/your/directory"
+if os.path.isdir(dir_path):
+    print(f"{dir_path} 是一个目录")
+else:
+    print(f"{dir_path} 不是一个目录或不存在")</code></pre>
 <ol>
-<li>如果你需要检查文件是否可读,可以使用 `os.access()`:</li>
+<li>如果你需要检查文件是否可读，可以使用 <code>os.access()</code>：</li>
 </ol>
-<p>```python import os</p>
-<p>file<sub>path</sub> = "/path/to/your/file.txt" if
-os.path.exists(file<sub>path</sub>) and os.access(file<sub>path</sub>,
-os.R<sub>OK</sub>): print(f"文件 {file<sub>path</sub>} 存在且可读")
-else: print(f"文件 {file<sub>path</sub>} 不存在或不可读") ```</p>
-<p>这些方法都不使用try语句,而是直接检查文件或目录的状态。它们是线程安全的,并且通常比使用try-except块更快。</p>
-<p>注意:在多线程环境中,在检查文件存在性和实际使用文件之间可能存在竞态条件。如果这是一个问题,你可能需要使用适当的锁定机制或考虑使用try-except块来处理文件操作。</p>
+<pre><code class="language-python">import os
+
+file_path = "/path/to/your/file.txt"
+if os.path.exists(file_path) and os.access(file_path, os.R_OK):
+    print(f"文件 {file_path} 存在且可读")
+else:
+    print(f"文件 {file_path} 不存在或不可读")</code></pre>
+<p>这些方法不使用 try 语句，而是直接检查文件或目录的状态。它们通常比使用
+try-except 块更直接。</p>
+<p>注意：在多线程环境中，检查文件存在性和实际使用文件之间可能存在竞态条件。如果这是一个问题，需要使用适当的锁定机制，或使用
+try-except 块处理文件操作。</p>
 <h3 id="code">__code__</h3>
 <p>这个函数可以用来查看变量参数等信息.</p>
 <div class="sourceCode" id="cb16"><pre
@@ -746,24 +760,39 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a h
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> islice</span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(islice(fib(), <span class="dv">5</span>))</span>
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [0, 1, 1, 2, 3]</span></span></code></pre></div>
-<p>StackOverflow上有许多热门的Python问题。其中一个备受关注的问题是"Yield关键词的作用是什么?"。这个问题获得了大量赞同和同样疑问的评论。</p>
-<p>让我们用简单的方式来理解yield：</p>
-<p>yield是Python中的一个特殊关键词，它可以让函数变成一个"会停顿的函数"。每次遇到yield，函数就会暂停并返回一个值，下次再调用时，会从上次暂停的地方继续执行。</p>
+<p>StackOverflow 上有许多热门的 Python 问题。其中一个备受关注的问题是“yield
+关键词的作用是什么？”。</p>
+<p>简单理解，yield 是 Python 中的一个特殊关键词。它可以让函数变成一个“会停顿的函数”：每次遇到
+yield，函数都会暂停并返回一个值；下次再调用时，会从上次暂停的地方继续执行。</p>
 <p>举个简单的例子：</p>
 <ol>
-<li><p>使用yield创建一个简单的计数器: ```python def countdown(n): while
-n &gt; 0: yield n n -= 1</p>
-<p>for i in countdown(5): print(i) # 输出: 5, 4, 3, 2, 1 ```</p>
+<li><p>使用 yield 创建一个简单的计数器：</p>
+<pre><code class="language-python">def countdown(n):
+    while n &gt; 0:
+        yield n
+        n -= 1
+
+for i in countdown(5):
+    print(i)
+# 输出: 5, 4, 3, 2, 1</code></pre>
 <p>你提出的想法很好，让我们来分析一下：</p>
-<p>```python def countdown(n): while n &gt; 0: n -= 1 return n</p>
-<p>for i in countdown(5): print(i) ```</p>
+<pre><code class="language-python">def countdown(n):
+    while n &gt; 0:
+        n -= 1
+        return n
+
+for i in countdown(5):
+    print(i)</code></pre>
 <p>这个版本确实不行，原因如下：</p>
 <ol>
-<li><p>函数提前返回：虽然函数有return语句，但它在第一次循环就返回了，导致函数只执行一次就结束。即使加上return
-n或return
-n,也只会返回一个值就结束函数。举一个简单的例子来说明这个问题：</p>
-<p>```python def countdown(n): while n &gt; 0: n -= 1 return n</p>
-<p>print(countdown(5)) # 输出: 4 ```</p>
+<li><p>函数提前返回：虽然函数有 return 语句，但它在第一次循环就返回了，导致函数只执行一次就结束。举一个简单的例子：</p>
+<pre><code class="language-python">def countdown(n):
+    while n &gt; 0:
+        n -= 1
+        return n
+
+print(countdown(5))
+# 输出: 4</code></pre>
 <p>你会发现，函数只返回了一个值，而不是期望的倒数序列。</p></li>
 <li><p>无法迭代：因为函数只返回一个值，它不是一个可迭代对象，所以不能在for循环中使用。</p></li>
 <li><p>输出不完整：即使函数能运行，它也只会输出一个值，而不是期望的倒数序列。</p></li>
@@ -800,12 +829,12 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a h
 <p>这可能是不可取的，原因有两个：</p>
 <ol>
 <li>首先，我们不想总是不必要地分配内存。在机器学习中，我们可能有数百兆的参数，并且在一秒内多次更新所有参数。通常情况下，我们希望原地执行这些更新；</li>
+<li>如果我们不原地更新，其他引用仍然会指向旧的内存位置，这样某些代码可能会无意中引用旧的参数。</li>
 </ol>
-<p>2.如果我们不原地更新，其他引|用仍然会指向旧的内存位置，这样我们的某些代码可能会无意中引|用旧的参数。</p>
-<p>幸运的是，执行原地操作非常简单。我们可以使用切片表示法将操作的结果分配给先前分配的数组，例如Y[:]
-&lt;expression&gt;。为了说明这一点，我们首先创建一个新的矩阵Z，其形状与另一个Y相同，使用zeros<sub>1ike来分配一个全0的块</sub>。</p>
+<p>幸运的是，执行原地操作非常简单。我们可以使用切片表示法将操作的结果分配给先前分配的数组，例如 <code>Y[:] = &lt;expression&gt;</code>。为了说明这一点，我们首先创建一个新的矩阵 <code>Z</code>，其形状与另一个 <code>Y</code> 相同，并使用
+<code>zeros_like</code> 分配一个全 0 的块。</p>
 <div class="sourceCode" id="cb33" data-results="output"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> torch. zeros_like(Y)</span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> torch.zeros_like(Y)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;id(Z):&#39;</span>,<span class="bu">id</span>(Z))</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Z[:] <span class="op">=</span> X <span class="op">+</span>Y</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&#39;id(Z):&#39;</span>, <span class="bu">id</span>(Z))</span>
@@ -840,15 +869,15 @@ sys import argv
 class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> sqrt</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;Square root of 16 is&quot;</span>, sqrt (<span class="dv">16</span>))</span></code></pre></div>
 <h3 id="name">__name__</h3>
-<p>在 Python 中，`_<sub>name</sub>__`
+<p>在 Python 中，<code>_<sub>name</sub>__</code>
 是一个内置的特殊变量，它的值取决于模块是如何被运行的。</p>
 <ul>
-<li>如果模块是被直接运行的（比如你在命令行输入 `python
-my<sub>script</sub>.py`），那么 `_<sub>name</sub>__` 的值就是
-`"__main__"`。</li>
-<li>如果模块是被导入的（比如在另一个 Python 文件中你写了 `import
-my<sub>script</sub>`），那么 `_<sub>name</sub>__`
-的值就是模块的名字（在这个例子中就是 `my<sub>script</sub>`）。</li>
+<li>如果模块是被直接运行的（比如你在命令行输入 <code>python
+my<sub>script</sub>.py</code>），那么 <code>_<sub>name</sub>__</code> 的值就是
+<code>"__main__"</code>。</li>
+<li>如果模块是被导入的（比如在另一个 Python 文件中你写了 <code>import
+my<sub>script</sub></code>），那么 <code>_<sub>name</sub>__</code>
+的值就是模块的名字（在这个例子中就是 <code>my<sub>script</sub></code>）。</li>
 </ul>
 <p>你可以利用这个特性来决定你的代码的行为。下面是一个例子：</p>
 <div class="sourceCode" id="cb36" data-results="output"><pre
@@ -858,10 +887,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a h
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;This script is being imported, not run directly.&quot;</span>)</span></code></pre></div>
 <ul>
-<li>如果你直接运行这个脚本（`python my<sub>script</sub>.py`），它会打印
+<li>如果你直接运行这个脚本（<code>python my<sub>script</sub>.py</code>），它会打印
 "This script is being run directly, not imported."。</li>
-<li>如果你在另一个脚本中导入这个脚本（`import
-my<sub>script</sub>`），它会打印 "This script is being imported, not run
+<li>如果你在另一个脚本中导入这个脚本（<code>import
+my<sub>script</sub></code>），它会打印 "This script is being imported, not run
 directly."。</li>
 </ul>
 <p>这种模式可以让你的代码同时作为脚本（直接运行）和模块（被其他脚本导入）使用，而且行为可以有所不同。这在编写
@@ -1648,7 +1677,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a 
 <span id="cb110-16"><a href="#cb110-16" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; {1, 2}</span></span></code></pre></div>
 <h2 id="字典">字典</h2>
 <p>字典可能是 python
-最为重要的数据结构。它更为常见的名字是*哈希映射或关联数组*。它是键值对的大小可变集合，键和值都是
+最为重要的数据结构。它更为常见的名字是<strong>哈希映射或关联数组</strong>。它是键值对的大小可变集合，键和值都是
 python
 对象。你可以像访问列表或元组中的元素一样，访问、插入或设定字典中的元素</p>
 <div class="sourceCode" id="cb111" data-results="output"><pre
@@ -2368,11 +2397,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a 
 <span id="cb166-10"><a href="#cb166-10" aria-hidden="true" tabindex="-1"></a>demo(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>)</span>
 <span id="cb166-11"><a href="#cb166-11" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; a</span></span>
 <span id="cb166-12"><a href="#cb166-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    b</span></span></code></pre></div>
-<p>上面的例子可以看出,args<sub>f</sub> 是第一个字符, *args<sub>v</sub>
-是剩下的字符.</p>
-<p>**kwargs
+<p>上面的例子可以看出，args_f 是第一个字符，*args_v 是剩下的字符。</p>
+<p><code>**kwargs</code>
 允许你将不定长度的键值对，作为参数传递给一个函数。如果你想要在一个函数里处理带名字的参数，你应该使用
-**kwargs.</p>
+<code>**kwargs</code>。</p>
 <div class="sourceCode" id="cb167" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> demo(<span class="op">**</span>kwargs):</span>
 <span id="cb167-2"><a href="#cb167-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k,v <span class="kw">in</span> kwargs.items():</span>
@@ -2440,8 +2468,7 @@ callable() 函数。</p>
 提供的一个内置函数，用来检查一个对象是否是可调用的。如果对象可调用，返回
 True；否则返回 False。</p></li>
 <li><p>代码示例解释：</p>
-<p>```python [callable(obj) for obj in (abs, str, 13)]</p>
-<p>```</p>
+<pre><code class="language-python">[callable(obj) for obj in (abs, str, 13)]</code></pre>
 <p>这行代码检查了三个对象：</p>
 <ul>
 <li>abs 是一个函数，所以是可调用的（True）</li>
@@ -2541,7 +2568,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a 
 <span id="cb176-4"><a href="#cb176-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample use</span></span>
 <span id="cb176-5"><a href="#cb176-5" aria-hidden="true" tabindex="-1"></a>avg(<span class="dv">1</span>, <span class="dv">2</span>) <span class="co"># 1.5</span></span>
 <span id="cb176-6"><a href="#cb176-6" aria-hidden="true" tabindex="-1"></a>avg(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>) <span class="co"># 2.5</span></span></code></pre></div>
-<p>为了接受任意数量的关键字参数，使用一个以**开头的参数。比如：</p>
+<p>为了接受任意数量的关键字参数，可以使用一个以 <code>**</code> 开头的参数。比如：</p>
 <div class="sourceCode" id="cb177"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> maximun(x, y):</span>
 <span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> x <span class="op">&gt;</span> y:</span>
@@ -2552,9 +2579,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a 
 <span id="cb177-7"><a href="#cb177-7" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> y</span>
 <span id="cb177-8"><a href="#cb177-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb177-9"><a href="#cb177-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(maximun(<span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div>
-<p>从上面两个例子可以看出，* 对应任意数量的位置参数，**
+<p>从上面两个例子可以看出，<code>*</code> 对应任意数量的位置参数，<code>**</code>
 对应任意数量的关键字参数。还有一种情况是函数只接受关键字参数：把强制关键字参数放到某个
-* 参数或者单个 * 后面，就能达到这种效果。</p>
+<code>*</code> 参数或者单个 <code>*</code> 后面，就能达到这种效果。</p>
 <div class="sourceCode" id="cb178"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recv(maxsize, <span class="op">*</span>, block):</span>
 <span id="cb178-2"><a href="#cb178-2" aria-hidden="true" tabindex="-1"></a>   <span class="co">&#39;Receives a message&#39;</span></span>
@@ -2864,7 +2891,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb199-1"><a 
 <p>super() 函数是用于调用父类（超类）的一个方法。 super()
 是用来解决多重继承问题的，直接用类名调用父类方法在使用单继承的时候没有问题，但是如果使用多继承，会涉及到查找顺序（MRO），重复调用等种种问题。</p>
 <p>调用父类同名方法有2种方式：</p>
-<p>1.调用未绑定的父类方法</p>
+<h4 id="super-调用未绑定的父类方法">1. 调用未绑定的父类方法</h4>
 <div class="sourceCode" id="cb200" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Base(<span class="bu">object</span>):</span>
 <span id="cb200-2"><a href="#cb200-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> greet(<span class="va">self</span>):</span>
@@ -2881,7 +2908,7 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a 
 <span id="cb200-13"><a href="#cb200-13" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; hi, i am base</span></span>
 <span id="cb200-14"><a href="#cb200-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    hi, i am A</span></span></code></pre></div>
 <p>这种方式简单还可以，如果在多重继承中就会有问题。</p>
-<p>2.使用super 函数来调用</p>
+<h4 id="super-使用-super-函数调用">2. 使用 super 函数调用</h4>
 <div class="sourceCode" id="cb201" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb201-1"><a href="#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Base(<span class="bu">object</span>):</span>
 <span id="cb201-2"><a href="#cb201-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
@@ -3275,26 +3302,26 @@ def 定义的函数。</p>
 class="sourceCode python"><code class="sourceCode python"><span id="cb225-1"><a href="#cb225-1" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> [<span class="st">&#39;tony&#39;</span>,  <span class="st">&#39;bob&#39;</span>]</span>
 <span id="cb225-2"><a href="#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>(names, key <span class="op">=</span> <span class="kw">lambda</span> name:name.split()[<span class="op">-</span><span class="dv">1</span>].lower())</span>
 <span id="cb225-3"><a href="#cb225-3" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [&#39;bob&#39;, &#39;tony&#39;]</span></span></code></pre></div>
-<p>这段代码演示了如何使用 Python 的 `sorted()` 函数和 `lambda`
+<p>这段代码演示了如何使用 Python 的 <code>sorted()</code> 函数和 <code>lambda</code>
 函数来对名字列表进行排序。让我来解释一下各个部分:</p>
 <ol>
-<li><p>`names = ['tony', 'bob']`: 这是一个包含两个名字的列表。</p></li>
-<li><p>`sorted(names, …)`: `sorted()`
+<li><p><code>names = ['tony', 'bob']</code>: 这是一个包含两个名字的列表。</p></li>
+<li><p><code>sorted(names, …)</code>: <code>sorted()</code>
 函数用于对可迭代对象进行排序。它返回一个新的排序后的列表，而不改变原始列表。</p></li>
-<li><p>`key = lambda name: name.split()[-1].lower()`:
+<li><p><code>key = lambda name: name.split()[-1].lower()</code>:
 这是排序的关键部分。</p>
 <ul>
-<li>`lambda` 定义了一个匿名函数，它接受一个参数 `name`。</li>
-<li>`name.split()`
+<li><code>lambda</code> 定义了一个匿名函数，它接受一个参数 <code>name</code>。</li>
+<li><code>name.split()</code>
 将名字拆分成单词列表。在这个例子中，每个名字只有一个单词，所以结果是一个只包含一个元素的列表。</li>
-<li>`[-1]`
+<li><code>[-1]</code>
 取列表的最后一个元素，也就是姓氏（如果有的话）。在这个例子中，它仍然是完整的名字。</li>
-<li>`.lower()` 将名字转换为小写，确保排序不区分大小写。</li>
+<li><code>.lower()</code> 将名字转换为小写，确保排序不区分大小写。</li>
 </ul></li>
-<li><p>结果 `['bob', 'tony']`: 名字按字母顺序排序。</p></li>
+<li><p>结果 <code>['bob', 'tony']</code>: 名字按字母顺序排序。</p></li>
 </ol>
 <p>这种方法特别适用于排序更复杂的名字，比如包含姓和名的全名。例如，如果列表是
-`['John Smith', 'Alice Johnson']`，它会按姓氏 "Johnson" 和 "Smith"
+<code>['John Smith', 'Alice Johnson']</code>，它会按姓氏 "Johnson" 和 "Smith"
 排序。</p>
 <p>这个技巧在处理名字排序时非常有用，特别是当你需要按姓氏排序，或者需要不区分大小写排序时。</p>
 <p>更多关于 Python 排序和 lambda 函数的信息，可以参考 [Python
@@ -4344,11 +4371,11 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb308-1"><a 
 <span id="cb308-7"><a href="#cb308-7" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; array([0, 2, 4, 1, 3, 5])</span></span>
 <span id="cb308-8"><a href="#cb308-8" aria-hidden="true" tabindex="-1"></a>np.reshape(a, <span class="dv">6</span>)</span>
 <span id="cb308-9"><a href="#cb308-9" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; array([0, 1, 2, 3, 4, 5])</span></span></code></pre></div>
-<p>在Python的NumPy库和很多其他相关的机器学习库中，`y.reshape(-1,1)`
+<p>在Python的NumPy库和很多其他相关的机器学习库中，<code>y.reshape(-1,1)</code>
 是一种常见的数组重新塑形（reshaping）操作。</p>
-<p>`reshape`是一个常用的函数，它可以改变数组的形状。在这个例子中，`y`是一个数组，我们想把它改变成一个二维数组，其中，第二个维度的大小是1。</p>
-<p>而`-1`在`reshape`函数中有特殊的意义。当我们在一个维度上使用`-1`时，那个维度的大小就会被自动计算。具体来说，`-1`表示的维度的大小会根据数组的总大小和其他维度的大小来计算。例如，如果我们有一个大小为12的一维数组，我们可以把它重新塑形为`(3,4)`，`(4,3)`，`(2,6)`，`(6,2)`，`(1,12)`等等。如果我们用`-1`替换任何一个维度，比如`(3,-1)`，NumPy会自动计算`-1`处应该是4，因为3*4=12正好是数组的总大小。</p>
-<p><strong>所以，`y.reshape(-1,1)`表示的是把`y`改变成一个二维数组，其中，第二个维度的大小是1，第一个维度的大小是自动计算的，以确保整个数组的大小不变。这通常用于将一维数组转换为二维的列向量，方便在某些需要二维输入的机器学习算法中使用。</strong></p></li>
+<p><code>reshape</code>是一个常用的函数，它可以改变数组的形状。在这个例子中，<code>y</code>是一个数组，我们想把它改变成一个二维数组，其中，第二个维度的大小是1。</p>
+<p>而<code>-1</code>在<code>reshape</code>函数中有特殊的意义。当我们在一个维度上使用<code>-1</code>时，那个维度的大小就会被自动计算。具体来说，<code>-1</code>表示的维度的大小会根据数组的总大小和其他维度的大小来计算。例如，如果我们有一个大小为12的一维数组，我们可以把它重新塑形为<code>(3,4)</code>，<code>(4,3)</code>，<code>(2,6)</code>，<code>(6,2)</code>，<code>(1,12)</code>等等。如果我们用<code>-1</code>替换任何一个维度，比如<code>(3,-1)</code>，NumPy会自动计算<code>-1</code>处应该是4，因为3*4=12正好是数组的总大小。</p>
+<p><strong>所以，<code>y.reshape(-1,1)</code>表示的是把<code>y</code>改变成一个二维数组，其中，第二个维度的大小是1，第一个维度的大小是自动计算的，以确保整个数组的大小不变。这通常用于将一维数组转换为二维的列向量，方便在某些需要二维输入的机器学习算法中使用。</strong></p></li>
 <li><p>ravel</p>
 <p>Return a contiguous flattened array. 有点像是拍平!np.ravel 等价于
 np.reshape(-1,order='T').</p>
@@ -4375,21 +4402,21 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb310-1"><a 
 <span id="cb310-7"><a href="#cb310-7" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; array([1, 2, 3, 4])</span></span>
 <span id="cb310-8"><a href="#cb310-8" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array(a).flatten().tolist()</span>
 <span id="cb310-9"><a href="#cb310-9" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [1, 2, 3, 4]</span></span></code></pre></div>
-<p>`itertools.chain(*list2d)`
-这个函数的用法是将多个列表（或者其他可迭代对象）连接在一起，形成一个新的迭代器。在这个例子中，`list2d`
-是一个二维列表，`*list2d` 将其解包成两个独立的列表 `[1, 2, 3]` 和 `[4,
-5, 6]`。然后，`itertools.chain(*list2d)`
+<p><code>itertools.chain(*list2d)</code>
+这个函数的用法是将多个列表（或者其他可迭代对象）连接在一起，形成一个新的迭代器。在这个例子中，<code>list2d</code>
+是一个二维列表，<code>*list2d</code> 将其解包成两个独立的列表 <code>[1, 2, 3]</code> 和 <code>[4,
+5, 6]</code>。然后，<code>itertools.chain(*list2d)</code>
 将这两个列表连接在一起，形成一个一维的迭代器。</p>
 <p>这个迭代器可以迭代所有的元素，就像它们是在一个列表中一样。但是这并不会真的创建一个新的列表（除非你像在这个例子中那样，使用
-`list()`
+<code>list()</code>
 显式地将其转换为列表）。这意味着这个函数在处理大数据集的时候非常有用，因为它不会占用额外的内存。</p>
 <p>所以，这段代码：</p>
 <div class="sourceCode" id="cb311" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb311-1"><a href="#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
 <span id="cb311-2"><a href="#cb311-2" aria-hidden="true" tabindex="-1"></a>list2d <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]]</span>
 <span id="cb311-3"><a href="#cb311-3" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> <span class="bu">list</span>(itertools.chain(<span class="op">*</span>list2d))</span></code></pre></div>
-<p>最终的结果是 `merged` 变量会变成一个列表 `[1, 2, 3, 4, 5,
-6]`，这个列表包含了 `list2d` 中所有的元素。</p></li>
+<p>最终的结果是 <code>merged</code> 变量会变成一个列表 <code>[1, 2, 3, 4, 5,
+6]</code>，这个列表包含了 <code>list2d</code> 中所有的元素。</p></li>
 <li><p>flat</p>
 <p>A 1-D iterator over the array.方便矩阵位置赋值.loc,iloc
 其实这2个命令也可以实现这个操作.但是,array 对象loc
@@ -4408,25 +4435,27 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb312-1"><a 
 <span id="cb312-11"><a href="#cb312-11" aria-hidden="true" tabindex="-1"></a><span class="co"># array([[3, 3, 3],</span></span>
 <span id="cb312-12"><a href="#cb312-12" aria-hidden="true" tabindex="-1"></a><span class="co">#        [3, 3, 3]])</span></span></code></pre></div>
 <p>在这段代码中：</p>
-<p>`x = np.arange(1, 7).reshape(2, 3)` 这行代码首先使用 `np.arange(1,
-7)` 生成一个包含从 1 到 6 的整数序列，然后使用 `reshape(2, 3)`
-将这个序列重新整形为一个 2 行 3 列的二维数组 `x` ，如下所示：</p>
-<p>``` array([[1, 2, 3], [4, 5, 6]]) ```</p>
-<p>`x.flat`
+<p><code>x = np.arange(1, 7).reshape(2, 3)</code> 这行代码首先使用 <code>np.arange(1,
+7)</code> 生成一个包含从 1 到 6 的整数序列，然后使用 <code>reshape(2, 3)</code>
+将这个序列重新整形为一个 2 行 3 列的二维数组 <code>x</code> ，如下所示：</p>
+<pre><code>array([[1, 2, 3],
+       [4, 5, 6]])</code></pre>
+<p><code>x.flat</code>
 是一个扁平迭代器，它可以让我们以一种类似于遍历一维数组的方式遍历二维数组
-`x` 中的元素。</p>
-<p>`x.flat[3]` 表示获取这个扁平迭代器中的第 4 个元素（索引从 0
-开始）。在这个例子中，`x` 展开成一维后的序列是 `[1, 2, 3, 4, 5, 6]`
-，所以第 4 个元素就是 `4` 。</p>
-<p>例如，如果我们再执行 `print(x.flat[5])` ，就会得到 `6` 。</p>
-<p>在这里，`numpy.arange(1, 7).reshape(2, 3)` 创建了一个 2x3 的 NumPy
+<code>x</code> 中的元素。</p>
+<p><code>x.flat[3]</code> 表示获取这个扁平迭代器中的第 4 个元素（索引从 0
+开始）。在这个例子中，<code>x</code> 展开成一维后的序列是 <code>[1, 2, 3, 4, 5, 6]</code>
+，所以第 4 个元素就是 <code>4</code> 。</p>
+<p>例如，如果我们再执行 <code>print(x.flat[5])</code> ，就会得到 <code>6</code> 。</p>
+<p>在这里，<code>numpy.arange(1, 7).reshape(2, 3)</code> 创建了一个 2x3 的 NumPy
 数组，如下：</p>
-<p>``` [[1 2 3] [4 5 6]] ```</p>
-<p>然后，`x.flat` 是一个迭代器，它可以用于遍历数组 `x`
+<pre><code>[[1 2 3]
+ [4 5 6]]</code></pre>
+<p>然后，<code>x.flat</code> 是一个迭代器，它可以用于遍历数组 <code>x</code>
 中的所有元素，按行优先的顺序。也就是说，它将多维数组 "平坦化"
-为一维数组。所以，`x.flat` 对应的一维数组是 `[1, 2, 3, 4, 5, 6]`。</p>
-<p>`x.flat[3]` 则是获取这个 "平坦化" 后的数组中的第四个元素（Python
-的索引从 0 开始）。因此，结果是 `4`。</p></li>
+为一维数组。所以，<code>x.flat</code> 对应的一维数组是 <code>[1, 2, 3, 4, 5, 6]</code>。</p>
+<p><code>x.flat[3]</code> 则是获取这个 "平坦化" 后的数组中的第四个元素（Python
+的索引从 0 开始）。因此，结果是 <code>4</code>。</p></li>
 <li><p>copy</p>
 <p>可以对数据对象进行复制。</p>
 <div class="sourceCode" id="cb313" data-results="output"><pre
@@ -4439,22 +4468,22 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb313-1"><a 
 <span id="cb313-7"><a href="#cb313-7" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; 100</span></span>
 <span id="cb313-8"><a href="#cb313-8" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>] <span class="op">==</span> y[<span class="dv">0</span>]</span>
 <span id="cb313-9"><a href="#cb313-9" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>] <span class="op">==</span> z[<span class="dv">0</span>]</span></code></pre></div>
-<p>在你的代码中，你创建了一个名为 `x` 的 NumPy 数组，并将其值设置为 `[1,
-2, 3]`。然后，你创建了两个 `x` 的副本，`y` 和
-`z`，但是它们是通过不同的方式创建的。</p>
-<p>当你使用 `y = x` 语句时，你创建了 `x`
-的一个引用，而不是一个完全独立的副本。这意味着 `y` 和 `x`
-实际上指向的是内存中的同一位置，所以当你改变 `x` 中的任何值时，`y`
+<p>在你的代码中，你创建了一个名为 <code>x</code> 的 NumPy 数组，并将其值设置为 <code>[1,
+2, 3]</code>。然后，你创建了两个 <code>x</code> 的副本，<code>y</code> 和
+<code>z</code>，但是它们是通过不同的方式创建的。</p>
+<p>当你使用 <code>y = x</code> 语句时，你创建了 <code>x</code>
+的一个引用，而不是一个完全独立的副本。这意味着 <code>y</code> 和 <code>x</code>
+实际上指向的是内存中的同一位置，所以当你改变 <code>x</code> 中的任何值时，<code>y</code>
 中的相应值也会改变。</p>
 <blockquote>
 <p>这点与 R 不一致。</p>
 </blockquote>
-<p>然而，当你使用 `z = np.copy(x)` 语句时，你创建了 `x`
-的一个真正的副本。这意味着 `z` 在内存中有自己的位置，与 `x`
-完全无关。因此，即使你改变 `x` 中的值，`z` 中的值也不会受到影响。</p>
-<p>因此，当你执行 `x[0] = 100` 语句后，`x[0]` 和 `y[0]` 都变成了
-`100`，但 `z[0]` 仍然是 `1`。所以，`x[0] == y[0]` 返回 `True`，而 `x[0]
-== z[0]` 返回 `False`。</p>
+<p>然而，当你使用 <code>z = np.copy(x)</code> 语句时，你创建了 <code>x</code>
+的一个真正的副本。这意味着 <code>z</code> 在内存中有自己的位置，与 <code>x</code>
+完全无关。因此，即使你改变 <code>x</code> 中的值，<code>z</code> 中的值也不会受到影响。</p>
+<p>因此，当你执行 <code>x[0] = 100</code> 语句后，<code>x[0]</code> 和 <code>y[0]</code> 都变成了
+<code>100</code>，但 <code>z[0]</code> 仍然是 <code>1</code>。所以，<code>x[0] == y[0]</code> 返回 <code>True</code>，而 <code>x[0]
+== z[0]</code> 返回 <code>False</code>。</p>
 <p>这就是为什么在处理数组和其他数据结构时，需要明确区分引用和副本。在某些情况下，你可能只需要创建一个引用，以节省内存和计算资源。在其他情况下，你可能需要创建一个真正的副本，以避免原始数据被意外修改。</p>
 <p>在嵌套数据中，需要借助 copy 包的 deepcopy 函数进行处理。</p>
 <div class="sourceCode" id="cb314" data-results="output"><pre
@@ -4478,22 +4507,22 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb314-1"><a 
 <span id="cb314-18"><a href="#cb314-18" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [[1, 2, 3, 4, 5, 6]]</span></span></code></pre></div></li>
 <li><p>moveaxis</p>
 <p>Move axes of an array to new positions.</p>
-<p>首先，我们创建了一个形状为 (3, 4) 的全零数组 `x`。它可以想象为有 3
+<p>首先，我们创建了一个形状为 (3, 4) 的全零数组 <code>x</code>。它可以想象为有 3
 行和 4 列的二维数组。</p>
 <div class="sourceCode" id="cb315" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb315-1"><a href="#cb315-1" aria-hidden="true" tabindex="-1"></a>[[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
 <span id="cb315-2"><a href="#cb315-2" aria-hidden="true" tabindex="-1"></a> [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
 <span id="cb315-3"><a href="#cb315-3" aria-hidden="true" tabindex="-1"></a> [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]]</span></code></pre></div>
-<p>然后，我们使用 `np.moveaxis(x, 0, -1)` 函数来移动轴。</p>
-<p>这个函数的作用是更改数组的轴的顺序。在这个函数中，`0` 是源位置，`-1`
+<p>然后，我们使用 <code>np.moveaxis(x, 0, -1)</code> 函数来移动轴。</p>
+<p>这个函数的作用是更改数组的轴的顺序。在这个函数中，<code>0</code> 是源位置，<code>-1</code>
 是目标位置。源和目标位置都是基于零的索引。</p>
 <ul>
-<li>`-1` 在 NumPy
+<li><code>-1</code> 在 NumPy
 中表示最后一个轴，所以这个函数的作用是将第一个轴（即行）移动到最后一个轴的位置。</li>
 <li>在二维数组中，移动第一个轴到最后一个轴的位置实际上就是将行和列交换（也就是转置）。</li>
 </ul>
-<p>所以，`np.moveaxis(x, 0, -1).shape` 的结果是 `(4, 3)`，这是因为原始的
-`(3, 4)` 数组被转置为 `(4, 3)` 数组。换句话说，原本有 3 行 4
+<p>所以，<code>np.moveaxis(x, 0, -1).shape</code> 的结果是 <code>(4, 3)</code>，这是因为原始的
+<code>(3, 4)</code> 数组被转置为 <code>(4, 3)</code> 数组。换句话说，原本有 3 行 4
 列的数组变成了 4 行 3 列的数组。</p>
 <div class="sourceCode" id="cb316" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb316-1"><a href="#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -4504,13 +4533,13 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb316-1"><a 
 <span id="cb316-6"><a href="#cb316-6" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; (4, 3)</span></span></code></pre></div>
 <p>进一步解释：在 NumPy 中，数组轴的编号从 0
 开始。对于二维数组，0轴通常表示行，1轴表示列。</p>
-<p>`np.moveaxis` 函数的用法是 `np.moveaxis(array, source,
-destination)`，其中 `source` 是要移动的轴的当前位置，而 `destination`
-是你想要移动到的位置。在我们的例子中，`source` 为 0，而 `destination` 为
+<p><code>np.moveaxis</code> 函数的用法是 <code>np.moveaxis(array, source,
+destination)</code>，其中 <code>source</code> 是要移动的轴的当前位置，而 <code>destination</code>
+是你想要移动到的位置。在我们的例子中，<code>source</code> 为 0，而 <code>destination</code> 为
 -1。</p>
 <p>在 Python（和很多其他编程语言）中，-1
-通常用来表示列表或数组的最后一个元素。所以，当我们说 `np.moveaxis(x, 0,
--1)`，我们的意思是：“将 0 轴（行）移动到最后一个位置”。</p>
+通常用来表示列表或数组的最后一个元素。所以，当我们说 <code>np.moveaxis(x, 0,
+-1)</code>，我们的意思是：“将 0 轴（行）移动到最后一个位置”。</p>
 <p>这就是为什么我们说 "你告诉 NumPy 你想把 0 轴（行）移动到最后"
 的原因。希望这能帮助你理解。</p>
 <p>np.moveaxis 用于调整数组的维度（轴）。 在 numpy
@@ -4527,19 +4556,19 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb317-1"><a 
 <span id="cb317-3"><a href="#cb317-3" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; (1, 2, 3)</span></span>
 <span id="cb317-4"><a href="#cb317-4" aria-hidden="true" tabindex="-1"></a>np.rollaxis(a, <span class="dv">2</span>, <span class="dv">0</span>).shape</span>
 <span id="cb317-5"><a href="#cb317-5" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; (3, 1, 2)</span></span></code></pre></div>
-<p>首先，`np.ones((1, 2, 3))` 创建了一个形状为 (1, 2, 3) 的数组
-`a`，这是一个三维数组，第一个维度（轴0）长度为1，第二个维度（轴1）长度为2，第三个维度（轴2）长度为3。</p>
-<p>然后，`np.rollaxis(a, 2, 0)` 的作用是将 `a`
+<p>首先，<code>np.ones((1, 2, 3))</code> 创建了一个形状为 (1, 2, 3) 的数组
+<code>a</code>，这是一个三维数组，第一个维度（轴0）长度为1，第二个维度（轴1）长度为2，第三个维度（轴2）长度为3。</p>
+<p>然后，<code>np.rollaxis(a, 2, 0)</code> 的作用是将 <code>a</code>
 的第三个维度（轴2）滚动到第一个位置（轴0），并将原来的第一、第二维度依次向后滚动。</p>
 <p>这里是如何工作的：</p>
 <ol>
-<li>`np.rollaxis(a, 2, 0)` 指的是把原数组 `a`
+<li><code>np.rollaxis(a, 2, 0)</code> 指的是把原数组 <code>a</code>
 的轴2（长度为3）滚动到轴0的位置。</li>
 <li>原来的轴0（长度为1）滚动到轴1的位置。</li>
 <li>原来的轴1（长度为2）滚动到轴2的位置。</li>
 </ol>
-<p>所以结果的形状为 `(3, 1, 2)`。</p>
-<p>总的来说，`np.rollaxis`
+<p>所以结果的形状为 <code>(3, 1, 2)</code>。</p>
+<p>总的来说，<code>np.rollaxis</code>
 函数的作用就是将指定的轴滚动到指定的位置，其他轴的相对位置保持不变。</p></li>
 <li><p>swapaxes</p>
 <p>Interchange two axes of an array.交换轴.</p>
@@ -4649,9 +4678,9 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb325-1"><a 
 <span id="cb325-10"><a href="#cb325-10" aria-hidden="true" tabindex="-1"></a><span class="co">#        [3, 4, 3, 4]])</span></span></code></pre></div></li>
 <li><p>insert</p>
 <p>在特定位置插入值.这段文本是关于 Python
-编程语言中的操作。首先，`a=np.array([[1,1],[2,2],[3,3]])`
-这部分创建了一个名为 `a` 的 NumPy 数组。然后，`np.insert(a,1,5)`
-这一操作是使用 NumPy 库的 `insert` 函数对数组 `a` 进行插入操作，在索引为
+编程语言中的操作。首先，<code>a=np.array([[1,1],[2,2],[3,3]])</code>
+这部分创建了一个名为 <code>a</code> 的 NumPy 数组。然后，<code>np.insert(a,1,5)</code>
+这一操作是使用 NumPy 库的 <code>insert</code> 函数对数组 <code>a</code> 进行插入操作，在索引为
 1 的位置插入值 5 。</p>
 <div class="sourceCode" id="cb326" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb326-1"><a href="#cb326-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">1</span>], [<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">3</span>]])</span>
@@ -4814,12 +4843,12 @@ b))，而不是np.vstack(a, b)</p>
 <div class="title">
 <p>Note</p>
 </div>
-<p>在 Python 的 `numpy` 中，`np.vstack((a, b))`
+<p>在 Python 的 <code>numpy</code> 中，<code>np.vstack((a, b))</code>
 这样的写法是因为函数参数的设计和语法规则。</p>
 <p>这种将参数放在元组中的方式可以更清晰地区分单个参数和多个参数的情况，避免了参数传递的歧义。</p>
-<p>例如，如果直接写成 `np.vstack(a, b)`
+<p>例如，如果直接写成 <code>np.vstack(a, b)</code>
 ，可能会导致解释器难以确定这两个参数是要分别处理还是作为一个整体来处理。</p>
-<p>使用元组 `(a, b)`
+<p>使用元组 <code>(a, b)</code>
 明确地表示这是一组要进行垂直拼接的数组，提高了代码的可读性和可理解性，也符合
 Python 中函数调用时传递参数的一般规范。</p>
 <p>再比如，有些函数可能需要接受可变数量的参数，使用元组或列表来包裹这些参数能更有效地组织和传递数据。</p>
@@ -4951,11 +4980,11 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb350-1"><a 
 <li><p>array</p>
 <p>To get the actual data inside a Index or Series, use the .array
 property.</p>
-<p>在这段代码中，`long<sub>series</sub>`是一个Pandas
-Series对象，通过使用`pd.Series`函数创建。`np.random.randn(1000)`生成了一个包含1000个随机数的NumPy数组，这些随机数是从标准正态分布中采样得到的。</p>
-<p>`long<sub>series</sub>.array`是Series对象的一个属性，它返回Series中的数据作为一个`PandasArray`对象。`PandasArray`类似于NumPy数组，但具有更多的功能和特性，例如能够处理缺失值、支持不同的数据类型等。</p>
-<p>通过访问`long<sub>series</sub>.array`，你可以对Series中的数据执行各种操作，如统计描述、筛选、转换等。例如，你可以使用`long<sub>series</sub>.array.mean()`计算Series数据的平均值，</p>
-<p>总而言之，`long<sub>series</sub>.array`提供了访问和操作Series数据的接口，使你能够利用Pandas和NumPy提供的丰富功能来处理数据。</p>
+<p>在这段代码中，<code>long<sub>series</sub></code>是一个Pandas
+Series对象，通过使用<code>pd.Series</code>函数创建。<code>np.random.randn(1000)</code>生成了一个包含1000个随机数的NumPy数组，这些随机数是从标准正态分布中采样得到的。</p>
+<p><code>long<sub>series</sub>.array</code>是Series对象的一个属性，它返回Series中的数据作为一个<code>PandasArray</code>对象。<code>PandasArray</code>类似于NumPy数组，但具有更多的功能和特性，例如能够处理缺失值、支持不同的数据类型等。</p>
+<p>通过访问<code>long<sub>series</sub>.array</code>，你可以对Series中的数据执行各种操作，如统计描述、筛选、转换等。例如，你可以使用<code>long<sub>series</sub>.array.mean()</code>计算Series数据的平均值，</p>
+<p>总而言之，<code>long<sub>series</sub>.array</code>提供了访问和操作Series数据的接口，使你能够利用Pandas和NumPy提供的丰富功能来处理数据。</p>
 <div class="sourceCode" id="cb351" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb351-1"><a href="#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb351-2"><a href="#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -5056,34 +5085,27 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb357-1"><a 
 相关。如何按‘城市等级’分组，并用各城市等级组内的‘工作年限’平均值填充缺失值？（注意：‘城市等级’
 本身也可使用 groupby 与 transform 填充缺失值概述。</p>
 <p>通过按「城市等级」分组，并在各组内以「工作年限」平均值替换缺失项，实现分组填充。</p>
-<p>代码示例</p>
+<h4 id="transform-代码示例">代码示例</h4>
 <div class="sourceCode" id="cb358"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb358-1"><a href="#cb358-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb358-2"><a href="#cb358-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb358-3"><a href="#cb358-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;工作年限&#39;</span>] <span class="op">=</span> df.groupby(<span class="st">&quot;城市等级&quot;</span>)[<span class="st">&#39;工作年限&#39;</span>].transform(<span class="kw">lambda</span> x: x.fillna(np.mean(x)))</span>
 <span id="cb358-4"><a href="#cb358-4" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
-<p>工作流程</p>
-<p>对 DataFrame 按 城市等级
-列分组计算每个分组中工作年限的均值用组内均值替换该组中所有
-NaN将填充结果对齐回原列</p>
-<p>关键函数:</p>
-<p>groupby：对 DataFrame 按字段分组</p>
-<p>transform：对每个分组执行函数并保持索引</p>
-<p>fillna：用指定值填充缺失</p>
-<p>注意事项</p>
-<p>若部分行 城市等级 亦为
-NaN，则整个组均无均值，需预先处理或指定全局默认值。</p>
-<p>流程图</p>
-<pre class="mermaid"><code>flowchart LR
-
-A[原始 DataFrame df] --&gt; B{按城市等级分组}
-
-B --&gt; C[计算各组工作年限均值]
-
-C --&gt; D[用组内均值填充 NaN]
-
-D --&gt; E[输出填充后的“工作年限”列]
-</code></pre></li>
+<h4 id="transform-工作流程">工作流程</h4>
+<ol>
+<li>对 DataFrame 按「城市等级」列分组。</li>
+<li>计算每个分组中「工作年限」的均值。</li>
+<li>用组内均值替换该组中的缺失值。</li>
+<li>将填充结果按原索引对齐回原列。</li>
+</ol>
+<h4 id="transform-关键函数">关键函数</h4>
+<ul>
+<li><code>groupby</code>：对 DataFrame 按字段分组。</li>
+<li><code>transform</code>：对每个分组执行函数并保持索引。</li>
+<li><code>fillna</code>：用指定值填充缺失。</li>
+</ul>
+<h4 id="transform-注意事项">注意事项</h4>
+<p>若部分行的「城市等级」也是 NaN，则该组可能无法计算均值，需要预先处理或指定全局默认值。</p></li>
 <li><p>empty</p>
 <p>通过empty 属性，可以验证pandas 对象是否为空。</p>
 <div class="sourceCode" id="cb360" data-results="output"><pre
@@ -5470,27 +5492,30 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb389-1"><a 
 <span id="cb389-4"><a href="#cb389-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 删除多个行</span></span>
 <span id="cb389-5"><a href="#cb389-5" aria-hidden="true" tabindex="-1"></a>    df_new <span class="op">=</span> df.drop([<span class="dv">0</span>,<span class="dv">2</span>])</span>
 <span id="cb389-6"><a href="#cb389-6" aria-hidden="true" tabindex="-1"></a>  df_new</span></code></pre></div>
-<p>在 pandas 中，`fillna(…, inplace=True)`
+<p>在 pandas 中，<code>fillna(…, inplace=True)</code>
 的作用是直接在原对象上就地修改数据，而不是返回一个新的对象。具体来说：</p>
 <ul>
-<li><p>当 `inplace=False`（默认）时，`fillna` 会返回一个填充缺失值后的新
+<li><p>当 <code>inplace=False</code>（默认）时，<code>fillna</code> 会返回一个填充缺失值后的新
 Series 或 DataFrame，原对象保持不变，需要手动赋值，例如：
-`new<sub>series</sub> = series.fillna(value)`。</p></li>
-<li><p>当 `inplace=True` 时，`fillna` 会在原 Series 或 DataFrame
-上直接替换缺失值，并返回 `None`，不需要也不应再对其结果赋值。例如： ```
-series.fillna(value, inplace=True) ``` 此时 `series`
+<code>new<sub>series</sub> = series.fillna(value)</code>。</p></li>
+<li><p>当 <code>inplace=True</code> 时，<code>fillna</code> 会在原 Series 或 DataFrame
+上直接替换缺失值，并返回 <code>None</code>，不需要也不应再对其结果赋值。例如：</p>
+<pre><code class="language-python">series.fillna(value, inplace=True)</code></pre>
+<p>此时 <code>series</code>
 已被修改，填充缺失值完成。</p></li>
 </ul>
-<p>示例演示 `fillna` 有无 `inplace` 的区别：</p>
-<p>```python [`import pandas as pd`](example.py:1)</p>
-<p>[`series = pd.Series([1, None, 3, None, 5])`](example.py:3)
-print("原始 series：", series.tolist())</p>
-<p>[`new<sub>series</sub> = series.fillna(0)`](example.py:7)
-print("new<sub>series</sub>：", new<sub>series</sub>.tolist())</p>
-<p>print("原始 series 未变：", series.tolist())</p>
-<p>[`series.fillna(0, inplace=True)`](example.py:13) print("inplace 后
-series：", series.tolist())</p>
-<p>```</p></li>
+<p>示例演示 <code>fillna</code> 有无 <code>inplace</code> 的区别：</p>
+<pre><code class="language-python">import pandas as pd
+
+series = pd.Series([1, None, 3, None, 5])
+print("原始 series：", series.tolist())
+
+new_series = series.fillna(0)
+print("new_series：", new_series.tolist())
+print("原始 series 未变：", series.tolist())
+
+series.fillna(0, inplace=True)
+print("inplace 后 series：", series.tolist())</code></pre></li>
 <li><p>nlargest</p>
 <p>本方法返回N 个最大或最小的值。</p>
 <div class="sourceCode" id="cb390" data-results="output"><pre
@@ -5558,15 +5583,15 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb394-1"><a 
 <span id="cb394-20"><a href="#cb394-20" aria-hidden="true" tabindex="-1"></a><span class="co">#    7  1.124400 -0.782766  0.334236  0.673301</span></span>
 <span id="cb394-21"><a href="#cb394-21" aria-hidden="true" tabindex="-1"></a><span class="co">#    8  1.051455 -0.444122  0.147581  0.113439</span></span></code></pre></div></li>
 <li><p>func</p>
-<p>在这段代码中，首先创建了一个包含数值 `1`、`3`、`5`、`6` 的 `pandas`
-系列 `ser`。然后定义了一个函数 `add<sub>one</sub>` 用于将输入值加
-`1`，并将其添加为 `pd.Series` 的方法。</p>
-<p>接着通过 `ser.add<sub>one</sub>()`
-直接调用该方法对系列进行操作，得到每个元素加 `1` 的结果。</p>
-<p>最后通过 `ser.apply('add<sub>one</sub>')`
-也实现了同样的效果，这是使用 `apply`
+<p>在这段代码中，首先创建了一个包含数值 <code>1</code>、<code>3</code>、<code>5</code>、<code>6</code> 的 <code>pandas</code>
+系列 <code>ser</code>。然后定义了一个函数 <code>add<sub>one</sub></code> 用于将输入值加
+<code>1</code>，并将其添加为 <code>pd.Series</code> 的方法。</p>
+<p>接着通过 <code>ser.add<sub>one</sub>()</code>
+直接调用该方法对系列进行操作，得到每个元素加 <code>1</code> 的结果。</p>
+<p>最后通过 <code>ser.apply('add<sub>one</sub>')</code>
+也实现了同样的效果，这是使用 <code>apply</code>
 方法并指定函数名来对系列中的每个元素应用该函数。</p>
-<p>这种方式可以方便地为 `pandas`
+<p>这种方式可以方便地为 <code>pandas</code>
 系列添加自定义的操作方法，以满足特定的数据处理需求。例如，可以定义各种不同的计算函数来对系列进行灵活的变换。</p>
 <div class="sourceCode" id="cb395" data-results="output"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb395-1"><a href="#cb395-1" aria-hidden="true" tabindex="-1"></a>ser <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
@@ -5896,45 +5921,53 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb412-1"><a 
 <span id="cb412-71"><a href="#cb412-71" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">&quot;tight&quot;</span>)</span>
 <span id="cb412-72"><a href="#cb412-72" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div></li>
 <li><p>正交匹配追踪</p>
-<p>好的，让我们通过一个具体的例子来解释正交匹配追踪（Orthogonal Matching
+<p>下面通过一个具体例子解释正交匹配追踪（Orthogonal Matching
 Pursuit, OMP）算法的实际应用和理论背景。</p>
-<p>### 理论背景
-正交匹配追踪（OMP）是一种用于稀疏信号重构的贪婪算法。它的目标是从部分观测信号中恢复原始信号，特别适用于压缩感知问题。OMP算法通过迭代选择与当前残差最相关的原子（即内积最大的原子），逐步构建稀疏表示。</p>
-<p>### OMP算法步骤</p>
+<h4 id="omp-理论背景">理论背景</h4>
+<p>正交匹配追踪（OMP）是一种用于稀疏信号重构的贪婪算法。它的目标是从部分观测信号中恢复原始信号，特别适用于压缩感知问题。OMP
+算法通过迭代选择与当前残差最相关的原子（即内积最大的原子），逐步构建稀疏表示。</p>
+<h4 id="omp-算法步骤">OMP 算法步骤</h4>
 <ol>
-<li>**初始化**：设定初始残差为观测信号，选中原子集合为空。</li>
-<li>**原子选择**：在每次迭代中，选择与当前残差最相关的原子。</li>
-<li>**更新选中原子集合**：将选中的原子加入选中原子集合。</li>
-<li>**求解最小二乘问题**：通过最小二乘法求解稀疏表示。</li>
-<li>**更新残差**：更新残差为当前残差减去选中原子的贡献。</li>
-<li>**迭代**：重复上述步骤，直到达到预定的稀疏度或残差足够小。</li>
+<li><strong>初始化</strong>：设定初始残差为观测信号，选中原子集合为空。</li>
+<li><strong>原子选择</strong>：在每次迭代中，选择与当前残差最相关的原子。</li>
+<li><strong>更新选中原子集合</strong>：将选中的原子加入选中原子集合。</li>
+<li><strong>求解最小二乘问题</strong>：通过最小二乘法求解稀疏表示。</li>
+<li><strong>更新残差</strong>：更新残差为当前残差减去选中原子的贡献。</li>
+<li><strong>迭代</strong>：重复上述步骤，直到达到预定的稀疏度或残差足够小。</li>
 </ol>
-<p>### 实际数据示例
-下面是一个使用Python实现OMP算法的示例，展示如何从高维数据中提取稀疏信号：</p>
-<p>```python import numpy as np from sklearn.linear<sub>model</sub>
-import OrthogonalMatchingPursuit</p>
-<p>np.random.seed(0) n<sub>samples</sub>, n<sub>features</sub> = 50, 100
-X = np.random.randn(n<sub>samples</sub>, n<sub>features</sub>)</p>
-<p>n<sub>nonzerocoefs</sub> = 17 idx = np.arange(n<sub>features</sub>)
-np.random.shuffle(idx) coef = np.zeros(n<sub>features</sub>)
-coef[idx[:n<sub>nonzerocoefs</sub>]] =
-np.random.randn(n<sub>nonzerocoefs</sub>)</p>
-<p>y = np.dot(X, coef)</p>
-<p>y += 0.01 * np.random.normal(size=n<sub>samples</sub>)</p>
-<p>omp =
-OrthogonalMatchingPursuit(n<sub>nonzerocoefs</sub>=n<sub>nonzerocoefs</sub>)
-omp.fit(X, y) coef<sub>omp</sub> = omp.coef_</p>
-<p>print("原始系数:", coef) print("OMP估计的系数:", coef<sub>omp</sub>)
-```</p>
-<p>### 解释</p>
+<h4 id="omp-实际数据示例">实际数据示例</h4>
+<p>下面是一个使用 Python 实现 OMP 算法的示例，展示如何从高维数据中提取稀疏信号：</p>
+<pre><code class="language-python">import numpy as np
+from sklearn.linear_model import OrthogonalMatchingPursuit
+
+np.random.seed(0)
+n_samples, n_features = 50, 100
+X = np.random.randn(n_samples, n_features)
+
+n_nonzero_coefs = 17
+idx = np.arange(n_features)
+np.random.shuffle(idx)
+coef = np.zeros(n_features)
+coef[idx[:n_nonzero_coefs]] = np.random.randn(n_nonzero_coefs)
+
+y = np.dot(X, coef)
+y += 0.01 * np.random.normal(size=n_samples)
+
+omp = OrthogonalMatchingPursuit(n_nonzero_coefs=n_nonzero_coefs)
+omp.fit(X, y)
+coef_omp = omp.coef_
+
+print("原始系数:", coef)
+print("OMP 估计的系数:", coef_omp)</code></pre>
+<h4 id="omp-解释">解释</h4>
 <ol>
-<li>**数据生成**：生成一个随机矩阵 `X` 和一个稀疏系数向量
-`coef`，并用它们生成目标变量 `y`。</li>
-<li>**添加噪声**：在目标变量 `y`
+<li><strong>数据生成</strong>：生成一个随机矩阵 <code>X</code> 和一个稀疏系数向量
+<code>coef</code>，并用它们生成目标变量 <code>y</code>。</li>
+<li><strong>添加噪声</strong>：在目标变量 <code>y</code>
 中添加一些噪声，以模拟真实数据中的噪声。</li>
-<li>**OMP算法**：使用 `OrthogonalMatchingPursuit`
-类进行稀疏回归，指定非零系数的数量为 `n<sub>nonzerocoefs</sub>`。</li>
-<li>**结果输出**：输出原始系数和OMP估计的系数，以比较两者的差异。</li>
+<li><strong>OMP 算法</strong>：使用 <code>OrthogonalMatchingPursuit</code>
+类进行稀疏回归，指定非零系数的数量为 <code>n_nonzero_coefs</code>。</li>
+<li><strong>结果输出</strong>：输出原始系数和 OMP 估计的系数，以比较两者的差异。</li>
 </ol></li>
 <li><p>bayesian ridge regression</p>
 <p>贝叶斯岭回归（Bayesian Ridge
