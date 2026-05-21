@@ -15,3 +15,8 @@
 
 - [[file:2017_plan.org][2017-2018 年度工作总结及未来计划]]
 
+* 2026 年 5 月
+
+- [[file:../wiki/sql.html][SQL Wiki]]
+- [[file:../wiki/python.html][Python Wiki]]
+- [[file:../wiki/stat.html][统计 Wiki（待整理）]]

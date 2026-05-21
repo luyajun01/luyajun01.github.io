@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SQL Wiki</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/org-css.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">SQL Wiki</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#sql-wiki-1" id="toc-sql-wiki-1">SQL Wiki</a>
+<ul>
+<li><a href="#执行顺序" id="toc-执行顺序">执行顺序</a></li>
+<li><a href="#名词解释" id="toc-名词解释">名词解释</a>
+<ul>
+<li><a href="#外键" id="toc-外键">外键</a></li>
+<li><a href="#索引" id="toc-索引">索引</a></li>
+<li><a href="#数据库" id="toc-数据库">数据库</a></li>
+<li><a href="#表" id="toc-表">表</a></li>
+<li><a href="#主键" id="toc-主键">主键</a></li>
+<li><a href="#外键-1" id="toc-外键-1">外键</a></li>
+</ul></li>
+<li><a href="#创建数据库" id="toc-创建数据库">创建数据库</a></li>
+<li><a href="#选择数据库" id="toc-选择数据库">选择数据库</a></li>
+<li><a href="#数据类型" id="toc-数据类型">数据类型</a>
+<ul>
+<li><a href="#数值类型" id="toc-数值类型">数值类型</a></li>
+<li><a href="#日期和时间" id="toc-日期和时间">日期和时间</a></li>
+<li><a href="#字符串" id="toc-字符串">字符串</a></li>
+</ul></li>
+<li><a href="#创建数据表" id="toc-创建数据表">创建数据表</a></li>
+<li><a href="#删除数据库" id="toc-删除数据库">删除数据库</a></li>
+<li><a href="#插入数据" id="toc-插入数据">插入数据</a>
+<ul>
+<li><a href="#sql别名" id="toc-sql别名">SQL别名</a></li>
+</ul></li>
+<li><a href="#查询数据" id="toc-查询数据">查询数据</a>
+<ul>
+<li><a href="#分页查询" id="toc-分页查询">分页查询</a></li>
+<li><a href="#聚合查询" id="toc-聚合查询">聚合查询</a></li>
+<li><a href="#多表查询" id="toc-多表查询">多表查询</a></li>
+<li><a href="#连接查询" id="toc-连接查询">连接查询</a></li>
+<li><a href="#left-join" id="toc-left-join">left join</a></li>
+<li><a href="#自链接" id="toc-自链接">自链接</a></li>
+</ul></li>
+<li><a href="#更新表-update" id="toc-更新表-update">更新表
+update</a></li>
+<li><a href="#注释" id="toc-注释">注释</a></li>
+<li><a href="#delete" id="toc-delete">delete</a></li>
+<li><a href="#limit" id="toc-limit">limit</a></li>
+<li><a href="#regexp" id="toc-regexp">RegExp</a></li>
+<li><a href="#where" id="toc-where">where</a>
+<ul>
+<li><a href="#like" id="toc-like">like</a></li>
+<li><a href="#in" id="toc-in">in</a></li>
+<li><a href="#not-in" id="toc-not-in">not in</a></li>
+<li><a href="#not-exists" id="toc-not-exists">not exists</a></li>
+<li><a href="#between-and" id="toc-between-and">between and</a></li>
+<li><a href="#not-between-and" id="toc-not-between-and">not between
+and</a></li>
+<li><a href="#unionunion-all" id="toc-unionunion-all">union/union
+all</a></li>
+</ul></li>
+<li><a href="#null" id="toc-null">null</a></li>
+<li><a href="#通配符" id="toc-通配符">通配符</a></li>
+<li><a href="#concat" id="toc-concat">concat</a></li>
+<li><a href="#ordering-and-limiting"
+id="toc-ordering-and-limiting">ordering and limiting</a></li>
+<li><a href="#averaging-and-grouping"
+id="toc-averaging-and-grouping">Averaging and Grouping</a></li>
+<li><a href="#nested-select" id="toc-nested-select">nested
+select</a></li>
+<li><a href="#join" id="toc-join">join</a></li>
+<li><a href="#innerjoin"
+id="toc-innerjoin">inner<sub>join</sub></a></li>
+<li><a href="#distinct" id="toc-distinct">distinct</a></li>
+<li><a href="#插入变量" id="toc-插入变量">插入变量</a></li>
+<li><a href="#case-when" id="toc-case-when">case when</a></li>
+<li><a href="#coalesce" id="toc-coalesce">coalesce</a></li>
+<li><a href="#summarise" id="toc-summarise">summarise</a>
+<ul>
+<li><a href="#count" id="toc-count">count</a></li>
+<li><a href="#meanvar" id="toc-meanvar">mean/var</a></li>
+<li><a href="#having" id="toc-having">having</a></li>
+</ul></li>
+<li><a href="#sqlite3" id="toc-sqlite3">sqlite3</a></li>
+<li><a href="#string-截取" id="toc-string-截取">string 截取</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="sql-wiki-1">SQL Wiki</h1>
+<h2 id="执行顺序">执行顺序</h2>
+<p>sql 语句的顺序经常搞错，需要学习下。</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="kw">id</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>name,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>subject,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">avg</span>(score) <span class="kw">as</span> avg_score</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> students_grade</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> pt <span class="op">&gt;=</span> <span class="st">&#39;2019-01-01&#39;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">group</span> <span class="kw">by</span> <span class="kw">id</span>,name,subject</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">having</span> avg_score <span class="op">&gt;=</span> <span class="dv">60</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">order</span> <span class="kw">by</span> avg_score <span class="kw">desc</span></span></code></pre></div>
+<p>这些关键字的执行顺序是：from -&gt; where -&gt; group by -&gt; select
+-&gt; distinct -&gt; having -&gt; order by -&gt; limit/offset.</p>
+<p>在 from, where, group by 语句都被执行完后，才开始执行 select 语句。
+having 是只有存在 group by 语句时才会使用 having.having 主要用于对聚合
+计算后的字段进行筛选。</p>
+<div class="sourceCode" id="cb2" data-results="output"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    E.DepartmentID,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    E.Name,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">MAX</span>(E.Salary) <span class="kw">as</span> MaxSalary</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    Employees E</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    Departments D <span class="kw">ON</span> E.DepartmentID <span class="op">=</span> D.DepartmentID</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    E.Status <span class="op">=</span> <span class="st">&#39;Active&#39;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    E.DepartmentID</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">MAX</span>(E.Salary) <span class="op">&gt;</span> <span class="dv">50000</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    MaxSalary <span class="kw">DESC</span>;</span></code></pre></div>
+<p>当然，我可以通过一个具体的例子来帮助你理解SQL语句的执行顺序。假设我们有两个表：一个是员工表（Employees），另一个是部门表（Departments）。我们想找出每个部门薪资最高的员工信息以及他们的薪资。以下是相应的SQL查询和每个步骤的解释：</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    E.DepartmentID,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    E.Name,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">MAX</span>(E.Salary) <span class="kw">as</span> MaxSalary</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    Employees E</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    Departments D <span class="kw">ON</span> E.DepartmentID <span class="op">=</span> D.DepartmentID</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    E.Status <span class="op">=</span> <span class="st">&#39;Active&#39;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    E.DepartmentID</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">MAX</span>(E.Salary) <span class="op">&gt;</span> <span class="dv">50000</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    MaxSalary <span class="kw">DESC</span>;</span></code></pre></div>
+<p><strong><strong>执行顺序及解释：</strong></strong></p>
+<ol>
+<li><p><strong><strong>FROM Employees E</strong></strong>:
+首先，SQL引擎会从Employees表中获取数据。</p></li>
+<li><p><strong><strong>JOIN Departments D ON E.DepartmentID =
+D.DepartmentID</strong></strong>:
+然后，根据DepartmentID将Employees表和Departments表进行连接。</p></li>
+<li><p><strong><strong>WHERE E.Status = 'Active'</strong></strong>:
+接下来，只选择状态为'Active'的员工。</p></li>
+<li><p><strong><strong>GROUP BY E.DepartmentID</strong></strong>:
+将结果按DepartmentID进行分组，为接下来的聚合函数（MAX）做准备。</p></li>
+<li><p><strong><strong>SELECT E.DepartmentID, E.Name, MAX(E.Salary) as
+MaxSalary</strong></strong>:
+选取DepartmentID、员工姓名和每个部门最高的薪资。</p></li>
+<li><p><strong><strong>HAVING MAX(E.Salary) &gt;
+50000</strong></strong>: 筛选出平均薪资超过50000的那些部门。</p></li>
+<li><p><strong><strong>ORDER BY MaxSalary DESC</strong></strong>:
+最后，按照最高薪资降序排序结果。</p></li>
+</ol>
+<p>在这个例子中，你可以看到SQL语句的各个部分是如何按照特定的执行顺序组合在一起，以达到我们想要的查询结果。通过理解这个顺序，你可以更好地构建和优化你的SQL查询。</p>
+<p>在SQL中，查询的关键词执行顺序如下：</p>
+<ol>
+<li><p>FROM/JOIN：首先执行FROM和/或JOIN子句，以确定感兴趣的数据。</p></li>
+<li><p>WHERE：执行WHERE子句，以过滤不符合约束条件的记录。</p></li>
+<li><p>GROUP BY：执行GROUP
+BY子句，根据一个或多个列中的值对数据进行分组。</p></li>
+<li><p>HAVING：执行HAVING子句，删除不符合约束条件的已创建分组记录。</p></li>
+<li><p>SELECT：执行SELECT子句，获取所有所需的列和表达式。</p></li>
+<li><p>ORDER BY：执行ORDER BY子句，对派生值按升序或降序排序。</p></li>
+<li><p>LIMIT/OFFSET：最后执行LIMIT和/或OFFSET子句，以保留或跳过指定数量的行。</p></li>
+</ol>
+<p>这些步骤按顺序执行，以便从数据库中找到所需的数据，并将其过滤和处理为最终结果。</p>
+<h2 id="名词解释">名词解释</h2>
+<h3 id="外键">外键</h3>
+<p>外键：可以通过特定的指标，实现与其他表关联，这种列就称为外键。外键并不是通过列名实现的，而是通过定义外键约束实现的：</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> students</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ADD</span> <span class="kw">CONSTRAINT</span> fk_class_id</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FOREIGN</span> <span class="kw">KEY</span> (class_id)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">REFERENCES</span> classes (<span class="kw">id</span>);</span></code></pre></div>
+<p>其中，外键约束的名称fk<sub>classid可以任意</sub>，FOREIGN KEY
+(class<sub>id</sub>)指定了class<sub>id作为外键</sub>，REFERENCES classes
+(id)指定了这个外键将关联到classes表的id列（即classes表的主键）。</p>
+<p>通过定义外键约束，关系数据库可以保证无法插入无效的数据。即如果classes表不存在id=99的记录，students表就无法插入class<sub>id</sub>=99的记录。</p>
+<p>由于外键约束会降低数据库的性能，大部分互联网应用程序为了追求速度，并不设置外键约束，而是仅靠应用程序自身来保证逻辑的正确性。这种情况下，class<sub>id仅仅是一个普通的列</sub>，只是它起到了外键的作用而已。</p>
+<p>要删除一个外键约束，也是通过ALTER TABLE实现的：</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> students</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">FOREIGN</span> <span class="kw">KEY</span> fk_class_id;</span></code></pre></div>
+<h3 id="索引">索引</h3>
+<p>在关系数据库中，如果有上万甚至上亿条记录，在查找记录的时候，想要获得非常快的速度，就需要使用索引。</p>
+<p>索引是关系数据库中对某一列或多个列的值进行预排序的数据结构。通过使用索引，可以让数据库系统不必扫描整个表，而是直接定位到符合条件的记录，这样就大大加快了查询速度。</p>
+<p>如果要经常根据 score 列进行查询，就需要对score 列创建索引。</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> students</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ADD</span> <span class="kw">INDEX</span> idx_score (score);</span></code></pre></div>
+<p>使用ADD INDEX idx<sub>score</sub>
+(score)就创建了一个名称为idx<sub>score</sub>，使用列score的索引。索引名称是任意的，索引如果有多列，可以在括号里依次写上，例如：</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> students</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ADD</span> <span class="kw">INDEX</span> idx_name_score (name, score);</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">alter</span> <span class="kw">table</span> user_info <span class="kw">add</span> school <span class="dt">varchar</span>(<span class="dv">15</span>) <span class="kw">after</span> <span class="kw">level</span>;</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>增加列在某列之后</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">alter</span> <span class="kw">table</span> 增加的表格 <span class="kw">add</span> 增加列的名称 数据类型 位置(<span class="kw">after</span> <span class="kw">level</span> 在level 之后)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">alter</span> <span class="kw">table</span> user_info <span class="kw">change</span> job profession <span class="dt">varchar</span>(<span class="dv">10</span>);</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>更换列的名称及数据类型</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">alter</span> <span class="kw">table</span> user_info <span class="kw">change</span> 原列名 修改列名 修改数据类型</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">alter</span> <span class="kw">table</span> user_info <span class="kw">modify</span> achievement <span class="dt">int</span>(<span class="dv">11</span>) <span class="kw">default</span> <span class="dv">0</span>;</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>更改数据类型</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">alter</span> <span class="kw">table</span> 表名 <span class="kw">modify</span> 修改列名称 数据类型 默认值等</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- 在duration列创建普通索引idx_duration</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> idx_duration <span class="kw">ON</span> examination_info(duration);</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- 在exam_id列创建唯一性索引uniq_idx_exam_id</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">UNIQUE</span> <span class="kw">INDEX</span> uniq_idx_exam_id <span class="kw">ON</span> examination_info(exam_id);</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- 在tag列创建全文索引full_idx_tag</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> FULLTEXT <span class="kw">INDEX</span> full_idx_tag <span class="kw">ON</span> examination_info(tag);</span></code></pre></div>
+<h3 id="数据库">数据库</h3>
+<p>保存有组织的数据的容器（通常是一个文件或者一组文件）。</p>
+<h3 id="表">表</h3>
+<p>在数据库领域中，表是一种结构化的文件，可以用来存储某种特定类型的数据。表可以保存顾客清单、产品目录、或者其他信息清单。</p>
+<p>表是某种特定类型数据的结构化清单。</p>
+<h3 id="主键">主键</h3>
+<p>表中每一行都应该有一列（或几列）可以唯一标识自己。一列（或一组列），其值能够唯一标识表中每一行。</p>
+<p>主键需要满足以下条件：</p>
+<p>1.任意两行都不具有相同的主键值；</p>
+<p>2.每一行都必须具有一个主键值（主键列不允许 NULL 值）</p>
+<p>3.主键列中的值不允许修改或者更新</p>
+<p>4.主键值不能重用（如果某行从表中删除，它的主键不能赋给以后的新行）</p>
+<h3 id="外键-1">外键</h3>
+<p>一个表中的 FOREIGN KEY 指向另一个表中的 UNIQUE
+KEY(唯一约束的键)。</p>
+<p>让我们通过一个实例来解释外键。请看下面两个表：</p>
+<h2 id="创建数据库">创建数据库</h2>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">create</span> <span class="kw">database</span> samp_db <span class="dt">character</span> <span class="kw">set</span> gbk;</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> <span class="kw">database</span> samp_db; <span class="co">--删除库名为samp_db</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>show databases;</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> samp_db ;<span class="co">--选择创建的数据库samp_db</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>show <span class="kw">tables</span>;<span class="co">--显示samp_db下面所有的表名字</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>describe</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">DATABASE</span> <span class="cf">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> RUNOOB <span class="kw">DEFAULT</span> CHARSET utf8 COLLATE utf8_general_ci;</span></code></pre></div>
+<p>创建数据库，该命令的作用：</p>
+<ol>
+<li>如果数据库不存在则创建，存在则不创建。</li>
+<li>创建RUNOOB数据库，并设定编码集为utf8</li>
+</ol>
+<h2 id="选择数据库">选择数据库</h2>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> course; <span class="co">-- course是数据库名</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>查看列：desc 表名;</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>修改表名：alter <span class="kw">table</span> t_book <span class="kw">rename</span> <span class="kw">to</span> bbb;</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>添加列：alter <span class="kw">table</span> 表名 <span class="kw">add</span> <span class="kw">column</span> 列名 <span class="dt">varchar</span>(<span class="dv">30</span>);</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>删除列：alter <span class="kw">table</span> 表名 <span class="kw">drop</span> <span class="kw">column</span> 列名;</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>修改列名MySQL： <span class="kw">alter</span> <span class="kw">table</span> bbb <span class="kw">change</span> nnnnn hh <span class="dt">int</span>;</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>修改列名SQLServer：exec sp_rename<span class="st">&#39;t_student.name&#39;</span>,<span class="st">&#39;nn&#39;</span>,<span class="st">&#39;column&#39;</span>;</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>修改列名Oracle：lter <span class="kw">table</span> bbb <span class="kw">rename</span> <span class="kw">column</span> nnnnn <span class="kw">to</span> hh <span class="dt">int</span>;</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>修改列属性：alter <span class="kw">table</span> t_book <span class="kw">modify</span> name <span class="dt">varchar</span>(<span class="dv">22</span>);</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>删除行: <span class="kw">delete</span> <span class="kw">from</span> course <span class="kw">where</span> Cname <span class="op">=</span> <span class="st">&#39;&#39;</span></span></code></pre></div>
+<h2 id="数据类型">数据类型</h2>
+<h3 id="数值类型">数值类型</h3>
+<table>
+<tbody>
+<tr>
+<td>类型</td>
+<td>用途</td>
+</tr>
+<tr>
+<td>TINYINT</td>
+<td>小整数值</td>
+</tr>
+<tr>
+<td>SMALLINT</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>MEDIUMINT</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>INT或INTEGER</td>
+<td>大整数值</td>
+</tr>
+<tr>
+<td>BIGINT</td>
+<td>极大整数值</td>
+</tr>
+<tr>
+<td>FLOAT</td>
+<td>单精度浮点数值</td>
+</tr>
+<tr>
+<td>DOUBLE</td>
+<td>双精度浮点数值</td>
+</tr>
+<tr>
+<td>DECIMAL</td>
+<td>小数值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="日期和时间">日期和时间</h3>
+<table>
+<tbody>
+<tr>
+<td>类型</td>
+<td>用途</td>
+</tr>
+<tr>
+<td>DATE</td>
+<td>日期值</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>时间值或持续时间</td>
+</tr>
+<tr>
+<td>YEAR</td>
+<td>年份值</td>
+</tr>
+<tr>
+<td>DATETIME</td>
+<td>混合日期和时间值</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>混合日期和时间值，时间戳</td>
+</tr>
+</tbody>
+</table>
+<p>通过用 timestampdiff 函数可以实现两个时间戳的时间差。</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>exam_record</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> TIMESTAMPDIFF(<span class="kw">MINUTE</span>, start_time, submit_time) <span class="op">&lt;</span> <span class="dv">5</span> <span class="kw">and</span> score <span class="op">&lt;</span><span class="dv">60</span></span></code></pre></div>
+<h3 id="字符串">字符串</h3>
+<table>
+<tbody>
+<tr>
+<td>类型</td>
+<td>用途</td>
+</tr>
+<tr>
+<td>CHAR</td>
+<td>定长字符串</td>
+</tr>
+<tr>
+<td>VARCHAR</td>
+<td>变长字符串</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>长文本数据</td>
+</tr>
+<tr>
+<td>LONGTEXT</td>
+<td>极大文本数据</td>
+</tr>
+</tbody>
+</table>
+<p>char(n) 和 varchar(n) 中括号里n
+代表字符的个数，并不代表字节的个数，比如CHAR(30)
+就可以存储30个字符。</p>
+<h2 id="创建数据表">创建数据表</h2>
+<p>创建数据表需要包括以下信息：表名，表字段名，定义每个表字段。创建mysql
+数据表的SQL 通用语法是：</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">create</span> <span class="kw">table</span> table_name (column_name column_type);</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> STUDENT</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>(SNO <span class="dt">VARCHAR</span>(<span class="dv">3</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>SNAME <span class="dt">VARCHAR</span>(<span class="dv">4</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>SSEX <span class="dt">VARCHAR</span>(<span class="dv">2</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>SBIRTHDAY DATETIME,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">CLASS</span> <span class="dt">VARCHAR</span>(<span class="dv">5</span>));</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> `runoob_tbl`(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>   `runoob_id` <span class="dt">INT</span> UNSIGNED AUTO_INCREMENT,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>   `runoob_title` <span class="dt">VARCHAR</span>(<span class="dv">100</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>   `runoob_author` <span class="dt">VARCHAR</span>(<span class="dv">40</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>   `submission_date` <span class="dt">DATE</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">PRIMARY</span> <span class="kw">KEY</span> ( `runoob_id` )</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)ENGINE<span class="op">=</span>InnoDB <span class="kw">DEFAULT</span> CHARSET<span class="op">=</span>utf8;</span></code></pre></div>
+<ul>
+<li><p>如果不想字段为 NULL 可以设置字段的属性为NOT
+NULL，在操作数据库时如果输入该字段的数据为NULL，就会报错。</p></li>
+<li><p>AUTO<sub>INCREMENT定义列为自增的属性</sub>，一般用于主键，数值会自动加1。</p></li>
+<li><p>PRIMARY
+KEY关键字用于定义列为主键。您可以使用多列来定义主键，列间以逗号分隔。</p></li>
+<li><p>ENGINE 设置存储引擎，CHARSET 设置编码。</p></li>
+</ul>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">insert</span> <span class="kw">into</span> grade <span class="kw">values</span>(<span class="dv">90</span>,<span class="dv">100</span>,<span class="st">&#39;A&#39;</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">insert</span> <span class="kw">into</span> grade <span class="kw">values</span>(<span class="dv">80</span>,<span class="dv">89</span>,<span class="st">&#39;B&#39;</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">insert</span> <span class="kw">into</span> grade <span class="kw">values</span>(<span class="dv">70</span>,<span class="dv">79</span>,<span class="st">&#39;C&#39;</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">insert</span> <span class="kw">into</span> grade <span class="kw">values</span>(<span class="dv">60</span>,<span class="dv">69</span>,<span class="st">&#39;D&#39;</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="kw">insert</span> <span class="kw">into</span> grade <span class="kw">values</span>(<span class="dv">0</span>,<span class="dv">59</span>,<span class="st">&#39;E&#39;</span>)</span></code></pre></div>
+<h2 id="删除数据库">删除数据库</h2>
+<p>在删除数据库过程中，务必要十分谨慎，因为在执行删除命令后，所有数据将会消失。</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> <span class="kw">database</span> samp_db; <span class="co">--删除库名为samp_db</span></span></code></pre></div>
+<h2 id="插入数据">插入数据</h2>
+<p>例如，我们向students表插入一条新记录，先列举出需要插入的字段名称，然后在VALUES子句中依次写出对应字段的值：</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">insert</span> <span class="kw">into</span> table_name (field1, field2,<span class="op">..</span>.,fieldN)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                       <span class="kw">Values</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                       (value1, value2,<span class="op">..</span>.,valueN);</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode SQL"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> students (class_id, name, gender, score) <span class="kw">VALUES</span> (<span class="dv">2</span>, <span class="st">&#39;大牛&#39;</span>, <span class="st">&#39;M&#39;</span>, <span class="dv">80</span>);</span></code></pre></div>
+<h3 id="sql别名">SQL别名</h3>
+<p>通过使用SQL,可以为表名称或列名称指定别名。分列的SQL 别名和表的SQL
+别名写法。列的SQL 别名用法</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> column_name <span class="kw">AS</span> alias_name <span class="kw">from</span> table_name;</span></code></pre></div>
+<p>表的SQL 别名用法</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> column_name <span class="kw">from</span> table_name <span class="kw">AS</span> alias_name</span></code></pre></div>
+<p>为了插入ID为9003的高难度SQL试卷，且不管试卷ID是否已存在，都要插入成功，我们可以使用INSERT
+IGNORE或REPLACE语句。这里我们使用REPLACE语句来实现：</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">REPLACE</span> <span class="kw">INTO</span> examination_info (exam_id, tag, difficulty, duration, release_time)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="dv">9003</span>, <span class="st">&#39;SQL&#39;</span>, <span class="st">&#39;High&#39;</span>, <span class="dv">90</span>, <span class="st">&#39;2021-01-01 00:00:00&#39;</span>);</span></code></pre></div>
+<h2 id="查询数据">查询数据</h2>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> column_name,column_name</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> table_name</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>[<span class="kw">WHERE</span> Clause]</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>[<span class="kw">LIMIT</span> N][ OFFSET M]</span></code></pre></div>
+<p>查询语句中你可以使用一个或者多个表，表之间使用逗号(,)分割，并使用WHERE语句来设定查询条件。
+SELECT 命令可以读取一条或者多条记录。
+你可以使用星号（*）来代替其他字段，SELECT语句会返回表的所有字段数据。你可以使用
+WHERE 语句来包含任何条件。 你可以使用 LIMIT
+属性来设定返回的记录数。你可以通过OFFSET指定SELECT语句开始查询的数据偏移量。默认情况下偏移量为0。</p>
+<h3 id="分页查询">分页查询</h3>
+<p>使用SELECT查询时，如果结果集数据量很大，比如几万行数据，放在一个页面显示的话数据量太大，不如分页显示，每次显示100条。</p>
+<p>要实现分页功能，实际上就是从结果集中显示第1~100条记录作为第1页，显示第101~200条记录作为第2页，以此类推。</p>
+<p>因此，分页实际上就是从结果集中“截取”出第M~N条记录。
+<strong>这个查询可以通过LIMIT &lt;M&gt; OFFSET
+&lt;N&gt;子句实现。</strong>
+我们先把所有学生按照成绩从高到低进行排序：</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">id</span>, name, gender, score</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> students</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> score <span class="kw">DESC</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">3</span> OFFSET <span class="dv">0</span>;</span></code></pre></div>
+<p>上述查询LIMIT 3 OFFSET
+0表示，对结果集从0号记录开始，最多取3条。注意SQL记录集的索引从0开始。</p>
+<p>如果要查询第2页，那么我们只需要“跳过”头3条记录，也就是对结果集从3号记录开始查询，把OFFSET设定为3：</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">id</span>, name, gender, score</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> students</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> score <span class="kw">DESC</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">3</span> OFFSET <span class="dv">3</span>;</span></code></pre></div>
+<p>可见，分页查询的关键在于，首先要确定每页需要显示的结果数量pageSize（这里是3），然后根据当前页的索引pageIndex（从1开始），确定LIMIT和OFFSET应该设定的值：</p>
+<p>LIMIT总是设定为pageSize； OFFSET计算公式为pageSize * (pageIndex -
+1)。 这样就能正确查询出第N页的记录集。</p>
+<h3 id="聚合查询">聚合查询</h3>
+<p>count, 察看数据的行数</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> students;</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) num <span class="kw">FROM</span> students;</span></code></pre></div>
+<p>分组</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) num <span class="kw">FROM</span> students <span class="kw">GROUP</span> <span class="kw">BY</span> class_id;</span></code></pre></div>
+<h3 id="多表查询">多表查询</h3>
+<p>SELECT查询不但可以从一张表查询数据，还可以从多张表同时查询数据。查询多张表的语法是：SELECT
+* FROM &lt;表1&gt; &lt;表2&gt;。</p>
+<p>例如，同时从students表和classes表的“乘积”，即查询数据，可以这么写：</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> students, classes;</span></code></pre></div>
+<p>这种一次查询两个表的数据，查询的结果也是一个二维表，它是students表和classes表的“乘积”，即students表的每一行与classes表的每一行都两两拼在一起返回。结果集的列数是students表和classes表的列数之和，行数是students表和classes表的行数之积。</p>
+<p>这种多表查询又称笛卡尔查询，使用笛卡尔查询时要非常小心，由于结果集是目标表的行数乘积，对两个各自有100行记录的表进行笛卡尔查询将返回1万条记录，对两个各自有1万行记录的表进行笛卡尔查询将返回1亿条记录。</p>
+<p>你可能还注意到了，上述查询的结果集有两列id和两列name，两列id是因为其中一列是students表的id，而另一列是classes表的id，但是在结果集中，不好区分。两列name同理</p>
+<p>要解决这个问题，我们仍然可以利用投影查询的“设置列的别名”来给两个表各自的id和name列起别名：</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>students.<span class="kw">id</span> sid,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>students.name,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>students.gender,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>students.score,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>classes.<span class="kw">id</span> cid,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>classes.name cname</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> students, classes;</span></code></pre></div>
+<p>注意，多表查询时，要使用表名.列名这样的方式来引用列和设置别名，这样就避免了结果集的列名重复问题。但是，用表名.列名这种方式列举两个表的所有列实在是很麻烦，所以SQL还允许给表设置一个别名，让我们在投影查询中引用起来稍微简洁一点：</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>s.<span class="kw">id</span> sid,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>s.name,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>s.gender,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>s.score,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>c.<span class="kw">id</span> cid,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>c.name cname</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> students s, classes c;</span></code></pre></div>
+<h3 id="连接查询">连接查询</h3>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.<span class="kw">id</span>, s.name, s.class_id, c.name class_name, s.gender, s.score</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> students s</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> classes c</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> s.class_id <span class="op">=</span> c.<span class="kw">id</span>;</span></code></pre></div>
+<p>注意INNER JOIN查询的写法是：</p>
+<p>先确定主表，仍然使用FROM &lt;表1&gt;的语法；
+再确定需要连接的表，使用INNER JOIN &lt;表2&gt;的语法；
+然后确定连接条件，使用ON &lt;条件…&gt;，这里的条件是s.class<sub>id</sub>
+=
+c.id，表示students表的class<sub>id列与classes表的id列相同的行需要连接</sub>；
+可选：加上WHERE子句、ORDER BY等子句。</p>
+<p>外连接</p>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.<span class="kw">id</span>, s.name, s.class_id, c.name class_name, s.gender, s.score</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> students s</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="kw">RIGHT</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> classes c</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> s.class_id <span class="op">=</span> c.<span class="kw">id</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.<span class="kw">id</span>, s.name, s.class_id, c.name class_name, s.gender, s.score</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> students s</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> classes c</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> s.class_id <span class="op">=</span> c.<span class="kw">id</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode SQL"><code class="sourceCode sql"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.<span class="kw">id</span>, s.name, s.class_id, c.name class_name, s.gender, s.score</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> students s</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FULL</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span> classes c</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> s.class_id <span class="op">=</span> c.<span class="kw">id</span>;</span></code></pre></div>
+<h3 id="left-join">left join</h3>
+<p>注意观察 left join 中两表的链接方式。</p>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> a.device_id, b.question_id,b.result <span class="kw">from</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">select</span> <span class="kw">id</span>,device_id <span class="kw">from</span> user_profile <span class="kw">where</span> university <span class="op">=</span> <span class="st">&#39;浙江大学&#39;</span>) a <span class="kw">left</span> <span class="kw">join</span> question_practice_detail b</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="kw">on</span> a.device_id <span class="op">=</span> b.device_id <span class="kw">order</span> <span class="kw">by</span> b.question_id <span class="kw">asc</span></span></code></pre></div>
+<h3 id="自链接">自链接</h3>
+<p>当然可以！让我用简单的语言来解释一下如何使用自连接（也叫自联结）来实现滚动统计。</p>
+<p>什么是滚动统计？</p>
+<p>滚动统计是一种计算方法，它会在数据序列中滑动一个窗口，对窗口内的数据进行统计。例如，计算每个月的销售额及其前两个月的总和，这样你可以看到一个三个月的滚动总销售额。</p>
+<p>什么是自连接？</p>
+<p>自连接是指在数据库查询中，将一个表与它自己连接起来。这在处理需要比较或组合同一表中不同记录的数据时非常有用。</p>
+<p>如何用自连接实现滚动统计？</p>
+<p>让我们通过一个简单的例子来说明。</p>
+<p>假设你有一个销售记录的表，叫做 Sales，结构如下：</p>
+<p>SaleID SaleDate Amount 1 2024-01-01 100 2 2024-01-02 150 3 2024-01-03
+200 4 2024-01-04 250 5 2024-01-05 300</p>
+<p>现在，你想计算每一天及其前两天的销售总额（即一个3天的滚动总和）。</p>
+<p>步骤：</p>
+<ol>
+<li>给表起别名：为了区分同一个表中的不同实例，我们给表起不同的别名，比如
+s1 和 s2。</li>
+<li>设定连接条件：我们希望将每一行 s1 与它前两天的行 s2 连接起来。假设
+SaleDate 是连续的，可以用日期来进行匹配。</li>
+<li>计算总和：在连接后，对 s1 和匹配的 s2 的 Amount 进行求和。</li>
+</ol>
+<p>示例SQL查询：</p>
+<p>SELECT s1.SaleDate, (s1.Amount + COALESCE(s2.Amount, 0) +
+COALESCE(s3.Amount, 0)) AS RollingTotal FROM Sales s1 LEFT JOIN Sales s2
+ON s1.SaleDate = DATEADD(day, 1, s2.SaleDate) LEFT JOIN Sales s3 ON
+s1.SaleDate = DATEADD(day, 2, s3.SaleDate) ORDER BY s1.SaleDate;</p>
+<p>解释：</p>
+<p>• s1 是当前的销售记录。 • s2 是当前记录的前一天的销售记录。 • s3
+是当前记录的前两天的销售记录。 • COALESCE
+函数用于处理可能没有前一天或前两天数据的情况，避免出现 NULL。</p>
+<p>结果：</p>
+<p>SaleDate RollingTotal 2024-01-01 100 2024-01-02 250 (100 + 150)
+2024-01-03 450 (100 + 150 + 200) 2024-01-04 600 (150 + 200 + 250)
+2024-01-05 750 (200 + 250 + 300)</p>
+<p>总结</p>
+<p>通过自连接，我们将同一个表中的不同时间点的数据关联起来，这样就可以在一个查询中同时访问当前行及其前面的几行数据。然后，通过对这些关联的数据进行计算，就实现了滚动统计。这种方法在需要基于时间序列进行分析时非常有用，尤其是在不支持窗口函数的数据库中。</p>
+<p>希望这个解释对你有帮助！</p>
+<h2 id="更新表-update">更新表 update</h2>
+<p>UPDATE &lt;表名&gt; SET 字段1=值1, 字段2=值2, … WHERE
+…;可以用update命令更新数据库。</p>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">update</span> STUDENT <span class="kw">SET</span> SSEX <span class="op">=</span> <span class="ot">&quot;女&quot;</span> <span class="kw">where</span> SNAME <span class="op">=</span> <span class="st">&#39;曾华&#39;</span></span></code></pre></div>
+<p>例如，我们想更新students表id=1的记录的name和score这两个字段，先写出UPDATE
+students SET name='大牛',
+score=66，然后在WHERE子句中写出需要更新的行的筛选条件id=1：</p>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> students <span class="kw">SET</span> name<span class="op">=</span><span class="st">&#39;大牛&#39;</span>, score<span class="op">=</span><span class="dv">66</span> <span class="kw">WHERE</span> <span class="kw">id</span><span class="op">=</span><span class="dv">1</span>;</span></code></pre></div>
+<p>最后，要特别小心的是，UPDATE语句可以没有WHERE条件，例如：</p>
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode SQL"><code class="sourceCode sql"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> students <span class="kw">SET</span> score<span class="op">=</span><span class="dv">60</span>;</span></code></pre></div>
+<p>这时，整个表的所有记录都会被更新。所以，在执行UPDATE语句时要非常小心，最好先用SELECT语句来测试WHERE条件是否筛选出了期望的记录集，然后再用UPDATE更新。</p>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">update</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>examination_info</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> tag <span class="op">=</span> <span class="ot">&quot;Python&quot;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> tag <span class="op">=</span> <span class="ot">&quot;PYTHON&quot;</span></span></code></pre></div>
+<h2 id="注释">注释</h2>
+<p>在sql中，使用 – 嵌在行内，–
+之后的文本就是注释,也可以进行多行注释，从/* 开始，到 */结束。</p>
+<h2 id="delete">delete</h2>
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">delete</span> <span class="kw">from</span> STUDENT <span class="kw">where</span>  SNAME <span class="op">=</span> <span class="st">&#39;曾华&#39;</span></span></code></pre></div>
+<h2 id="limit">limit</h2>
+<p>R 中 head 一般是展示 6 行数据的功能。sql 语句可以写成如下：</p>
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>a1s <span class="op">&lt;-</span> sqldf(<span class="ot">&quot;select * from iris limit 6&quot;</span>)</span></code></pre></div>
+<h2 id="regexp">RegExp</h2>
+<p>之前学习过like %进行模糊匹配，MySQL 同样也支持其他正则表达式的匹配，
+MySQL中使用 REGEXP 操作符来进行正则表达式匹配。</p>
+<table>
+<tbody>
+<tr>
+<td>模式</td>
+<td>描述</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>^</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>[…]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>[^…]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>p1</td>
+<td>p2</td>
+<td>p3</td>
+<td>匹配p1或p2或p3</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达一次或多次</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配确定的n次</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> STUDENT <span class="kw">where</span> SNAME regexp <span class="st">&#39;王&#39;</span></span></code></pre></div>
+<h2 id="where">where</h2>
+<p>sql 语句中的 filter 是 where.这一节属于条件查询。</p>
+<h3 id="like">like</h3>
+<p>我们知道在 MySQL 中使用 SQL SELECT 命令来读取数据， 同时我们可以在
+SELECT 语句中使用 WHERE 子句来获取指定的记录。 WHERE 子句中可以使用等号
+= 来设定获取数据的条件，如 "runoob<sub>author</sub> =
+'RUNOOB.COM'"。但是有时候我们需要获取 runoob<sub>author</sub> 字段含有
+"COM" 字符的所有记录，这时我们就需要在 WHERE 子句中使用 SQL LIKE
+子句。</p>
+<div class="sourceCode" id="cb45"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>#从iris 数据集中筛选出Species 开头是<span class="ot">&quot;set&quot;</span> 的记录</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>sqldf(<span class="ot">&quot;select * from iris where Species like &#39;set%&#39;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> STUDENT <span class="kw">where</span> SNAME <span class="kw">like</span> <span class="ot">&quot;匡%&quot;</span></span></code></pre></div>
+<p>like 通常紧跟通配符
+"%",代表匹配0个以上的字符。找到所有电影名为“WALL-” 开头的电影。</p>
+<div class="sourceCode" id="cb47"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> movies <span class="kw">where</span> title <span class="kw">like</span> <span class="ot">&quot;%WALL-%&quot;</span></span></code></pre></div>
+<p>R 语句可以这么写</p>
+<div class="sourceCode" id="cb48" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Species <span class="sc">%like%</span>  <span class="st">&#39;set&#39;</span>)</span></code></pre></div>
+<h3 id="in">in</h3>
+<p>在 SQL
+中，`IN`操作符用于检查一个值是否包含在指定的一组值中。它通常用在`WHERE`子句中，以过滤出那些列值等于列表中任一值的行。</p>
+<p>`IN`操作符的语法为：`SELECT column<sub>name</sub> FROM
+table<sub>name</sub> WHERE column<sub>name</sub> IN (value1, value2,…,
+valuen)`。其中：</p>
+<ul>
+<li>`column<sub>name</sub>`：要检查的值所在的列名；</li>
+<li>`value1, value2,…,
+valuen`：要检查的值的列表，可以是常量、子查询或从其他表中选取的值。</li>
+</ul>
+<p>例如，`sqldf("select * from iris where Species in
+('setosa','versicolor')")`这条语句的作用是从`iris`表中选择`Species`列的值为`'setosa'`或`'versicolor'`的所有行。</p>
+<p>使用`IN`操作符可以简化多个`OR`条件的情况，使查询更加清晰和简洁。例如，不用`IN`的话，上述查询可能需要写成：`SELECT
+* FROM iris WHERE Species = 'etosa' OR Species = 'ersicolor'`。</p>
+<p>`IN`操作符还支持与子查询结合使用，例如：`SELECT column<sub>name</sub>
+FROM table<sub>name</sub> WHERE column<sub>name</sub> IN (SELECT
+column<sub>name</sub> FROM subquery)`，其中子查询返回一个值的集合。</p>
+<p>此外，需要注意的是`IN`操作符不包括`NULL`值，即使列表中包含`NULL`，使用`IN
+(NULL)`的查询不会返回任何行。但可以使用`IS
+NULL`来专门检查`NULL`值。同时，`IN`操作符的性能可能会受到值列表长度的影响，对于较长的列表，可以考虑使用其他方法来提高性能。</p>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>sqldf(<span class="ot">&quot;select * from iris where Species in (&#39;setosa&#39;,&#39;versicolor&#39;)&quot;</span>)</span></code></pre></div>
+<p>*当然还有更直接的*＝语句</p>
+<pre><code>sqldf(&quot;select * from iris where Species = &#39;setosa&#39;&quot;)
+</code></pre>
+<h3 id="not-in">not in</h3>
+<p>Number does not exist in a list 不在一个列表里。</p>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> movies <span class="kw">where</span> <span class="kw">id</span> <span class="kw">not</span> <span class="kw">in</span> (<span class="ot">&quot;1&quot;</span>,<span class="ot">&quot;2&quot;</span>);</span></code></pre></div>
+<p>这段代码是一个 SQL 查询语句，其作用是从名为 `movies` 的表中选择出所有
+`id` 不在指定列表（"1" 和 "2"）中的记录。</p>
+<p>具体解释如下：</p>
+<ul>
+<li>`SELECT *`：表示选择所有列的数据。`*`
+是通配符，表示选择所有列。</li>
+<li>`FROM movies`：指定要从哪个表中查询数据，这里是 `movies` 表。</li>
+<li>`WHERE id NOT IN ("1","2")`：这是一个筛选条件。`WHERE`
+子句用于指定筛选条件，只有满足条件的记录才会被选中。`id NOT IN
+("1","2")` 表示筛选出 `id` 列的值不在指定列表（"1" 和
+"2"）中的记录。`NOT IN` 操作符用于排除列表中的值。</li>
+</ul>
+<p>需要注意的是，如果在实际应用中表 `movies` 中的 `id` 列可能存在 `NULL`
+值，并且子查询或其他方式生成的排除列表中也可能包含 `NULL`，那么使用 `NOT
+IN`
+可能会导致意外的结果。在这种情况下，更好的做法可能是使用其他方式来表达这种条件，例如使用
+`NOT EXISTS` 或者对 `NULL`
+值进行特殊处理，具体方法取决于数据库管理系统以及实际需求。</p>
+<p><strong>NOT IN 和 NULL： 当使用 NOT IN
+子句时，如果子查询结果中包含NULL，整个NOT
+IN条件会返回NULL，而不是TRUE或FALSE。</strong></p>
+<p>例如，如果使用 SQL Server，可以将查询修改为：</p>
+<div class="sourceCode" id="cb52"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> movies <span class="kw">WHERE</span> <span class="kw">id</span><span class="op">!=</span> <span class="kw">ALL</span> (<span class="kw">SELECT</span> ISNULL(<span class="kw">id</span>, <span class="st">&#39;&#39;</span>) <span class="kw">FROM</span> movies <span class="kw">WHERE</span> <span class="kw">id</span> <span class="kw">IN</span> (<span class="ot">&quot;1&quot;</span>,<span class="ot">&quot;2&quot;</span>));</span></code></pre></div>
+<p>上述查询中，使用 `ISNULL(id, '')` 处理了 `id` 可能为 `NULL`
+的情况。如果子查询中存在 `NULL`
+值，它将被转换为空字符串，而不会影响最终的筛选结果。不同的数据库系统可能有不同的函数来处理
+`NULL` 值，比如在 Oracle 中可以使用 `NVL`
+函数等。在实际使用时，需要根据所使用的具体数据库进行相应的调整。</p>
+<h3 id="not-exists">not exists</h3>
+<div class="sourceCode" id="cb53"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> movies m</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> (</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="dv">1</span> <span class="kw">FROM</span> ratings r </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> r.movie_id <span class="op">=</span> m.<span class="kw">id</span> <span class="kw">AND</span> r.rating <span class="op">&lt;</span> <span class="dv">5</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>这里面 select 1 的意思是我们可以通过一个简单的示例来说明这段 SQL
+代码的含义。假设有两个表：students 表和 enrollments 表。</p>
+<p>示例数据</p>
+<p>students 表：</p>
+<p>id name 1 Alice 2 Bob 3 Charlie</p>
+<p>enrollments 表：</p>
+<p>student<sub>id</sub> course 1 Math 1 Physics 2 Chemistry</p>
+<p>SQL 查询解释</p>
+<p>SQL 语句如下：</p>
+<p>SELECT * FROM students s WHERE NOT EXISTS ( SELECT 1 FROM enrollments
+e WHERE e.student<sub>id</sub> = s.id );</p>
+<p>这段代码的逻辑是：从 students 表中选出那些在 enrollments
+表中没有对应记录的学生。</p>
+<p>步骤解析</p>
+<ol>
+<li>针对每个学生</li>
+</ol>
+<p>对于 students 表中的每一行（每个学生），子查询会执行：</p>
+<p>SELECT 1 FROM enrollments e WHERE e.student<sub>id</sub> = s.id</p>
+<p>这个子查询的目的是查找 enrollments 表中是否存在与当前学生 s.id
+相匹配的记录。</p>
+<ol>
+<li>子查询返回的结果</li>
+</ol>
+<p>• 对于 Alice (id = 1)： 子查询会查找 enrollments 表中
+student<sub>id</sub> = 1 的记录。我们发现有两条记录（Math 和
+Physics），因此子查询返回至少一行数据，EXISTS 为真，NOT EXISTS
+为假，Alice 不会被选中。 • 对于 Bob (id = 2)： 子查询查找
+student<sub>id</sub> = 2
+的记录，有一条记录（Chemistry）。同样，子查询返回至少一行数据，所以 Bob
+不会被选中。 • 对于 Charlie (id = 3)： 子查询查找 student<sub>id</sub> =
+3 的记录，但在 enrollments
+表中没有找到任何记录，因此子查询返回空结果集。此时，EXISTS 为假，NOT
+EXISTS 为真，Charlie 会被选中。</p>
+<ol>
+<li>为什么写 SELECT 1？</li>
+</ol>
+<p>在 EXISTS 或 NOT EXISTS
+子句中，数据库只关心子查询是否返回了任何记录，而不在乎返回的具体内容。 •
+使用 SELECT 1
+表示只返回一个常量，这种写法简洁且明确表达了“只关心存在性”的意图。 •
+同样效果的写法还有 SELECT * 或 SELECT NULL，但习惯上更推荐使用 SELECT
+1。</p>
+<p>最终结果</p>
+<p>执行这条 SQL 查询后，返回的结果只有 Charlie 这条记录，因为只有
+Charlie 没有在 enrollments 表中找到对应的记录。</p>
+<h3 id="between-and">between and</h3>
+<p>上面的语句是针对的是离散变量，如果变量是连续变量，那么就需要用到
+between and 了。</p>
+<div class="sourceCode" id="cb54"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>sqldf(<span class="ot">&quot;select * from mtcars where wt between 3 and 4&quot;</span>)</span></code></pre></div>
+<p>还能进一步显示行名，</p>
+<div class="sourceCode" id="cb55" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&quot;select * from mtcars where wt between 3 and 4&quot;</span>, <span class="at">row.names =</span> T)</span></code></pre></div>
+<p>python 的 sql 语句中 between 是左闭右开。</p>
+<p>R 语句为</p>
+<div class="sourceCode" id="cb56" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">filter</span>(wt <span class="sc">%&gt;%</span> <span class="fu">between</span>(<span class="dv">3</span>,<span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb57" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&#39;select Abbr, avg(&quot;Sepal.Length&quot;)  from iris where Species in (&#39;&#39;,&#39;&#39;) by Species&#39;</span>)</span></code></pre></div>
+<h3 id="not-between-and">not between and</h3>
+<p>Number is not within range of two values (inclusive)
+不在2个数之间。</p>
+<div class="sourceCode" id="cb58"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>sqldf(<span class="ot">&quot;select * from mtcars where wt not between 3 and 4&quot;</span>, <span class="kw">row</span>.names <span class="op">=</span> T)</span></code></pre></div>
+<h3 id="unionunion-all">union/union all</h3>
+<p>数据集的合并，类似于 R 中的 rbind.</p>
+<div class="sourceCode" id="cb59" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&quot;select * from a1 union all select * from a2&quot;</span>)</span></code></pre></div>
+<p>必须注意 union 与 union all 之间的区别。union all 是不去重，union
+是去重。</p>
+<div class="sourceCode" id="cb60" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&quot;select count(*) from (</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="st">select * from iris</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="st">union all</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="st">select * from iris</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="st">)&quot;</span>)</span></code></pre></div>
+<h2 id="null">null</h2>
+<p>空值，这块需要注意的点就是 is not null/ is null</p>
+<p>null 不被匹配！</p>
+<div class="note">
+<div class="title">
+<p>Note</p>
+</div>
+<p>在 SQL 中，LIKE 操作符用于模式匹配，而通配符 %
+表示匹配任意长度的任意字符组合。例如，prod<sub>name</sub> LIKE '%'
+意味着匹配所有包含任意字符的非空字符串。
+但是，注意这里的“匹配”只针对有实际字符串值的记录，而不是 NULL。</p>
+<p>为什么 NULL 不被匹配？</p>
+<ol>
+<li>NULL 的含义</li>
+</ol>
+<p>在 SQL 中，NULL
+表示“未知”或“缺失”的值，并不是一个空字符串。它代表数据不存在，而不是一个可比较的字符值。</p>
+<ol>
+<li>比较结果为 UNKNOWN</li>
+</ol>
+<p>当你使用 LIKE 进行比较时，如果某个列的值是 NULL，则任何与 NULL
+的比较都会返回 NULL（也就是逻辑上的 UNKNOWN），而不是 TRUE。 例如：</p>
+<p>NULL LIKE '%'</p>
+<p>结果不是 TRUE，而是 NULL。在 WHERE 子句中，只有返回 TRUE
+的记录会被选中，因此 NULL 的记录会被忽略。</p>
+<ol>
+<li>简单数据示例说明</li>
+</ol>
+<p>假设有一个表 products 如下：</p>
+<p>prod<sub>id</sub> prod<sub>name</sub> 1 Apple 2 Banana 3 (NULL)</p>
+<p>当你执行如下查询：</p>
+<p>SELECT * FROM products WHERE prod<sub>name</sub> LIKE '%';</p>
+<p>• 对于 prod<sub>id</sub> 为 1 的记录，'Apple' LIKE '%' 返回
+TRUE，因此这行会被选中。 • 对于 prod<sub>id</sub> 为 2 的记录，'Banana'
+LIKE '%' 返回 TRUE，因此这行也会被选中。 • 对于 prod<sub>id</sub> 为 3
+的记录，NULL LIKE '%' 返回 NULL（即 UNKNOWN），因此这行不会被选中。</p>
+<p>总结</p>
+<p>虽然 % 通配符在字符串匹配中能匹配任意字符，但它无法“匹配”
+NULL。如果你想专门查找 NULL 值，需要使用 IS NULL 条件，而不是 LIKE。</p>
+</div>
+<h2 id="通配符">通配符</h2>
+<p>在 SQL 中，方括号 []
+通配符用于定义一个字符集，这个字符集指定了可以匹配的位置字符。使用 []
+可以指定一个范围或一组字符，只有当某个字符匹配该集合中的字符时，条件才会成立。</p>
+<p>方括号 ([]) 的基本用法：</p>
+<ol>
+<li>字符集匹配</li>
+</ol>
+<p>方括号 []
+中可以列出一个或多个字符，表示可以匹配的字符范围或集合。例如，[abc]
+会匹配 ‘a’、‘b’ 或 ‘c’ 中的任何一个字符。</p>
+<ol>
+<li>字符范围</li>
+</ol>
+<p>如果在方括号中使用连字符 -，可以表示一个字符的范围。例如，[a-z]
+表示小写字母中的任何一个字符，[0-9] 表示数字中的任何一个。</p>
+<ol>
+<li>否定字符集</li>
+</ol>
+<p>如果使用 ^ 或 !
+在方括号的开头，它表示一个否定字符集，即匹配不在指定集合中的字符。例如，[<sup>0</sup>-9]
+会匹配非数字字符。</p>
+<ol>
+<li>举例说明</li>
+</ol>
+<p>以下是一些常见的例子：</p>
+<p>示例 1：匹配以字母 M 或 ] 开头的名字</p>
+<p>假设我们有一个 contacts 表，包含 name 字段，查询所有名字以 M 或 ]
+开头的联系人。</p>
+<p>SELECT * FROM contacts WHERE name LIKE '[M]%' OR name LIKE
+'[}]%';</p>
+<p>在这个查询中，[M] 匹配以 M 开头的名字，[}] 匹配以 ]
+开头的名字。这里，方括号的作用是指定我们要匹配的字符集——要么是 M，要么是
+]。</p>
+<p>示例 2：匹配以数字或字母开头的名字</p>
+<p>如果我们希望查找名字以数字或字母开头的联系人：</p>
+<p>SELECT * FROM contacts WHERE name LIKE '[0-9]%' OR name LIKE
+'[a-zA-Z]%';</p>
+<p>• [0-9] 匹配任何数字（0 到 9）。 • [a-zA-Z]
+匹配任何字母（大小写都可以）。</p>
+<p>这个查询将返回所有名字以数字或字母开头的联系人。</p>
+<p>示例 3：匹配不以数字开头的名字</p>
+<p>如果我们想排除那些名字以数字开头的联系人，可以使用否定字符集：</p>
+<p>SELECT * FROM contacts WHERE name LIKE '[<sup>0</sup>-9]%';</p>
+<p>这个查询使用 [<sup>0</sup>-9]
+来排除以数字开头的名字，匹配所有名字以非数字字符开头的联系人。</p>
+<p>注意：并不是所有 DBMS 都支持方括号 [] 作为字符集</p>
+<p>如你所提到的，方括号 []
+用来定义字符集并不是所有数据库管理系统（DBMS）都支持的，特别是在一些数据库中，这种用法可能不可用。通常，微软的
+SQL Server 和 Access 是支持这种语法的。</p>
+<p>总结 • 方括号 [] 用来定义字符集，并要求匹配某个位置上的字符。 •
+它可以用来表示一个范围（如 [a-z]），列举多个字符（如
+[abc]），或否定某些字符（如 [<sup>0</sup>-9]）。 • 在一些 DBMS（如 SQL
+Server 和
+Access）中，方括号用法是支持的，但其他一些数据库可能不支持这一特性。</p>
+<h2 id="concat">concat</h2>
+<p>数据链接需要用到的命令是Concat.</p>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> name, <span class="fu">concat</span>(url,<span class="st">&#39;,&#39;</span>,alexa,<span class="st">&#39;,&#39;</span>,country) <span class="kw">AS</span> site_info <span class="kw">from</span> websites</span></code></pre></div>
+<h2 id="ordering-and-limiting">ordering and limiting</h2>
+<p>数据排序。order by var desc 降序排列；order by var asc 升序排列。</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasets)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sqldf)</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: gsubfn</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: proto</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Loading required package: RSQLite</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&#39;select * from iris order by &quot;Sepal.Length&quot; desc limit 3&#39;</span>)</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          7.9         3.8          6.4         2.0 virginica</span></span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          7.7         3.8          6.7         2.2 virginica</span></span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          7.7         2.6          6.9         2.3 virginica</span></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Sepal.Length)) <span class="sc">%&gt;%</span></span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span></span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1          7.9         3.8          6.4         2.0 virginica</span></span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2          7.7         3.8          6.7         2.2 virginica</span></span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3          7.7         2.6          6.9         2.3 virginica</span></span></code></pre></div>
+<h2 id="averaging-and-grouping">Averaging and Grouping</h2>
+<p>这个就属于 summarise 范畴啦。</p>
+<div class="sourceCode" id="cb63" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&#39;select Species, avg(&quot;Sepal.Length&quot;) from iris group by Species&#39;</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      Species avg(&quot;Sepal.Length&quot;)</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1     setosa               5.006</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 versicolor               5.936</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  virginica               6.588</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(Species, Sepal.Length) <span class="sc">%&gt;%</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="fu">mean</span>(Sepal.Length))</span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 x 2</span></span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Species    `mean(Sepal.Length)`</span></span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;fct&gt;                     &lt;dbl&gt;</span></span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 setosa                     5.01</span></span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 versicolor                 5.94</span></span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 virginica                  6.59</span></span></code></pre></div>
+<h2 id="nested-select">nested select</h2>
+<p>这一块暂时还没搞明白。For each Species, find the average Sepal Length
+among those rows where Sepal Length exceeds the average Sepal Length for
+that Species.</p>
+<div class="sourceCode" id="cb64"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>sqldf(<span class="ot">&quot;select iris.Species &#39;[Species]&#39;,</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">avg</span>(\<span class="ot">&quot;Sepal.Length\&quot;</span>) <span class="st">&#39;[Avg of SLs &gt; avg SL]&#39;</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> iris,</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>(<span class="kw">select</span> Species, <span class="fu">avg</span>(\<span class="ot">&quot;Sepal.Length\&quot;</span>) SLavg</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> iris <span class="kw">group</span> <span class="kw">by</span> Species) SLavg</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> iris.Species <span class="op">=</span> SLavg.Species</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="kw">and</span> \<span class="ot">&quot;Sepal.Length\&quot;</span> <span class="op">&gt;</span> SLavg</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a><span class="kw">group</span> <span class="kw">by</span> iris.Species<span class="ot">&quot;)</span></span></code></pre></div>
+<p>上面的 sql 语句等价于下面</p>
+<div class="sourceCode" id="cb65" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(Sepal.Length <span class="sc">~</span> Species, iris, <span class="cf">function</span>(x) <span class="fu">mean</span>(x[x <span class="sc">&gt;</span> <span class="fu">mean</span>(x)]))</span></code></pre></div>
+<p>请过滤出每组记录大于该组均值的记录。</p>
+<div class="sourceCode" id="cb66"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>Emp <span class="op">&lt;-</span> <span class="kw">data</span>.frame(emp <span class="op">=</span> letters[<span class="dv">1</span><span class="ch">:24</span>], salary <span class="op">=</span> <span class="dv">1</span><span class="ch">:24</span>, dept <span class="op">=</span> rep(c(<span class="ot">&quot;A&quot;</span>, <span class="ot">&quot;B&quot;</span>, <span class="ot">&quot;C&quot;</span>), <span class="kw">each</span> <span class="op">=</span> <span class="dv">8</span>))</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>sqldf(<span class="ot">&quot;SELECT *</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Emp <span class="kw">AS</span> e1</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> salary <span class="op">&gt;</span> (<span class="kw">SELECT</span> <span class="fu">avg</span>(salary)</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Emp</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> dept <span class="op">=</span> e1.dept)<span class="ot">&quot;)</span></span></code></pre></div>
+<p>等价于以下 R 语言</p>
+<div class="sourceCode" id="cb67" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>Emp<span class="sc">$</span>ave_salary <span class="ot">=</span> <span class="fu">ave</span>(Emp<span class="sc">$</span>salary, Emp<span class="sc">$</span>dept)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>Emp <span class="sc">%&gt;%</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(salary <span class="sc">&gt;</span> ave_salary)</span></code></pre></div>
+<h2 id="join">join</h2>
+<p>数据连接方式，R and SQL 不同的地方。</p>
+<table>
+<tbody>
+<tr>
+<td>R</td>
+<td>SQL</td>
+</tr>
+<tr>
+<td>inner<sub>join</sub>()</td>
+<td>SELECT * FROM x JOIN y ON x.a = y.a</td>
+</tr>
+<tr>
+<td>left<sub>join</sub>()</td>
+<td>SELECT * FROM x LEFT JOIN y ON x.a = y.a</td>
+</tr>
+<tr>
+<td>right<sub>join</sub>()</td>
+<td>SELECT * FROM x RIGHT JOIN y ON x.a = y.a</td>
+</tr>
+<tr>
+<td>full<sub>join</sub>()</td>
+<td>SELECT * FROM x FULL JOIN y ON x.a = y.a</td>
+</tr>
+<tr>
+<td>semi<sub>join</sub>()</td>
+<td>SELECT * FROM x WHERE EXISTS (SELECT 1 FROM y WHERE x.a = y.a)</td>
+</tr>
+<tr>
+<td>anti<sub>join</sub>()</td>
+<td>SELECT * FROM x WHERE NOT EXISTS (SELECT 1 FROM y WHERE x.a =
+y.a)</td>
+</tr>
+<tr>
+<td>intersect(x, y)</td>
+<td>SELECT * FROM x INTERSECT SELECT * FROM y</td>
+</tr>
+<tr>
+<td>union(x, y)</td>
+<td>SELECT * FROM x UNION SELECT * FROM y</td>
+</tr>
+<tr>
+<td>setdiff(x, y)</td>
+<td>SELECT * FROM x EXCEPT SELECT * FROM y</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb68" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>Abbr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Species =</span> <span class="fu">levels</span>(iris<span class="sc">$</span>Species),</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Abbr =</span> <span class="fu">c</span>(<span class="st">&quot;S&quot;</span>, <span class="st">&quot;Ve&quot;</span>, <span class="st">&quot;Vi&quot;</span>))</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&#39;select Abbr, avg(&quot;Sepal.Length&quot;) from iris natural join Abbr group by Species&#39;</span>)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Abbr avg(&quot;Sepal.Length&quot;)</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    S               5.006</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   Ve               5.936</span></span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   Vi               6.588</span></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">inner_join</span>(Abbr, <span class="at">by =</span> <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="fu">mean</span>(Sepal.Length))</span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>                                     <span class="co">#&gt; Warning: Column `Species` joining factor and character vector, coercing</span></span>
+<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a>                                     <span class="co">#&gt; into character vector</span></span>
+<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a>                                     <span class="co">#&gt; # A tibble: 3 x 2</span></span>
+<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a>                                     <span class="co">#&gt;   Species    `mean(Sepal.Length)`</span></span>
+<span id="cb68-18"><a href="#cb68-18" aria-hidden="true" tabindex="-1"></a>                                     <span class="co">#&gt;   &lt;chr&gt;                     &lt;dbl&gt;</span></span>
+<span id="cb68-19"><a href="#cb68-19" aria-hidden="true" tabindex="-1"></a>                                     <span class="co">#&gt; 1 setosa                     5.01</span></span>
+<span id="cb68-20"><a href="#cb68-20" aria-hidden="true" tabindex="-1"></a>                                     <span class="co">#&gt; 2 versicolor                 5.94</span></span>
+<span id="cb68-21"><a href="#cb68-21" aria-hidden="true" tabindex="-1"></a>                                     <span class="co">#&gt; 3 virginica                  6.59</span></span></code></pre></div>
+<div class="sourceCode" id="cb69" data-org-language="R"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>SNP1x <span class="ot">&lt;-</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">Animal =</span> <span class="fu">c</span>(<span class="dv">194073197</span><span class="dt">L</span>, <span class="dv">194073197</span><span class="dt">L</span>, <span class="dv">194073197</span><span class="dt">L</span>,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                            <span class="dv">194073197</span><span class="dt">L</span>, <span class="dv">194073197</span><span class="dt">L</span>), <span class="at">Marker =</span> <span class="fu">structure</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">.Label =</span> <span class="fu">c</span>(<span class="st">&quot;P1001&quot;</span>,</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>                                                                                        <span class="st">&quot;P1002&quot;</span>, <span class="st">&quot;P1004&quot;</span>, <span class="st">&quot;P1005&quot;</span>, <span class="st">&quot;P1006&quot;</span>, <span class="st">&quot;P1007&quot;</span>), <span class="at">class =</span> <span class="st">&quot;factor&quot;</span>),</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="dt">L</span>, <span class="dv">1</span><span class="dt">L</span>, <span class="dv">2</span><span class="dt">L</span>, <span class="dv">0</span><span class="dt">L</span>, <span class="dv">2</span><span class="dt">L</span>)), <span class="at">.Names =</span> <span class="fu">c</span>(<span class="st">&quot;Animal&quot;</span>, <span class="st">&quot;Marker&quot;</span>,</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>                                                        <span class="st">&quot;x&quot;</span>), <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">&quot;3213&quot;</span>, <span class="st">&quot;1295&quot;</span>, <span class="st">&quot;915&quot;</span>, <span class="st">&quot;2833&quot;</span>, <span class="st">&quot;1487&quot;</span>), <span class="at">class =</span> <span class="st">&quot;data.frame&quot;</span>)</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>SNP4 <span class="ot">&lt;-</span></span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">Animal =</span> <span class="fu">c</span>(<span class="dv">194073197</span><span class="dt">L</span>, <span class="dv">194073197</span><span class="dt">L</span>, <span class="dv">194073197</span><span class="dt">L</span>,</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>                            <span class="dv">194073197</span><span class="dt">L</span>, <span class="dv">194073197</span><span class="dt">L</span>, <span class="dv">194073197</span><span class="dt">L</span>), <span class="at">Marker =</span> <span class="fu">structure</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">.Label =</span> <span class="fu">c</span>(<span class="st">&quot;P1001&quot;</span>,</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>                                                                                                    <span class="st">&quot;P1002&quot;</span>, <span class="st">&quot;P1004&quot;</span>, <span class="st">&quot;P1005&quot;</span>, <span class="st">&quot;P1006&quot;</span>, <span class="st">&quot;P1007&quot;</span>), <span class="at">class =</span> <span class="st">&quot;factor&quot;</span>),</span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">Y =</span> <span class="fu">c</span>(<span class="fl">0.021088</span>, <span class="fl">0.021088</span>, <span class="fl">0.021088</span>, <span class="fl">0.021088</span>, <span class="fl">0.021088</span>, <span class="fl">0.021088</span></span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>                 )), <span class="at">.Names =</span> <span class="fu">c</span>(<span class="st">&quot;Animal&quot;</span>, <span class="st">&quot;Marker&quot;</span>, <span class="st">&quot;Y&quot;</span>), <span class="at">class =</span> <span class="st">&quot;data.frame&quot;</span>, <span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">&quot;3213&quot;</span>,</span>
+<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a>                                                                                              <span class="st">&quot;1295&quot;</span>, <span class="st">&quot;915&quot;</span>, <span class="st">&quot;2833&quot;</span>, <span class="st">&quot;1487&quot;</span>, <span class="st">&quot;1885&quot;</span>))</span>
+<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&quot;select * from SNP4 left join SNP1x using (Animal, Marker) limit 5&quot;</span>)</span>
+<span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      Animal Marker       Y x</span></span>
+<span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 194073197  P1001 0.02109 2</span></span>
+<span id="cb69-18"><a href="#cb69-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 194073197  P1002 0.02109 1</span></span>
+<span id="cb69-19"><a href="#cb69-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 194073197  P1004 0.02109 2</span></span>
+<span id="cb69-20"><a href="#cb69-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 194073197  P1005 0.02109 0</span></span>
+<span id="cb69-21"><a href="#cb69-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 194073197  P1006 0.02109 2</span></span></code></pre></div>
+<h2 id="innerjoin">inner<sub>join</sub></h2>
+<p>在 flights 数据集中，对 year,group 进行分组，筛选出大于均值
+dep<sub>time</sub> 的记录。</p>
+<div class="sourceCode" id="cb70" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year,month) <span class="sc">%&gt;%</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(dep_time) <span class="sc">%&gt;%</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">inner_join</span>(flights <span class="sc">%&gt;%</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>               <span class="fu">group_by</span>(year,month) <span class="sc">%&gt;%</span></span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">summarise</span>(<span class="fu">mean</span>(dep_time))) <span class="sc">%&gt;%</span></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(dep_time <span class="sc">&gt;</span> <span class="st">`</span><span class="at">mean(dep_time)</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>SQL<span class="op">&gt;</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> (<span class="kw">SELECT</span> `LHS`.`year` <span class="kw">AS</span> `year`, `LHS`.`month` <span class="kw">AS</span> `month`, `LHS`.`dep_time` <span class="kw">AS</span> `dep_time`, `RHS`.`mean(dep_time)` <span class="kw">AS</span> `mean(dep_time)`</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> (<span class="kw">SELECT</span> `year`, `month`, `dep_time`</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `nycflights13:<span class="ch">:flights</span>`) <span class="kw">AS</span> `LHS`</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> (<span class="kw">SELECT</span> `year`, `month`, <span class="fu">AVG</span>(`dep_time`) <span class="kw">AS</span> `mean(dep_time)`</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `nycflights13:<span class="ch">:flights</span>`</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> `year`, `month`) <span class="kw">AS</span> `RHS`</span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> (`LHS`.`year` <span class="op">=</span> `RHS`.`year` <span class="kw">AND</span> `LHS`.`month` <span class="op">=</span> `RHS`.`month`)</span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> (`dep_time` <span class="op">&gt;</span> `mean(dep_time)`)</span></code></pre></div>
+<p>查询所有学生的 sname，cno，degree 列</p>
+<div class="sourceCode" id="cb72"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> SNAME,CNO,<span class="kw">DEGREE</span> <span class="kw">from</span> (<span class="kw">select</span> SNAME, SNO <span class="kw">from</span> STUDENT) <span class="kw">as</span> A</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="kw">inner</span> <span class="kw">join</span> (<span class="kw">select</span> SNO, CNO, <span class="kw">DEGREE</span> <span class="kw">from</span>  SCORE) <span class="kw">as</span> B</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="kw">on</span> A.SNO <span class="op">=</span> B.SNO</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> SNO,CNAME,<span class="kw">DEGREE</span> <span class="kw">from</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">select</span> CNO, CNAME <span class="kw">from</span> COURSE) <span class="kw">AS</span> A</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="kw">inner</span> <span class="kw">join</span> (<span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> SCORE) <span class="kw">AS</span> B</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="kw">on</span> A.CNO <span class="op">=</span> B.CNO</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> SNAME, CNO, <span class="kw">DEGREE</span> <span class="kw">from</span> (<span class="kw">select</span>  SNAME,SNO <span class="kw">from</span> STUDENT) <span class="kw">as</span> A</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="kw">join</span> (<span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> SCORE) <span class="kw">as</span> B</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="kw">on</span> A.SNO <span class="op">=</span> B.SNO</span></code></pre></div>
+<p>在SQL中，默认的 `JOIN` 是 `INNER JOIN`。这意味着如果你仅仅使用 `JOIN`
+关键字而不指定类型，SQL引擎会自动将其解释为 `INNER JOIN`。</p>
+<p>### INNER JOIN `INNER JOIN`
+会返回两个表中所有匹配的行。如果某一行在其中一个表中没有匹配项，那么该行将不会出现在结果集中。</p>
+<p>### LEFT JOIN `LEFT JOIN`（或 `LEFT OUTER
+JOIN`）会返回左表中的所有行，即使在右表中没有匹配项。对于那些没有匹配项的右表行，将会返回
+`NULL`。</p>
+<p>### 示例解释</p>
+<p>#### 使用 INNER JOIN</p>
+<p>```sql SELECT table1.column1, table1.column2, table2.column1,
+table2.column2 FROM table1 JOIN table2 ON table1.common<sub>column</sub>
+= table2.common<sub>column</sub>; ```</p>
+<p>这个查询等同于：</p>
+<p>```sql SELECT table1.column1, table1.column2, table2.column1,
+table2.column2 FROM table1 INNER JOIN table2 ON
+table1.common<sub>column</sub> = table2.common<sub>column</sub>; ```</p>
+<p>#### 使用 LEFT JOIN</p>
+<p>```sql SELECT table1.column1, table1.column2, table2.column1,
+table2.column2 FROM table1 LEFT JOIN table2 ON
+table1.common<sub>column</sub> = table2.common<sub>column</sub>; ```</p>
+<p>### 例子</p>
+<p>假设有两个表，`employees` 和 `departments`。</p>
+<p>#### 表 employees</p>
+<table>
+<thead>
+<tr>
+<th>employee<sub>id</sub></th>
+<th>name</th>
+<th>department<sub>id</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>John</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Jane</td>
+<td>20</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Alice</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>#### 表 departments</p>
+<table>
+<thead>
+<tr>
+<th>department<sub>id</sub></th>
+<th>department<sub>name</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Finance</td>
+</tr>
+</tbody>
+</table>
+<p>#### INNER JOIN 查询</p>
+<p>```sql SELECT employees.name, departments.department<sub>name</sub>
+FROM employees JOIN departments ON employees.department<sub>id</sub> =
+departments.department<sub>id</sub>; ```</p>
+<p>结果集：</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>department<sub>name</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>John</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Jane</td>
+<td>Finance</td>
+</tr>
+</tbody>
+</table>
+<p>#### LEFT JOIN 查询</p>
+<p>```sql SELECT employees.name, departments.department<sub>name</sub>
+FROM employees LEFT JOIN departments ON
+employees.department<sub>id</sub> = departments.department<sub>id</sub>;
+```</p>
+<p>结果集：</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>department<sub>name</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>John</td>
+<td>HR</td>
+</tr>
+<tr>
+<td>Jane</td>
+<td>Finance</td>
+</tr>
+<tr>
+<td>Alice</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<p>在这个例子中，`INNER JOIN` 仅返回两个表中都有匹配项的行，而 `LEFT
+JOIN`
+返回左表中所有行，即使右表中没有匹配项，也会显示这些行并在右表列中填充
+`NULL`。</p>
+<h2 id="distinct">distinct</h2>
+<p>选取出唯一的结果的语法.</p>
+<h2 id="插入变量">插入变量</h2>
+<p>用$ 可以插入变量。</p>
+<div class="sourceCode" id="cb75" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>minSL <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>limit <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>species <span class="ot">&lt;-</span> <span class="st">&quot;virginica&quot;</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>fn<span class="sc">$</span><span class="fu">sqldf</span>(<span class="st">&quot;select * from iris where </span><span class="sc">\&quot;</span><span class="st">Sepal.Length</span><span class="sc">\&quot;</span><span class="st"> &gt; $minSL and species = &#39;$species&#39; limit $limit&quot;</span>)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span></span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">#&gt; 1          7.1         3.0          5.9         2.1 virginica</span></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">#&gt; 2          7.6         3.0          6.6         2.1 virginica</span></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">#&gt; 3          7.3         2.9          6.3         1.8 virginica</span></span></code></pre></div>
+<h2 id="case-when">case when</h2>
+<p>计算25岁以上和以下的用户数量。</p>
+<div class="sourceCode" id="cb76"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> </span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>age_cut, <span class="fu">count</span>(age_cut) <span class="kw">as</span> <span class="dt">number</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>(<span class="kw">select</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="cf">when</span> </span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>(age <span class="op">&gt;=</span> <span class="dv">25</span>) <span class="cf">then</span> (<span class="st">&#39;25岁及以上&#39;</span>)</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="cf">when</span> <span class="kw">not</span> (age <span class="op">&gt;=</span> <span class="dv">25</span>) <span class="kw">or</span> (age <span class="kw">is</span> <span class="kw">null</span>) <span class="cf">then</span> (<span class="st">&#39;25岁以下&#39;</span>)</span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span> <span class="kw">as</span>  age_cut</span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> user_profile) a</span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="kw">group</span> <span class="kw">by</span></span>
+<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a>age_cut</span></code></pre></div>
+<h2 id="coalesce">coalesce</h2>
+<p>COALESCE 和 nvl 是不是一个意思？ ``` 是的，`COALESCE` 和 `NVL`
+在功能上非常相似，但有一些细微的差别：</p>
+<ol>
+<li><p>`NVL` 是 Oracle 特有的函数，而 `COALESCE` 是 SQL
+标准函数，在多种数据库系统中都可以使用。</p></li>
+<li><p>`NVL` 只接受两个参数，而 `COALESCE`
+可以接受两个或更多参数。</p></li>
+<li><p>`NVL` 的语法是： ```sql NVL(expr1, expr2) ``` 如果 expr1 为
+NULL，则返回 expr2，否则返回 expr1。</p></li>
+<li><p>`COALESCE` 的语法是： ```sql COALESCE(expr1, expr2, …, exprn) ```
+它返回参数列表中第一个非 NULL 的表达式。如果所有参数都为 NULL，则返回
+NULL。</p></li>
+</ol>
+<p>在大多数情况下，当只需要处理两个表达式时，`NVL` 和 `COALESCE`
+可以互换使用。例如：</p>
+<p>```sql NVL(expr1, expr2) ```</p>
+<p>等同于</p>
+<p>```sql COALESCE(expr1, expr2) ```</p>
+<p>但是，`COALESCE` 更灵活，因为它可以处理多个表达式：</p>
+<p>```sql COALESCE(expr1, expr2, expr3, expr4) ```</p>
+<p>这相当于嵌套的 `NVL` 函数：</p>
+<p>```sql NVL(NVL(NVL(expr1, expr2), expr3), expr4) ```</p>
+<p>在您提供的代码中，使用 `COALESCE` 替换 `NVL`
+是一个很好的选择，特别是在处理多个可能的 NULL
+值时。这样做可以使代码更具可读性和可移植性。</p>
+<h2 id="summarise">summarise</h2>
+<h3 id="count">count</h3>
+<p>计数 select count(class) as ct from STUDENT where class = "abc"</p>
+<div class="sourceCode" id="cb77" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&quot;select count(*) from iris&quot;</span>)</span></code></pre></div>
+<h3 id="meanvar">mean/var</h3>
+<div class="sourceCode" id="cb78" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqldf</span>(<span class="st">&quot;select avg(demand) mean, variance(demand) var from BOD&quot;</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a> <span class="co">#&gt;    mean   var</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="co">#&gt; 1 14.83 21.44</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> SNAME, <span class="kw">DEGREE</span> <span class="kw">from</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">select</span> SNO,SNAME,<span class="kw">CLASS</span> <span class="kw">from</span> STUDENT) <span class="kw">as</span> A</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="kw">join</span> (<span class="kw">select</span> <span class="op">*</span> <span class="kw">from</span> SCORE) <span class="kw">as</span> B</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="kw">on</span> A.SNO <span class="op">=</span> B.SNO <span class="kw">where</span> <span class="kw">CLASS</span> <span class="op">=</span> <span class="ot">&quot;95033&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb80" data-org-language="R"
+data-results="output graphics" data-file="fig_1.png"
+data-exports="both"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(year,month) <span class="sc">%&gt;%</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">mean</span>(dep_time)) <span class="sc">%&gt;%</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">show_query</span>()</span></code></pre></div>
+<p>上面 dplyr 语句 sql 写法是：</p>
+<pre><code>    &lt;SQL&gt;
+SELECT `year`, `month`, AVG(`dep_time`) AS `mean(dep_time)`
+FROM `nycflights13::flights`
+GROUP BY `year`, `month`
+</code></pre>
+<h3 id="having">having</h3>
+<p>在sql 语句中，一般起到过滤的作用。</p>
+<div class="sourceCode" id="cb82"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>#现在运营想查看每个学校用户的平均发贴和回帖情况，寻找低活跃度学校进行重点运营，请取出平均发贴数低于5的学校或平均回帖数小于20的学校。</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> university, <span class="fu">avg</span>(question_cnt) <span class="kw">as</span> avg_question_cnt,</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="fu">avg</span>(answer_cnt) <span class="kw">as</span> avg_answer_cnt <span class="kw">from</span> user_profile <span class="kw">group</span> <span class="kw">by</span> university <span class="kw">having</span> <span class="fu">avg</span>(question_cnt) <span class="op">&lt;</span> <span class="dv">5</span> <span class="kw">or</span> <span class="fu">avg</span>(answer_cnt) <span class="op">&lt;</span> <span class="dv">20</span></span></code></pre></div>
+<h2 id="sqlite3">sqlite3</h2>
+<p>这个 python 包可以处理 sql 语句。</p>
+<div class="sourceCode" id="cb83" data-results="output"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;/home/tonylu/learn/sql/test.db&#39;</span>)</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> conn.cursor()</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>c.execute(<span class="st">&#39;&#39;&#39;CREATE TABLE SCORE</span></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="st">       (ID INT PRIMARY KEY     NOT NULL,</span></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="st">       NAME           TEXT    NOT NULL,</span></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="st">       COURSE            TEXT     NOT NULL,</span></span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a><span class="st">       SCORE        INT);&#39;&#39;&#39;</span>)</span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;数据表创建成功&quot;</span>)</span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>conn.commit()</span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>conn.close()</span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> sqlite3.<span class="ex">connect</span>(<span class="st">&#39;/home/tonylu/learn/sql/test.db&#39;</span>)</span>
+<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> conn.cursor()</span>
+<span id="cb83-16"><a href="#cb83-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;数据库打开成功&quot;</span>)</span>
+<span id="cb83-17"><a href="#cb83-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-18"><a href="#cb83-18" aria-hidden="true" tabindex="-1"></a>c.execute(<span class="st">&quot;INSERT INTO SCORE (ID,NAME,COURSE,SCORE) </span><span class="op">\</span></span>
+<span id="cb83-19"><a href="#cb83-19" aria-hidden="true" tabindex="-1"></a><span class="st">      VALUES (1, &#39;Paul&#39;, &#39;Math&#39;, 98)&quot;</span>)</span>
+<span id="cb83-20"><a href="#cb83-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-21"><a href="#cb83-21" aria-hidden="true" tabindex="-1"></a>c.execute(<span class="st">&quot;INSERT INTO SCORE (ID,NAME,COURSE,SCORE) </span><span class="op">\</span></span>
+<span id="cb83-22"><a href="#cb83-22" aria-hidden="true" tabindex="-1"></a><span class="st">      VALUES (2, &#39;Allen&#39;, &#39;MATH&#39;, 88)&quot;</span>)</span>
+<span id="cb83-23"><a href="#cb83-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-24"><a href="#cb83-24" aria-hidden="true" tabindex="-1"></a>c.execute(<span class="st">&quot;INSERT INTO SCORE (ID,NAME,COURSE,SCORE) </span><span class="op">\</span></span>
+<span id="cb83-25"><a href="#cb83-25" aria-hidden="true" tabindex="-1"></a><span class="st">      VALUES (3, &#39;Teddy&#39;, &#39;Computer&#39;, 91)&quot;</span>)</span>
+<span id="cb83-26"><a href="#cb83-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-27"><a href="#cb83-27" aria-hidden="true" tabindex="-1"></a>c.execute(<span class="st">&quot;INSERT INTO SCORE (ID,NAME,COURSE,SCORE) </span><span class="op">\</span></span>
+<span id="cb83-28"><a href="#cb83-28" aria-hidden="true" tabindex="-1"></a><span class="st">      VALUES (4, &#39;Mark&#39;, &#39;English&#39;, 71)&quot;</span>)</span>
+<span id="cb83-29"><a href="#cb83-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-30"><a href="#cb83-30" aria-hidden="true" tabindex="-1"></a>c.execute(<span class="st">&quot;INSERT INTO SCORE (ID,NAME,COURSE,SCORE) </span><span class="op">\</span></span>
+<span id="cb83-31"><a href="#cb83-31" aria-hidden="true" tabindex="-1"></a><span class="st">      VALUES (5, &#39;Mark&#39;, &#39;Computer&#39;, 87)&quot;</span>)</span>
+<span id="cb83-32"><a href="#cb83-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-33"><a href="#cb83-33" aria-hidden="true" tabindex="-1"></a>c.execute(<span class="st">&quot;INSERT INTO SCORE (ID,NAME,COURSE,SCORE) </span><span class="op">\</span></span>
+<span id="cb83-34"><a href="#cb83-34" aria-hidden="true" tabindex="-1"></a><span class="st">      VALUES (6, &#39;Allen&#39;, &#39;English&#39;, 73)&quot;</span>)</span>
+<span id="cb83-35"><a href="#cb83-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-36"><a href="#cb83-36" aria-hidden="true" tabindex="-1"></a>conn.commit()</span>
+<span id="cb83-37"><a href="#cb83-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">&quot;数据插入成功&quot;</span>)</span>
+<span id="cb83-38"><a href="#cb83-38" aria-hidden="true" tabindex="-1"></a>conn.close()</span>
+<span id="cb83-39"><a href="#cb83-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-40"><a href="#cb83-40" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> c.execute(<span class="st">&quot;select name from (select row_number() over(partition by name order by score) as rank, * from score) where rank=1 and score&gt;80&quot;</span>)</span>
+<span id="cb83-41"><a href="#cb83-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-42"><a href="#cb83-42" aria-hidden="true" tabindex="-1"></a><span class="co"># cursor = c.execute(&quot;select sum(score), name from score where name in (select name from (select row_number() over(partition by name order by score) as rank, * from score) where rank=1 and score&gt;80)&quot;)</span></span>
+<span id="cb83-43"><a href="#cb83-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-44"><a href="#cb83-44" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> c.execute(<span class="st">&quot;select sum(score) from score&quot;</span>)</span>
+<span id="cb83-45"><a href="#cb83-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-46"><a href="#cb83-46" aria-hidden="true" tabindex="-1"></a>cursor <span class="op">=</span> c.execute(<span class="st">&quot;select name from (select row_number() over(partition by name order by score) as rank, * from score) where rank=1 and score&gt;80&quot;</span>)</span>
+<span id="cb83-47"><a href="#cb83-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-48"><a href="#cb83-48" aria-hidden="true" tabindex="-1"></a>[i <span class="cf">for</span> i <span class="kw">in</span> cursor]</span>
+<span id="cb83-49"><a href="#cb83-49" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; [(&#39;Paul&#39;,), (&#39;Teddy&#39;,)]</span></span></code></pre></div>
+<h2 id="string-截取">string 截取</h2>
+<p>从左截取字符串。</p>
+<div class="sourceCode" id="cb84"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="kw">left</span>(SBIRTHDAY, <span class="dv">4</span>) <span class="kw">from</span> STUDENT <span class="kw">where</span> SNO <span class="op">=</span> <span class="ot">&quot;108&quot;</span></span></code></pre></div>
+</body>
+</html>
