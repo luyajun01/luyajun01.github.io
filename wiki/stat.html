@@ -17,107 +17,214 @@
 <div id="content">
 <h1 align="center">统计 Wiki</h1>
 
-<p class="wiki-note">这页先作为统计笔记的公开精选目录。原始 <code>stat_wiki.org</code>
-内容量很大，里面混有业务案例、个人化表达和未清洗的代码记录；这里先保留适合公开学习的主题骨架，后续再逐块整理成文章。</p>
+<p class="wiki-note">这页是统计笔记的公开精选版。原始 <code>stat_wiki.org</code>
+仍然保留为完整草稿；这里先把适合公开阅读的统计学主线整理成可读正文，业务化、个人化和未清洗代码暂不放入。</p>
 
 <div class="outline-2">
-<h2>整理原则</h2>
+<h2 id="quick-nav">快速导航</h2>
 <div class="outline-text-2">
 <ul class="org-ul">
-<li>只公开统计方法、数学概念和通用建模流程。</li>
-<li>业务、金融、风控、客户类例子先抽象化，再决定是否发布。</li>
-<li>去掉 AI 对话痕迹、临时 TODO、跑错代码和个人化表达。</li>
-<li>代码示例保留最小可复现版本，公式和文字解释保持一致。</li>
+<li><a href="#stat-learning">统计学习三要素</a></li>
+<li><a href="#probability">概率论与测度基础</a></li>
+<li><a href="#inference">指数族与充分统计量</a></li>
+<li><a href="#bayes">贝叶斯与经验贝叶斯</a></li>
+<li><a href="#regression">回归与正则化</a></li>
+<li><a href="#testing">统计检验与模型评估</a></li>
+<li><a href="#ml">机器学习方法</a></li>
+<li><a href="#causal">因果推断</a></li>
 </ul>
 </div>
 </div>
 
 <div class="outline-2">
-<h2>数学基础与概率论</h2>
+<h2 id="stat-learning">统计学习三要素</h2>
 <div class="outline-text-2">
-<ul class="org-ul">
-<li>拓扑空间、Borel 可测性、测度论。</li>
-<li>黎曼积分与勒贝格积分的差异。</li>
-<li>概率空间、事件空间、σ-代数、概率测度。</li>
-<li>独立性、同分布、条件独立、贝叶斯定理。</li>
-<li>收敛理论、大数定律、中心极限定理、Delta 方法。</li>
-<li>线性代数工具：Cholesky 分解、LU 分解、Gram-Schmidt 正交化、谱分解、SVD。</li>
-</ul>
+<p>统计学习可以先抓住三个问题：用什么模型描述数据，按什么准则判断模型好坏，以及用什么算法求出模型参数。对应起来就是模型、策略、算法。</p>
+
+<table>
+<thead>
+<tr><th>要素</th><th>要回答的问题</th><th>常见例子</th></tr>
+</thead>
+<tbody>
+<tr><td>模型</td><td>假设输入和输出之间有什么关系</td><td>线性模型、树模型、神经网络、半参数模型</td></tr>
+<tr><td>策略</td><td>怎样定义“好模型”</td><td>平方损失、对数损失、经验风险、结构风险</td></tr>
+<tr><td>算法</td><td>如何把模型真正求出来</td><td>最小二乘、梯度下降、坐标下降、EM、MCMC</td></tr>
+</tbody>
+</table>
+
+<p>理论上最自然的目标是最小化期望风险，也就是模型在真实数据分布下的平均损失：</p>
+<pre><code>R_exp(f) = E[L(Y, f(X))]</code></pre>
+<p>但真实联合分布通常不可知，所以实际建模会转向训练样本上的经验风险：</p>
+<pre><code>R_emp(f) = (1 / N) * sum L(y_i, f(x_i))</code></pre>
+<p>经验风险最小化容易理解，却可能过拟合；结构风险最小化会在损失外加入复杂度惩罚。Lasso、Ridge、Elastic Net 等正则化方法，本质上就是把“拟合得好”和“模型不要太复杂”放在一起权衡。</p>
+<p>分类问题通常不适合直接用平方损失作为核心训练目标。平方损失关心数值差距，而分类更关心正确类别的概率是否足够大。因此，交叉熵更常用于分类模型，它直接惩罚模型给真实类别分配的概率太低。</p>
 </div>
 </div>
 
 <div class="outline-2">
-<h2>统计推断</h2>
+<h2 id="probability">概率论与测度基础</h2>
 <div class="outline-text-2">
+<p>概率论的基础对象是概率空间，通常写成 <code>(Omega, F, P)</code>。其中 <code>Omega</code> 是样本空间，<code>F</code> 是事件集合，<code>P</code> 是给事件分配概率的函数。</p>
+
 <ul class="org-ul">
-<li>统计学习三要素：模型、策略、算法。</li>
-<li>指数分布族、Stein 恒等式、充分统计量。</li>
-<li>点估计、最大似然估计、经验贝叶斯。</li>
-<li>假设检验、P 值、t 检验、F 检验、卡方检验、K-S 检验、Shapiro-Wilk 检验。</li>
-<li>U 统计量、Edgeworth 展开、各种不等式。</li>
+<li><code>Omega</code>：随机试验所有可能结果的集合。例如抛硬币时，样本空间可以是 {正面, 反面}。</li>
+<li><code>F</code>：允许讨论概率的事件集合。它需要对补集、可数并等操作封闭，这就是 σ-代数的意义。</li>
+<li><code>P</code>：概率测度，把每个事件映射到 0 到 1 之间，并满足可数可加性。</li>
 </ul>
+
+<p>测度论的作用，是把“长度、面积、体积、概率”放在同一套语言里。黎曼积分按横轴切分区间，勒贝格积分按函数值切分集合。对于统计学而言，勒贝格积分更自然，因为期望本质上就是对随机变量按概率测度积分。</p>
+
+<p>常见收敛概念可以这样记：</p>
+<table>
+<thead>
+<tr><th>概念</th><th>直观含义</th><th>常见用途</th></tr>
+</thead>
+<tbody>
+<tr><td>依概率收敛</td><td>样本量增大后，估计量偏离真值的概率趋近于 0</td><td>一致性</td></tr>
+<tr><td>依分布收敛</td><td>随机变量的分布逐渐接近某个极限分布</td><td>中心极限定理</td></tr>
+<tr><td>几乎处处收敛</td><td>除概率为 0 的异常集合外都收敛</td><td>强大数定律</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
 <div class="outline-2">
-<h2>回归与统计建模</h2>
+<h2 id="inference">指数族与充分统计量</h2>
 <div class="outline-text-2">
+<p>许多重要分布都可以写成指数族形式，比如 Bernoulli、Binomial、Poisson、Normal、Gamma。一个常见写法是：</p>
+<pre><code>p(x | eta) = h(x) * exp(eta^T T(x) - A(eta))</code></pre>
+<p>这里 <code>eta</code> 是自然参数，<code>T(x)</code> 是统计量，<code>A(eta)</code> 负责归一化，<code>h(x)</code> 是基准测度项。指数族重要，是因为它把“分布形式、参数估计、充分统计量”联系到了一起。</p>
+
+<p>充分统计量的核心直觉是：如果一个统计量已经保留了估计参数所需的全部信息，那么知道原始样本的每个细节就不再必要。</p>
 <ul class="org-ul">
-<li>线性回归、决定系数、相关系数、复相关系数。</li>
-<li>Logistic 回归、LDA、GLM、GLMM、GAM。</li>
-<li>Cox 模型、生存函数、基准累积风险、Breslow 估计。</li>
-<li>正则化模型：Lasso、Adaptive Lasso、Elastic Net、Ridge、SCAD、MCP、Group Lasso。</li>
-<li>回归诊断、VIF、混杂因素、过拟合、模型校准。</li>
+<li>抛硬币 <code>n</code> 次估计正面概率 <code>p</code> 时，正面次数 <code>X</code> 是充分统计量。</li>
+<li>观察 <code>n</code> 天公交车到达次数，若每天次数服从 Poisson 分布，则总次数 <code>T = X_1 + ... + X_n</code> 是关于 <code>lambda</code> 的充分统计量。</li>
 </ul>
+<p>充分统计量的价值在于压缩数据而不丢失关于参数的信息。它是理解最大似然估计、指数族、Rao-Blackwell 化等内容的一条主线。</p>
 </div>
 </div>
 
 <div class="outline-2">
-<h2>机器学习方法</h2>
+<h2 id="bayes">贝叶斯与经验贝叶斯</h2>
 <div class="outline-text-2">
-<ul class="org-ul">
-<li>有监督模型：KNN、Naive Bayes、SVM、决策树、随机森林、感知机。</li>
-<li>无监督模型：K-means、Gaussian Mixture Model、Gaussian Process、PCA。</li>
-<li>集成学习：Bagging、Boosting、AdaBoost、GBDT、XGBoost、LightGBM。</li>
-<li>模型估计：梯度下降、SGD、Mini-batch、Momentum、Adam。</li>
-<li>不平衡数据：SMOTE、采样策略、评估指标。</li>
-<li>算法基础：EM 算法、MCMC、Jackknife、变量选择。</li>
-</ul>
+<p>贝叶斯公式把先验、似然和后验联系起来：</p>
+<pre><code>posterior ∝ likelihood * prior</code></pre>
+<p>更具体地写，就是：</p>
+<pre><code>p(theta | X) = p(X | theta) * p(theta) / p(X)</code></pre>
+
+<p>这句话很朴素：先验表示观察数据前对参数的认识，似然表示参数生成当前数据的可能性，后验表示看完数据后更新过的认识。</p>
+
+<p>经验贝叶斯进一步使用数据自身来估计先验分布的参数。一个典型流程是：</p>
+<ol class="org-ol">
+<li>用总体数据估计先验分布的超参数。</li>
+<li>把估计出的先验放入贝叶斯公式。</li>
+<li>对每个个体或实验单元计算后验分布。</li>
+</ol>
+
+<p>例如抛硬币问题中，如果正面概率 <code>theta</code> 的先验取 Beta 分布，观测数据服从二项分布，那么后验仍然是 Beta 分布。若先验为 <code>Beta(a, b)</code>，一次实验抛 <code>n</code> 次，正面出现 <code>d</code> 次，则后验参数更新为：</p>
+<pre><code>Beta(a + d, b + n - d)</code></pre>
+<p>这类共轭结构使贝叶斯更新非常清晰，也适合解释“信息如何随着样本增加而被修正”。</p>
 </div>
 </div>
 
 <div class="outline-2">
-<h2>因果推断与随机过程</h2>
+<h2 id="regression">回归与正则化</h2>
 <div class="outline-text-2">
+<p>回归模型是统计建模里最常用的一组工具。线性回归适合连续因变量，Logistic 回归适合二分类概率，Cox 模型适合带删失的生存时间分析。它们看起来不同，但都在回答同一个问题：解释变量如何影响目标变量。</p>
+
+<table>
+<thead>
+<tr><th>模型</th><th>目标变量</th><th>常见问题</th></tr>
+</thead>
+<tbody>
+<tr><td>线性回归</td><td>连续数值</td><td>均值如何随自变量变化</td></tr>
+<tr><td>Logistic 回归</td><td>二分类</td><td>事件发生概率如何变化</td></tr>
+<tr><td>Cox 模型</td><td>生存时间</td><td>风险率如何随协变量变化</td></tr>
+<tr><td>GLM</td><td>指数族响应变量</td><td>用连接函数统一不同分布</td></tr>
+</tbody>
+</table>
+
+<p>正则化用于处理变量多、共线性强、模型不稳定等问题：</p>
 <ul class="org-ul">
-<li>结构因果模型、do 算子、后门调整、过度控制。</li>
-<li>倾向性评分匹配、双重机器学习、双重稳健估计。</li>
-<li>贝叶斯网络、因果图、多指数模型。</li>
-<li>马尔可夫链、隐马尔可夫模型、随机过程。</li>
+<li><strong>Ridge</strong>：加入 L2 惩罚，能缓解共线性，但通常不会把系数压到 0。</li>
+<li><strong>Lasso</strong>：加入 L1 惩罚，可以做变量选择，把部分系数压到 0。</li>
+<li><strong>Elastic Net</strong>：结合 L1 和 L2，适合高维且变量成组相关的情况。</li>
+<li><strong>SCAD / MCP</strong>：试图减少 Lasso 对大系数的过度收缩。</li>
 </ul>
+
+<p>建模时不要只看显著性。还要检查残差、共线性、样本外表现、校准程度，以及变量是否有合理解释。一个稳定但稍简单的模型，经常比一个训练集上表现惊艳但无法解释的模型更有用。</p>
 </div>
 </div>
 
 <div class="outline-2">
-<h2>暂缓公开</h2>
+<h2 id="testing">统计检验与模型评估</h2>
 <div class="outline-text-2">
-<ul class="org-ul">
-<li>金融、保险、风控、客户、欺诈检测等业务案例，先转成匿名通用样例。</li>
-<li>深度学习、Transformer、知识图谱等内容，后续更适合单独拆成机器学习 Wiki。</li>
-<li>口语化对话、个人经历、未验证代码、临时 TODO，暂不放到公开页。</li>
-</ul>
+<p>统计检验的基本结构是：先给出原假设，再选择检验统计量，最后计算在原假设成立时观察到当前或更极端结果的概率，也就是 P 值。</p>
+
+<table>
+<thead>
+<tr><th>检验</th><th>常见用途</th><th>关注点</th></tr>
+</thead>
+<tbody>
+<tr><td>t 检验</td><td>均值比较</td><td>正态性、独立性、方差假设</td></tr>
+<tr><td>F 检验</td><td>方差比较、模型整体检验</td><td>方差结构与模型嵌套关系</td></tr>
+<tr><td>卡方检验</td><td>列联表、拟合优度</td><td>期望频数不能太小</td></tr>
+<tr><td>K-S 检验</td><td>分布差异</td><td>比较经验分布与理论分布</td></tr>
+<tr><td>Shapiro-Wilk</td><td>正态性检验</td><td>小样本下常用</td></tr>
+</tbody>
+</table>
+
+<p>P 值不是“原假设为真的概率”，也不是“结果重要性的大小”。它只是说明：如果原假设成立，当前数据有多反常。实际判断还要结合效应大小、置信区间、样本量和业务含义。</p>
+
+<p>模型评估也不能只看训练集表现。分类模型关注 AUC、Precision、Recall、F1、校准曲线；回归模型关注 RMSE、MAE、残差结构；生存模型还会看 C-index、校准和时间依赖指标。</p>
 </div>
 </div>
 
 <div class="outline-2">
-<h2>优先整理顺序</h2>
+<h2 id="ml">机器学习方法</h2>
+<div class="outline-text-2">
+<p>机器学习可以先按任务分成三类：有监督、无监督、半监督。有监督学习有明确标签，无监督学习主要寻找结构，半监督学习利用少量标签加大量未标注数据。</p>
+
+<ul class="org-ul">
+<li><strong>KNN</strong>：根据邻近样本投票或平均，直观但对尺度敏感。</li>
+<li><strong>Naive Bayes</strong>：利用条件独立假设快速分类，文本场景常见。</li>
+<li><strong>SVM</strong>：寻找最大间隔分类面，核函数可以处理非线性边界。</li>
+<li><strong>决策树</strong>：按信息增益、基尼系数等指标递归划分样本。</li>
+<li><strong>随机森林</strong>：多棵树做集成，降低单棵树的方差。</li>
+<li><strong>Boosting</strong>：逐步修正前一轮模型的错误，GBDT、XGBoost、LightGBM 都在这条线上。</li>
+</ul>
+
+<p>K-means 是典型的无监督聚类方法。它先选定 K 个中心，把样本分配到最近中心，再更新中心，直到分配结果稳定。它的问题是容易受初始点影响，因此常见做法是多次随机初始化，选择损失最小的一次。</p>
+
+<p>PCA 的目标是寻找方差最大的低维方向。它既可以用于降维，也可以用于理解高维变量中的主要变化结构。使用 PCA 时要注意标准化，否则量纲大的变量会支配主成分。</p>
+</div>
+</div>
+
+<div class="outline-2">
+<h2 id="causal">因果推断</h2>
+<div class="outline-text-2">
+<p>相关不等于因果。统计建模通常回答“给定特征，结果如何变化”，因果推断进一步追问“如果我们主动干预某个变量，结果会怎样变化”。</p>
+
+<p>因果推断的关键是识别：在什么假设下，可以从观察数据中恢复干预效果。常见工具包括：</p>
+<ul class="org-ul">
+<li><strong>因果图</strong>：用图结构表达变量之间的因果关系，帮助识别混杂变量。</li>
+<li><strong>后门调整</strong>：通过控制合适的混杂变量，阻断非因果路径。</li>
+<li><strong>倾向性评分</strong>：估计个体接受处理的概率，用于匹配、分层或加权。</li>
+<li><strong>双重稳健估计</strong>：结合处理模型和结果模型，只要其中一个模型设定正确，就仍有机会得到一致估计。</li>
+<li><strong>双重机器学习</strong>：用机器学习估计高维混杂结构，再通过正交化减少偏误。</li>
+</ul>
+
+<p>公开笔记里因果推断只保留方法论本身。涉及业务制度、客户数据、风控案例的内容，应先匿名化和抽象化，再决定是否发布。</p>
+</div>
+</div>
+
+<div class="outline-2">
+<h2 id="next-steps">后续整理顺序</h2>
 <div class="outline-text-2">
 <ol class="org-ol">
-<li>概率论与测度论：先整理概念卡，解决基础定义。</li>
-<li>统计推断：整理充分统计量、MLE、贝叶斯、假设检验。</li>
-<li>回归模型：整理线性回归、Logistic、Cox、正则化模型。</li>
-<li>机器学习：整理 PCA、SVM、决策树、随机森林、Boosting。</li>
-<li>因果推断：整理 PSM、DML、DR、因果图。</li>
+<li>先把“充分统计量、指数族、MLE、贝叶斯”整理成一篇统计推断文章。</li>
+<li>再整理“线性回归、Logistic、Cox、正则化”这一组建模文章。</li>
+<li>最后把机器学习和因果推断拆成独立 Wiki，避免统计页过度膨胀。</li>
 </ol>
 </div>
 </div>
